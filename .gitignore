@@ -43,7 +43,4 @@ node_modules
 <<<<<<< HEAD
 
 /dist
-=======
-dist/bundle.js
-dist/bundle.js.map
->>>>>>> master
+

@@ -61,3 +61,12 @@ p {
   color: #727272;
   padding: 4px;
 }
+.footer-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50px;
+  background-color: #FFFFFF;
+  border-top: 1px solid #B6B6B6;
+}

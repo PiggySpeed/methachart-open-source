@@ -5,9 +5,10 @@ import { connect } from 'react-redux';
 class AboutPageContainer extends React.Component {
   render() {
     return(
-      <div>
-        about page
-      </div>
+      <article>
+        <h1>MethaChart v1.0</h1>
+        <p>A simple way to create methadone log sheets.</p>
+      </article>
     );
   }
 }

@@ -21,7 +21,7 @@ app.on('window-all-closed', function() {
 //BrowserWindow.getDevToolsExtension()
 
 app.on('ready', function() {
-  mainWindow = new BrowserWindow({ width: 1200, height: 800 });
+  mainWindow = new BrowserWindow({ width: 900, height: 625 });
   mainWindow.loadURL('file://' + __dirname + '/src/index.html');
 
   var names = Object.keys(BrowserWindow.getDevToolsExtensions());
@@ -36,9 +36,5 @@ app.on('ready', function() {
 
 });
 
-
-//import installExtension, { REACT_DEVELOPER_TOOLS, JQUERY_DEBUGGER, REDUX_DEVTOOLS } from 'electron-devtools-installer';
-//
-//installExtension(REACT_DEVELOPER_TOOLS, JQUERY_DEBUGGER, REDUX_DEVTOOLS)
-//  .then((name) => console.log(`Added Extension:  ${name}`))
-//  .catch((err) => console.log('An error occurred: ', err));
+//Use this to turn off menubar
+//mainWindow.setMenu(null);

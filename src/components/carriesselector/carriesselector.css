@@ -61,3 +61,13 @@ p {
   color: #727272;
   padding: 4px;
 }
+.carriesselector-container {
+  position: relative;
+  width: auto;
+  height: 75px;
+  background-color: #cccccc;
+}
+.carries-text {
+  position: relative;
+  float: left;
+}

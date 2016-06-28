@@ -61,3 +61,9 @@ p {
   color: #727272;
   padding: 4px;
 }
+.dateselector-container {
+  position: relative;
+  width: auto;
+  height: 75px;
+  background-color: #FFFFFF;
+}

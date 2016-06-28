@@ -61,3 +61,15 @@ p {
   color: #727272;
   padding: 4px;
 }
+.drugpicker-container {
+  position: relative;
+  width: auto;
+  height: 75px;
+  background-color: #FFFFFF;
+}
+.drugpicker-unit {
+  position: relative;
+  float: left;
+  padding-top: 42px;
+  padding-left: 10px;
+}
