@@ -16,8 +16,7 @@ const styles = {
   dropdown: {
     position: 'relative',
     float: 'left',
-    width: 100,
-    marginTop: 15
+    width: 100
   }
 };
 

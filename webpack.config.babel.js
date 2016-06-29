@@ -39,7 +39,7 @@ const base = {
 };
 
 const developmentConfig = {
-  devtool: 'cheap-module-inline-source-map'
+  devtool: 'source-map'
 };
 
 const productionConfig = {

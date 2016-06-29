@@ -18,8 +18,10 @@
   "dependencies": {
     "express": "^4.13.4",
     "immutable": "^3.7.6",
+    "jquery": "^3.0.0",
     "less": "^2.7.1",
     "material-ui": "^0.15.1",
+    "moment": "^2.13.0",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
     "react-redux": "^4.4.5",

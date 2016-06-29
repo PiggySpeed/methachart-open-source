@@ -11,30 +11,48 @@ import DrugPicker from 'components/drugpicker/drugpicker.jsx';
 import DateSelector from 'components/dateselector/dateselector.jsx';
 import CarriesSelector from 'components/carriesselector/carriesselector.jsx';
 
+// Actions
+import {
+  onNameBlur, onPickDrug, onDoseBlur,
+  onSetStartDate, onSetEndDate, onSetTimeInterval,
+  } from './configuregeneralactions';
+
 const styles = {
   name: {
     width: 300,
     marginLeft: 24
   }
 };
-
-const ConfigureGeneralContainer = ({ }) => (
+//<CarriesSelector />
+const ConfigureGeneralContainer = ({ onNameBlur, onPickDrug, onDoseBlur,
+  onSetStartDate, onSetEndDate, startdate, enddate, timeinterval, onSetTimeInterval }) => (
   <section>
     <TextField
+      onBlur={(e) => onNameBlur(e.target.value)}
       style={styles.name}
       hintText="Name"
       floatingLabelText="Name"
     /><br/>
-    <DrugPicker drug="Methadone" onPickDrug={() => console.log("tree")} />
-    <DateSelector />
-    <CarriesSelector />
+    <DrugPicker drug="Methadone" onPickDrug={onPickDrug} onDoseBlur={onDoseBlur} />
+    <DateSelector onSetTimeInterval={onSetTimeInterval} timeinterval={timeinterval} startdate={startdate} enddate={enddate} onSetStartDate={onSetStartDate} onSetEndDate={onSetEndDate} />
   </section>
 );
 const mapStateToProps = (state) => {
-  return { }
+  return {
+    startdate: state.ConfigureGeneralReducer.get("startdate"),
+    enddate: state.ConfigureGeneralReducer.get("enddate"),
+    timeinterval: state.ConfigureGeneralReducer.get("timeinterval")
+  }
 };
 const mapDispatchToProps = (dispatch) => {
-  return { }
+  return {
+    onNameBlur: (name) => {dispatch(onNameBlur(name))},
+    onPickDrug: (drug) => {dispatch(onPickDrug(drug))},
+    onDoseBlur: (dose) => {dispatch(onDoseBlur(dose))},
+    onSetStartDate: (startdate) => { if(startdate){dispatch(onSetStartDate(startdate))} },
+    onSetEndDate: (enddate) => { if(enddate){dispatch(onSetEndDate(enddate)) }},
+    onSetTimeInterval: (startdate, enddate) => { if(startdate && enddate){dispatch(onSetTimeInterval(startdate, enddate))} }
+  }
 };
 const ConfigureGeneralPage = connect(mapStateToProps, mapDispatchToProps)(ConfigureGeneralContainer);
 export default ConfigureGeneralPage;
