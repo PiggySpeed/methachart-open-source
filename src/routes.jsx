@@ -11,6 +11,7 @@ import MainPage from 'modules/main/main.jsx';
 import AboutPage from 'modules/about/about.jsx';
 import ChartPage from 'modules/chart/chart.jsx';
 import SettingsPage from 'modules/settings/settings.jsx';
+import PrintPage from 'modules/print/print.jsx';
 
 // Material UI Theme Provider
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
@@ -24,6 +25,7 @@ const routes = (
           <IndexRoute component={ChartPage}/>
           <Route path="/about" component={AboutPage}/>
           <Route path="/settings" component={SettingsPage}/>
+          <Route path="/print" component={PrintPage}/>
         </Route>
       </Router>
     </Provider>

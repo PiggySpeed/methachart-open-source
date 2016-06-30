@@ -7,9 +7,17 @@ import { Table, TableBody, TableHeader, TableRow, TableHeaderColumn } from 'mate
 import LogRow from 'components/logrow/logrow.jsx';
 import { onBuildLog } from './configurespecificactions';
 
+const styles = {
+  tablewrapper: {
+    position: "relative",
+    height: "100%",
+    width: "100%"
+  }
+};
+
 const ConfigureSpecificContainer = ({ logdata, startdate, enddate, onBuildLog }) => (
-  <section>
-    <Table>
+  <section className="configure-specific-container">
+    <Table height="300px">
       <TableHeader>
         <TableRow onClick={()=>onBuildLog(startdate, enddate)}>
           <TableHeaderColumn>Date</TableHeaderColumn>
@@ -21,7 +29,7 @@ const ConfigureSpecificContainer = ({ logdata, startdate, enddate, onBuildLog })
       </TableHeader>
       <TableBody displayRowCheckbox={true}>
         {logdata.map((item, id) => {
-          return <LogRow key={id} rowdata={item} />
+          return <LogRow rowNumber={id} key={id} rowdata={item} />
         })}
       </TableBody>
     </Table>

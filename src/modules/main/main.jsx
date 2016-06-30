@@ -10,7 +10,7 @@ import NavigationButton from 'components/navigation/navigationbutton.jsx';
 import Content from 'components/content/content.jsx';
 import Feed from 'components/feed/feed.jsx';
 import Footer from 'components/footer/footer.jsx';
-
+import PrintPage from 'modules/print/print.jsx';
 
 import { onClick } from './mainactions';
 
@@ -32,12 +32,15 @@ class MainContainer extends React.Component {
     return(
       <div className="main-container">
         <Feed>
-
+          <div hidden>
+            <PrintPage />
+          </div>
         </Feed>
         <Content>
           {this.props.children || <ChartPage/>}
           <Footer changeRoute={this.goToRoute.bind(this)} />
         </Content>
+
       </div>
     );
   }

@@ -6,7 +6,11 @@ import IconButton from 'material-ui/IconButton';
 import ActionHome from 'material-ui/svg-icons/action/home';
 import ActionSettings from 'material-ui/svg-icons/action/settings';
 import ActionInfo from 'material-ui/svg-icons/action/info';
+import ActionPrint from 'material-ui/svg-icons/action/print';
 import RaisedButton from 'material-ui/RaisedButton';
+
+import PrintPage, { printDocument } from 'modules/print/print.jsx';
+import openWindow from 'modules/print/printwindow';
 
 const style = {
   position: 'relative',
@@ -25,7 +29,10 @@ const Footer = ({ changeRoute }) => (
     <IconButton onClick={() => changeRoute("/about")} tooltip="About" tooltipPosition="top-right">
       <ActionInfo />
     </IconButton>
-    <RaisedButton label="PRINT" style={style} backgroundColor="#FF5722" labelColor="#FFFFFF" />
+    <IconButton onClick={() => changeRoute("/print")} tooltip="Print" tooltipPosition="top-right">
+      <ActionPrint />
+    </IconButton>
+    <RaisedButton onClick={() => openWindow()} label="PRINT" style={style} backgroundColor="#FF5722" labelColor="#FFFFFF" />
   </footer>
 );
 

@@ -1,11 +1,10 @@
 import * as types from './configurespecificactions';
-import { Map, fromJS } from 'immutable';
-import { createDate, getAllDates } from 'shared/utils/date';
-
+import { Map, List, fromJS } from 'immutable';
+import { getAllDates } from 'shared/utils/date';
 
 const initialState = Map({
   name: "",
-  logdata: [
+  logdata: List([
     {
       date: "June 5, 2016",
       witness: "6 mL",
@@ -13,10 +12,7 @@ const initialState = Map({
       total: "9 mL",
       active: "true"
     }
-  ],
-  dates: [
-
-  ]
+  ])
 });
 
 const ConfigureSpecificReducer = (state = initialState, action) => {
@@ -27,10 +23,20 @@ const ConfigureSpecificReducer = (state = initialState, action) => {
       })
     }
     case types.ON_BUILD_LOG: {
-      getAllDates(action.startdate, action.enddate);
-      var newList1 = [];
+      var newLog = [];
+      var dates = getAllDates(action.startdate, action.enddate);
+      console.log("date length is ", dates.length);
+      for(var i = 0; i <= dates.length-1; i++ ) {
+        newLog.push({
+          date: dates[i],
+          witness: "6 mL",
+          takehome: "3 mL",
+          total: "9 mL",
+          active: "true"
+        })
+      }
       return state.merge({
-        dates: newList1
+        logdata: List(newLog)
       })
     }
     case types.ADD_LOG_ENTRY: {

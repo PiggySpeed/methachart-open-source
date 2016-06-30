@@ -1,0 +1,6 @@
+.print-container {
+  position: relative;
+  height: calc(100% - 70px);
+  width: 100%;
+  overflow: scroll;
+}

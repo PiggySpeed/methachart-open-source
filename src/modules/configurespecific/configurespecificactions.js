@@ -3,7 +3,6 @@ export const ON_NAME_BLUR = "ON_NAME_BLUR";
 export const ADD_LOG_ENTRY = "ADD_LOG_ENTRY";
 export const ON_BUILD_LOG = "ON_BUILD_LOG";
 
-
 // Actions
 export const onNameBlur = (name) => {
   return {
