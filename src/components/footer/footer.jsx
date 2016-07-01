@@ -10,8 +10,8 @@ import ActionPrint from 'material-ui/svg-icons/action/print';
 import RaisedButton from 'material-ui/RaisedButton';
 
 import PrintPage, { printDocument } from 'modules/print/print.jsx';
-import openWindow from 'modules/print/printwindow';
-
+import openWindow from 'shared/utils/newwindow';
+import { PRINT_URL } from 'shared/utils/url';
 const style = {
   position: 'relative',
   margin: 12,
@@ -32,7 +32,7 @@ const Footer = ({ changeRoute }) => (
     <IconButton onClick={() => changeRoute("/print")} tooltip="Print" tooltipPosition="top-right">
       <ActionPrint />
     </IconButton>
-    <RaisedButton onClick={() => openWindow()} label="PRINT" style={style} backgroundColor="#FF5722" labelColor="#FFFFFF" />
+    <RaisedButton onClick={() => openWindow(PRINT_URL)} label="PRINT" style={style} backgroundColor="#FF5722" labelColor="#FFFFFF" />
   </footer>
 );
 

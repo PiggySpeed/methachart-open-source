@@ -2,7 +2,6 @@
 import './print.less';
 import React from 'react';
 import { connect } from 'react-redux';
-import openWindow from './printwindow';
 
 export const printDocument = () => {
   window.frames["printf"].focus();
@@ -25,12 +24,10 @@ export const printDocument = () => {
 //  document.body.innerHTML = originalContents;
 //}
 
-
-
 const PrintContainer = ({ }) => (
   <div className="print-container">
     <iframe id="printf" name="printf" src="modules/print/print.html" height="98%" width="70%"></iframe>
-    <button onClick={() => printDocument()} >Print!</button>
+    <button onClick={()=>console.log()} >send info to print preview</button>
   </div>
 );
 const mapStateToProps = (state) => {

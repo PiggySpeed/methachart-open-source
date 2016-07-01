@@ -5,6 +5,14 @@
   <title>MethaChart Print Preview</title>
 </head>
 <body>
-  <h1>Hello World!</h1>
+  <div id='preview'>
+    <button type="button" onclick="Test()" >Click Me!</button>
+    <button type="button" onclick="Test2('tree')" >Click Me 2!</button>
+  </div>
+  <script>
+    const previewscript = document.createElement('script');
+    previewscript.src = window.location.pathname.replace("print.html", "printpreview.js").slice(1);
+    document.write(previewscript.outerHTML);
+  </script>
 </body>
 </html>
