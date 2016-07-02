@@ -26,7 +26,6 @@ export const printDocument = () => {
 
 const PrintContainer = ({ }) => (
   <div className="print-container">
-    <iframe id="printf" name="printf" src="modules/print/print.html" height="98%" width="70%"></iframe>
     <button onClick={()=>console.log()} >send info to print preview</button>
   </div>
 );
@@ -38,3 +37,5 @@ const mapDispatchToProps = (dispatch) => {
 };
 const PrintPage = connect(mapStateToProps, mapDispatchToProps)(PrintContainer);
 export default PrintPage;
+
+//<iframe id="printf" name="printf" src="modules/print/print.html" height="98%" width="70%"></iframe>
