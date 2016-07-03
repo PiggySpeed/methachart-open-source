@@ -38,7 +38,7 @@ class MainContainer extends React.Component {
         </Feed>
         <Content>
           {this.props.children || <ChartPage/>}
-          <Footer changeRoute={this.goToRoute.bind(this)} />
+          <Footer changeRoute={this.goToRoute.bind(this)} logdata={this.props.logdata} />
         </Content>
 
       </div>
@@ -50,7 +50,9 @@ MainContainer.contextTypes = {
 };
 
 const mapStateToProps = (state) => {
-  return { }
+  return {
+    logdata: state.ConfigureSpecificReducer.get("logdata").toArray()
+  }
 };
 const mapDispatchToProps = (dispatch) => {
   return {

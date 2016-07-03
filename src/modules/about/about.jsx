@@ -7,7 +7,12 @@ class AboutPageContainer extends React.Component {
     return(
       <article>
         <h1>MethaChart v1.0</h1>
-        <p>A simple way to create methadone log sheets.</p>
+        <h2>Features</h2>
+        <ul>
+          <li>toggle print preview</li>
+          <li>configure carries</li>
+        </ul>
+        <h2>Fixes</h2>
       </article>
     );
   }

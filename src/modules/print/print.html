@@ -3,11 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <title>MethaChart Print Preview</title>
+  <link rel="stylesheet" type="text/css" href="printpreview.css">
 </head>
 <body>
   <div id='preview'>
-    <button type="button" onclick="Test()" >Click Me!</button>
-    <button type="button" onclick="Test2('tree')" >Click Me 2!</button>
+    <table id="table" class="table-style">
+    </table>
   </div>
   <script>
     const previewscript = document.createElement('script');

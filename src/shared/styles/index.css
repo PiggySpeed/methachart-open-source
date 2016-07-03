@@ -57,7 +57,15 @@ h6 {
 p {
   text-align: left;
   font-family: 'Roboto', sans-serif;
-  font-size: 16pt;
+  font-size: 14pt;
   color: #727272;
   padding: 4px;
+}
+li {
+  text-align: left;
+  font-family: 'Roboto', sans-serif;
+  font-size: 14pt;
+  color: #727272;
+  padding: 4px;
+  padding-left: 20px;
 }

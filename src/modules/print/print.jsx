@@ -24,13 +24,15 @@ export const printDocument = () => {
 //  document.body.innerHTML = originalContents;
 //}
 
-const PrintContainer = ({ }) => (
+const PrintContainer = ({ logdata }) => (
   <div className="print-container">
-    <button onClick={()=>console.log()} >send info to print preview</button>
+    <button onClick={()=>console.log(logdata)} >send info to print preview</button>
   </div>
 );
 const mapStateToProps = (state) => {
-  return { }
+  return {
+    logdata: state.ConfigureSpecificReducer.get("logdata")
+  }
 };
 const mapDispatchToProps = (dispatch) => {
   return { }

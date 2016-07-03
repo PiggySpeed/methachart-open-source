@@ -1,0 +1,26 @@
+
+.table-style {
+  border: 1px solid black;
+  width: 100%;
+  border-collapse: collapse;
+}
+.table-header {
+  height: 30px;
+}
+.table-header-cell {
+  text-align: center;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12pt;
+  padding: 4px;
+  border-right: 1px solid black;
+}
+.table-row {
+  border: 1px solid black;
+  height: 50px;
+  text-align: center;
+}
+.table-cell {
+  border-right: 1px solid black;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12pt;
+}

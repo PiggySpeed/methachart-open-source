@@ -7,6 +7,7 @@ const initialState = Map({
   logdata: List([
     {
       date: "June 5, 2016",
+      rx: "30224",
       witness: "6 mL",
       takehome: "3 mL",
       total: "9 mL",
@@ -29,6 +30,7 @@ const ConfigureSpecificReducer = (state = initialState, action) => {
       for(var i = 0; i <= dates.length-1; i++ ) {
         newLog.push({
           date: dates[i],
+          rx: "30224",
           witness: "6 mL",
           takehome: "3 mL",
           total: "9 mL",

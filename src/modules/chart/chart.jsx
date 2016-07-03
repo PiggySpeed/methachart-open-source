@@ -28,10 +28,10 @@ class ChartContainer extends React.Component {
   render() {
     return(
       <Tabs style={styles.tabcontainer} >
-        <Tab inkBarStyle={styles.inkbar} style={styles.tab} label="General">
+        <Tab inkBarStyle={styles.inkbar} style={styles.tab} label="Main">
           <ConfigureGeneralPage />
         </Tab>
-        <Tab inkBarStyle={styles.inkbar} style={styles.tab} label="Specific">
+        <Tab inkBarStyle={styles.inkbar} style={styles.tab} label="Preview">
           <ConfigureSpecificPage />
         </Tab>
       </Tabs>
