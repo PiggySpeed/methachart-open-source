@@ -14,11 +14,6 @@ import PrintPage from 'modules/print/print.jsx';
 
 import { onClick } from './mainactions';
 
-const MOCK_DATA = {
-
-};
-
-
 class MainContainer extends React.Component {
   constructor(props){
     super(props)
@@ -40,7 +35,6 @@ class MainContainer extends React.Component {
           {this.props.children || <ChartPage/>}
           <Footer changeRoute={this.goToRoute.bind(this)} logdata={this.props.logdata} />
         </Content>
-
       </div>
     );
   }

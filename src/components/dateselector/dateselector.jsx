@@ -96,8 +96,13 @@ export default class DateSelector extends React.Component {
     super(props);
     this.state = {
       allDatesValid: false,
-      dates: []
+      startdateValid: false,
+      enddateValid: false
     }
+  }
+  onAllDatesValidated(date1, date2) {
+    if(date1 && date2){this.props.onBuildLog(date1, date2)}
+    return this.props.onSetTimeInterval(date1, date2, this.props.maxinterval);
   }
   areDatesValid(dates) {
     /** Calls the onValidateDates function onChange and onBlur **/
@@ -105,10 +110,10 @@ export default class DateSelector extends React.Component {
   }
   render() {
     return(
-      <section onClick={this.props.onSetTimeInterval(this.props.startdate, this.props.enddate)} className="dateselector-container">
+      <section onBlur={() => this.onAllDatesValidated(this.props.startdate, this.props.enddate)} className="dateselector-container">
         <DateField onDateBlur={this.props.onSetStartDate} label="Start"/>
         <DateField onDateBlur={this.props.onSetEndDate} label="End"/>
-        <h6 className="dateinterval-text">{this.props.startdate} {this.props.startdate && this.props.enddate ? " to " : ""} {this.props.enddate}<br/>{ this.props.timeinterval ? this.props.timeinterval + " days" : "" }</h6>
+        <h6 className="dateinterval-text">{this.props.startdate} {this.props.startdate && this.props.enddate ? " to " : ""} {this.props.enddate}<br/>{ Number.isInteger(this.props.timeinterval) ? this.props.timeinterval + " days" : this.props.timeinterval }</h6>
       </section>
     );
   }
@@ -116,7 +121,7 @@ export default class DateSelector extends React.Component {
 DateSelector.propTypes = {
   onValidateDates: React.PropTypes.func.isRequired
 };
-
+//onClick={this.props.onSetTimeInterval(this.props.startdate, this.props.enddate)}
 
 //const DateSelector = ({ onSetStartDate, onSetEndDate, onSetTimeInterval, startdate, enddate, timeinterval }) => (
 //  <section onClick={onSetTimeInterval(startdate, enddate)} className="dateselector-container">

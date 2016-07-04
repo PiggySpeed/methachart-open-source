@@ -16,10 +16,10 @@ function buildTable(data) {
   var table = document.getElementById("table");
   var headers = ["Date", "Rx#", "Witness", "Take Home", "Total", "RPh", "Patient Initials", "Notes"];
 
-  var headerrow = table.insertRow(0);
-  headerrow.setAttribute('class', 'table-header');
+  var tableheaderrow = table.insertRow(0);
+  tableheaderrow.setAttribute('class', 'table-header');
   for(var n = 0; n<headers.length; ++n ) {
-    var headercell = headerrow.insertCell(n);
+    var headercell = tableheaderrow.insertCell(n);
     headercell.innerHTML = headers[n];
     headercell.setAttribute('class', 'table-header-cell');
   }

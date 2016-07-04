@@ -15,11 +15,12 @@ export const formatDate = ( dd, mm, yy) => {
   return moment((pad(dd) + '/' + pad(mm) + '/20' + pad(yy)), 'DD/MM/YYYY', true).format('MMM DD, YYYY');
 };
 
-export const calculateInterval = ( startdate, enddate ) => {
+export const calculateInterval = ( startdate, enddate, maxinterval ) => {
   /** Returns the number of days between startdate and enddate, inclusive **/
   var start = moment(startdate, 'MMM DD, YYYY', true);
   var end = moment(enddate, 'MMM DD, YYYY', true);
-  return end.diff(start, 'days') + 1; //need to add 1 to include end date
+  var calculateddifference = end.diff(start, 'days')+1;
+  return calculateddifference >= 0 && calculateddifference <= maxinterval ? calculateddifference : "Invalid Date Range"; //need to add 1 to include end date
 };
 
 export const getAllDates = ( startdate, enddate ) => {

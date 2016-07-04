@@ -12,9 +12,11 @@ import DateSelector from 'components/dateselector/dateselector.jsx';
 import CarriesSelector from 'components/carriesselector/carriesselector.jsx';
 
 // Actions
-import onBuildLog from 'modules/configurespecific/configurespecificactions';
 import {
-  onNameBlur, onPickDrug, onDoseBlur,
+  onNameBlur, onDrugBlur, onDoseBlur, onBuildLog
+  } from 'modules/configurespecific/configurespecificactions';
+import {
+  onPickDrug, onSetDrug,
   onSetStartDate, onSetEndDate, onSetTimeInterval,
   } from './configuregeneralactions';
 
@@ -25,8 +27,9 @@ const styles = {
   }
 };
 //<CarriesSelector />
-const ConfigureGeneralContainer = ({ onNameBlur, onPickDrug, onDoseBlur, onBuildLog,
-  onSetStartDate, onSetEndDate, startdate, enddate, timeinterval, onSetTimeInterval }) => (
+const ConfigureGeneralContainer = ({ onNameBlur, onDrugBlur, onDoseBlur, onBuildLog, onPickDrug,
+  onSetStartDate, onSetEndDate, startdate, enddate, timeinterval, onSetTimeInterval, maxinterval,
+  selecteddrug, druglist}) => (
   <section>
     <TextField
       onBlur={(e) => onNameBlur(e.target.value)}
@@ -34,26 +37,45 @@ const ConfigureGeneralContainer = ({ onNameBlur, onPickDrug, onDoseBlur, onBuild
       hintText="Name"
       floatingLabelText="Name"
     /><br/>
-    <DrugPicker drug="Methadone" onPickDrug={onPickDrug} onDoseBlur={onDoseBlur} />
-    <DateSelector onValidateDates={(x)=>console.log(x)} onBuildLog={onBuildLog} onSetTimeInterval={onSetTimeInterval} timeinterval={timeinterval} startdate={startdate} enddate={enddate} onSetStartDate={onSetStartDate} onSetEndDate={onSetEndDate} />
+    <DrugPicker
+      selectedDrug={selecteddrug}
+      drugList={druglist}
+      onPickDrug={onDrugBlur}
+      onSetDrug={onSetDrug}
+      onDoseBlur={onDoseBlur} />
+    <DateSelector
+      onValidateDates={(x)=>console.log(x)}
+      onBuildLog={onBuildLog}
+      onSetTimeInterval={onSetTimeInterval}
+      timeinterval={timeinterval}
+      maxinterval={maxinterval}
+      startdate={startdate}
+      enddate={enddate}
+      onSetStartDate={onSetStartDate}
+      onSetEndDate={onSetEndDate} />
   </section>
 );
 const mapStateToProps = (state) => {
   return {
     startdate: state.ConfigureGeneralReducer.get("startdate"),
     enddate: state.ConfigureGeneralReducer.get("enddate"),
-    timeinterval: state.ConfigureGeneralReducer.get("timeinterval")
+    timeinterval: state.ConfigureGeneralReducer.get("timeinterval"),
+    maxinterval: state.ConfigureGeneralReducer.get("maxinterval"),
+    selecteddrug: state.ConfigureGeneralReducer.get("selecteddrug"),
+    druglist: state.ConfigureGeneralReducer.get("druglist")
   }
 };
 const mapDispatchToProps = (dispatch) => {
   return {
     onNameBlur: (name) => {dispatch(onNameBlur(name))},
-    onPickDrug: (drug) => {dispatch(onPickDrug(drug))},
+    onDrugBlur: (drug) => {dispatch(onDrugBlur(drug))},
     onDoseBlur: (dose) => {dispatch(onDoseBlur(dose))},
+    onBuildLog: (startdate, enddate) => {dispatch(onBuildLog(startdate, enddate))},
+    onPickDrug: (drug) => {console.log(drug)}, //dispatch(onPickDrug(drug))
+    onSetDrug: (e, din) => {console.log("tree", din); dispatch(onSetDrug(din))},
     onSetStartDate: (startdate) => { if(startdate){dispatch(onSetStartDate(startdate))} },
     onSetEndDate: (enddate) => { if(enddate){dispatch(onSetEndDate(enddate)) }},
-    onSetTimeInterval: (startdate, enddate) => { if(startdate && enddate){dispatch(onSetTimeInterval(startdate, enddate))} },
-    onBuildLog: (startdate, enddate) => {dispatch(onBuildLog(startdate, enddate))}
+    onSetTimeInterval: (startdate, enddate, maxinterval) => { if(startdate && enddate){dispatch(onSetTimeInterval(startdate, enddate, maxinterval))} }
   }
 };
 const ConfigureGeneralPage = connect(mapStateToProps, mapDispatchToProps)(ConfigureGeneralContainer);

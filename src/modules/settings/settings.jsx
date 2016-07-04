@@ -26,6 +26,7 @@ const SettingsPageContainer = ({ }) => (
       hintStyle={styles.hintstyle}
       hintText="printer path..."
     />
+
   </article>
 );
 const mapStateToProps = (state) => {

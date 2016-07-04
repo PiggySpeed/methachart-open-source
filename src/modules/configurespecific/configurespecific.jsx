@@ -18,7 +18,7 @@ const styles = {
 const ConfigureSpecificContainer = ({ logdata, startdate, enddate, onBuildLog }) => (
   <section className="configure-specific-container">
     <Table height="300px">
-      <TableHeader>
+      <TableHeader displaySelectAll={false}>
         <TableRow onClick={()=>onBuildLog(startdate, enddate)}>
           <TableHeaderColumn>Date</TableHeaderColumn>
           <TableHeaderColumn>Witness</TableHeaderColumn>
