@@ -1,4 +1,5 @@
 var ipcRenderer = require('electron').ipcRenderer;
+var moment = require('moment');
 
 var data = [1,2,3,4,5,6,7,8,9];
 
@@ -12,18 +13,30 @@ function Test2(x) {
   //webContents.print()
 }
 
+function buildHeader() {
+  // Build Header
+  var header = document.getElementById("header");
+
+
+  // Build Title
+  var headertitle = document.getElementById("header-title")
+
+}
+
 function buildTable(data) {
   var table = document.getElementById("table");
-  var headers = ["Date", "Rx#", "Witness", "Take Home", "Total", "RPh", "Patient Initials", "Notes"];
 
+  // Build table header
+  var tableheaders = ["Date", "Rx#", "Witness", "Take Home", "Total", "RPh", "Patient Initials", "Notes"];
   var tableheaderrow = table.insertRow(0);
   tableheaderrow.setAttribute('class', 'table-header');
-  for(var n = 0; n<headers.length; ++n ) {
+  for(var n = 0; n<tableheaders.length; ++n ) {
     var headercell = tableheaderrow.insertCell(n);
-    headercell.innerHTML = headers[n];
+    headercell.innerHTML = tableheaders[n];
     headercell.setAttribute('class', 'table-header-cell');
   }
 
+  // Build table body
   for(var i = 0; i<data.length; ++i){
     var row = table.insertRow(i+1);
     row.setAttribute('class', 'table-row');
@@ -54,6 +67,22 @@ function buildTable(data) {
     cell6.innerHTML = ""; // Patient
     cell7.innerHTML = ""; // Notes
   }
+
+  // Insert End Rx Message
+  var endrow = table.insertRow(data.length + 1);
+  endrow.setAttribute('class', 'table-endrow');
+
+  var endrowcell0 = endrow.insertCell(0);
+  var endrowcell1 = endrow.insertCell(1);
+
+  endrowcell0.setAttribute('class', 'table-endrow-cell0');
+  endrowcell1.setAttribute('class', 'table-endrow-cell1');
+  endrowcell1.setAttribute('colspan', '7');
+
+  var enddate = moment(data[data.length-1].date, 'MMM DD, YYYY');
+  console.log(moment(enddate).add(1, 'days'));
+  endrowcell0.innerHTML = enddate.format('MMM DD, YYYY').add(1, 'days');
+  endrowcell1.innerHTML = "END OF METHADONE PRESCRIPTION - PLEASE SEE DOCTOR FOR REFILLS";
 }
 
 

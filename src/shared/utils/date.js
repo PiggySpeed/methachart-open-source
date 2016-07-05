@@ -15,6 +15,10 @@ export const formatDate = ( dd, mm, yy) => {
   return moment((pad(dd) + '/' + pad(mm) + '/20' + pad(yy)), 'DD/MM/YYYY', true).format('MMM DD, YYYY');
 };
 
+export const getNextDay = ( date ) => {
+  return moment(date, 'MMM DD, YYYY', true).add(1, 'days');
+};
+
 export const calculateInterval = ( startdate, enddate, maxinterval ) => {
   /** Returns the number of days between startdate and enddate, inclusive **/
   var start = moment(startdate, 'MMM DD, YYYY', true);

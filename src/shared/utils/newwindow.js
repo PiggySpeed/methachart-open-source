@@ -13,9 +13,9 @@ const openWindow = (url, data) => {
 
   win.webContents.on('did-finish-load', () => {
     win.webContents.send('asynchronous-reply', data);
-      win.webContents.print({}, (error) => {
-        if (error) throw error;
-      });
+      //win.webContents.print({}, (error) => {
+      //  if (error) throw error;
+      //});
   });
 
   //win.webContents.on('did-finish-load', () => {
