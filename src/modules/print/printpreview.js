@@ -1,31 +1,45 @@
 var ipcRenderer = require('electron').ipcRenderer;
-var moment = require('moment');
-
-var data = [1,2,3,4,5,6,7,8,9];
 
 ipcRenderer.on('asynchronous-reply', function(event, data) {
-  buildTable(data);
+  buildHeader(data.headerdata);
+  buildTable(data.logdata);
 });
 
-function Test2(x) {
-  console.log("test", x);
-  //document.getElementById("preview").create
-  //webContents.print()
+
+//var pig = [1,4,3,6,3,7,9,5,3,2,6,8,3,3,1,3];
+
+function splitData(data, chunksize) {
+  /**
+   * Returns a new array of data split into smaller chunks with a max size of chunksize.
+   *
+   * data (arr): an array of data to be split up
+   * chunksize (int): the maximum size of chunks
+   * **/
+  var feed = data.slice(); // copy the original array
+  var wholechunks = Math.floor(feed.length/chunksize);
+  var arr = new Array(wholechunks + (feed.length % chunksize) -1);
+  for(var i = 0; i<wholechunks; ++i){
+    arr[i] = feed.splice(0, chunksize)
+  }
+  arr[arr.length-1] = feed.slice(); // add the remainder of the feed
+  return arr;
 }
 
-function buildHeader() {
-  // Build Header
-  var header = document.getElementById("header");
+function buildHeader(data) {
+  // Add Title
+  var headertitle = document.getElementById("header-title");
+  headertitle.innerHTML = "Methadone Accountability Log";
 
+  // Add Name
+  var namelabel = document.getElementById("name-label");
+  namelabel.innerHTML = data.name;
 
-  // Build Title
-  var headertitle = document.getElementById("header-title")
-
+  // Add Details
+  var detailslabel = document.getElementById("details-label");
+  detailslabel.innerHTML = "Start: " + data.startdate + " End: " + data.enddate;
 }
 
-function buildTable(data) {
-  var table = document.getElementById("table");
-
+function buildTableBody(data, table){
   // Build table header
   var tableheaders = ["Date", "Rx#", "Witness", "Take Home", "Total", "RPh", "Patient Initials", "Notes"];
   var tableheaderrow = table.insertRow(0);
@@ -37,6 +51,7 @@ function buildTable(data) {
   }
 
   // Build table body
+
   for(var i = 0; i<data.length; ++i){
     var row = table.insertRow(i+1);
     row.setAttribute('class', 'table-row');
@@ -68,21 +83,50 @@ function buildTable(data) {
     cell7.innerHTML = ""; // Notes
   }
 
-  // Insert End Rx Message
-  var endrow = table.insertRow(data.length + 1);
-  endrow.setAttribute('class', 'table-endrow');
+  // Add Page Number
+}
 
-  var endrowcell0 = endrow.insertCell(0);
-  var endrowcell1 = endrow.insertCell(1);
+function insertTableMessage(table, location, message) {
+  /**
+   * Inserts a message at the specified location(s)
+   *
+   * table (obj): reference to the table
+   * location (arr): an array of locations to insert the message
+   * message (str): the message
+   *
+   * **/
+  for(var i=0; i<location.length; ++i){
+    table.deleteRow(location[i]);
+    var row = table.insertRow(location[i]);
+    var rowcell = row.insertCell(0);
+    rowcell.setAttribute('class', 'table-endrow-cell0');
+    rowcell.setAttribute('colspan', '8');
+    rowcell.innerHTML = message;
+  }
+  //var endrow = table.insertRow(data.length + 1);
+  //endrow.setAttribute('class', 'table-endrow');
+  //var endrowcell0 = endrow.insertCell(0);
+  //endrowcell0.setAttribute('class', 'table-endrow-cell0');
+  //endrowcell0.setAttribute('colspan', '8');
+  //endrowcell0.innerHTML = "END OF METHADONE PRESCRIPTION - PLEASE SEE DOCTOR FOR REFILLS";
 
-  endrowcell0.setAttribute('class', 'table-endrow-cell0');
-  endrowcell1.setAttribute('class', 'table-endrow-cell1');
-  endrowcell1.setAttribute('colspan', '7');
+}
 
-  var enddate = moment(data[data.length-1].date, 'MMM DD, YYYY');
-  console.log(moment(enddate).add(1, 'days'));
-  endrowcell0.innerHTML = enddate.format('MMM DD, YYYY').add(1, 'days');
-  endrowcell1.innerHTML = "END OF METHADONE PRESCRIPTION - PLEASE SEE DOCTOR FOR REFILLS";
+function buildTable(data) {
+  var tables = document.getElementById("tables");
+  //var table = document.getElementById("table");
+  var batches = splitData(data, 28);
+  console.log("batches are ", batches);
+  //TODO: figure out how to get length of multidimensional array
+
+  for(var i=batches.length-1; i>=0; --i){
+    var table = document.createElement("table");
+    table.setAttribute('class', 'table-style');
+    buildTableBody(batches[i], table);
+    tables.appendChild(table);
+  }
+  //insertTableMessage(table, [data.length], "testing");
+
 }
 
 

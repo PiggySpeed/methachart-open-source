@@ -61,6 +61,7 @@ h2#rx-label-text {
   border-collapse: collapse;
   padding: 0;
   margin: 2px;
+  margin-top: 30px;
 }
 .table-header {
   height: 30px;
@@ -91,11 +92,7 @@ h2#rx-label-text {
   border-right: 1px solid black;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 12pt;
-}
-.table-endrow-cell1 {
-  border-right: 1px solid black;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 12pt;
+  font-style: italic;
 }
 
 /* Footer Styles */
