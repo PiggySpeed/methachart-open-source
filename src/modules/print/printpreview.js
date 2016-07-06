@@ -116,10 +116,12 @@ function buildTable(data) {
   var tables = document.getElementById("tables");
   //var table = document.getElementById("table");
   var batches = splitData(data, 28);
-  console.log("batches are ", batches);
+  //console.log("batches are ", batches);
   //TODO: figure out how to get length of multidimensional array
+  // there is something wrong with splitdata func
 
   for(var i=batches.length-1; i>=0; --i){
+    console.log("batches are ", batches[5]);
     var table = document.createElement("table");
     table.setAttribute('class', 'table-style');
     buildTableBody(batches[i], table);
