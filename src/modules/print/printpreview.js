@@ -17,11 +17,13 @@ function splitData(data, chunksize) {
    * **/
   var feed = data.slice(); // copy the original array
   var wholechunks = Math.floor(feed.length/chunksize);
-  var arr = new Array(wholechunks + (feed.length % chunksize) -1);
-  for(var i = 0; i<wholechunks; ++i){
+  var arrLength = Math.ceil(feed.length/chunksize);
+  var arr = new Array(arrLength);
+
+  for(var i = 0; i<arrLength-1; ++i){
     arr[i] = feed.splice(0, chunksize)
   }
-  arr[arr.length-1] = feed.slice(); // add the remainder of the feed
+  arr[arr.length-1] = feed.slice(); // add the remainder
   return arr;
 }
 
@@ -51,7 +53,6 @@ function buildTableBody(data, table){
   }
 
   // Build table body
-
   for(var i = 0; i<data.length; ++i){
     var row = table.insertRow(i+1);
     row.setAttribute('class', 'table-row');
@@ -116,16 +117,13 @@ function buildTable(data) {
   var tables = document.getElementById("tables");
   //var table = document.getElementById("table");
   var batches = splitData(data, 28);
-  //console.log("batches are ", batches);
-  //TODO: figure out how to get length of multidimensional array
-  // there is something wrong with splitdata func
 
   for(var i=batches.length-1; i>=0; --i){
-    console.log("batches are ", batches[5]);
     var table = document.createElement("table");
     table.setAttribute('class', 'table-style');
     buildTableBody(batches[i], table);
     tables.appendChild(table);
+
   }
   //insertTableMessage(table, [data.length], "testing");
 
