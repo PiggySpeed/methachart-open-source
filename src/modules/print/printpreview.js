@@ -2,11 +2,9 @@ var ipcRenderer = require('electron').ipcRenderer;
 
 ipcRenderer.on('asynchronous-reply', function(event, data) {
   buildHeader(data.headerdata);
-  buildTable(data.logdata);
+  buildTables(data.logdata);
 });
 
-
-//var pig = [1,4,3,6,3,7,9,5,3,2,6,8,3,3,1,3];
 
 function splitData(data, chunksize) {
   /**
@@ -16,7 +14,6 @@ function splitData(data, chunksize) {
    * chunksize (int): the maximum size of chunks
    * **/
   var feed = data.slice(); // copy the original array
-  var wholechunks = Math.floor(feed.length/chunksize);
   var arrLength = Math.ceil(feed.length/chunksize);
   var arr = new Array(arrLength);
 
@@ -104,25 +101,52 @@ function insertTableMessage(table, location, message) {
     rowcell.setAttribute('colspan', '8');
     rowcell.innerHTML = message;
   }
-  //var endrow = table.insertRow(data.length + 1);
-  //endrow.setAttribute('class', 'table-endrow');
-  //var endrowcell0 = endrow.insertCell(0);
-  //endrowcell0.setAttribute('class', 'table-endrow-cell0');
-  //endrowcell0.setAttribute('colspan', '8');
-  //endrowcell0.innerHTML = "END OF METHADONE PRESCRIPTION - PLEASE SEE DOCTOR FOR REFILLS";
-
 }
 
-function buildTable(data) {
+function buildTable(data, tablenode) {
+  /**
+   * Adds a table to the tablenode.
+   * Returns a reference to the table that was just created.
+   *
+   * data (arr): an array of data objects
+   * tablenode (obj): the DOM element to append this table to
+   *
+   * **/
+  var table = document.createElement("table");
+  table.setAttribute('class', 'table-style');
+  buildTableBody(data, table);
+  tablenode.appendChild(table);
+  return table;
+}
+
+function addPageNumber(number, max, node){
+  var pageNumber = document.createElement('p');
+  pageNumber.innerHTML = "p. " + number + "/" + max;
+  pageNumber.setAttribute('id', 'page-order-label');
+  node.appendChild(pageNumber);
+}
+
+function addPageBreak(node){
+  /**
+   * Adds an empty div that create a page break after it.
+   *
+   * node (obj): node in which to add the page break to.
+   * **/
+  var pageBreak = document.createElement('div');
+  pageBreak.innerHTML = " "; // the page-break-after property won't work on empty divs
+  pageBreak.setAttribute('class', 'page-break');
+  node.appendChild(pageBreak);
+}
+
+function buildTables(data) {
   var tables = document.getElementById("tables");
 
-  var batches = splitData(data, 28);
+  var batches = splitData(data, 15);
 
-  for(var i=batches.length-1; i>=0; --i){
-    var table = document.createElement("table");
-    table.setAttribute('class', 'table-style');
-    buildTableBody(batches[i], table);
-    tables.appendChild(table);
+  for(var i=0; i<batches.length; ++i){
+    buildTable(batches[i], tables);
+    addPageNumber(i+1, batches.length, tables);
+    addPageBreak(tables);
   }
 }
 
