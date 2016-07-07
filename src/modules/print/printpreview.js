@@ -75,9 +75,9 @@ function buildTableBody(data, table){
 
     cell0.innerHTML = data[i].date;
     cell1.innerHTML = data[i].rx;
-    cell2.innerHTML = data[i].witness;
+    cell2.innerHTML = data[i].witness + " mL";
     cell3.innerHTML = data[i].takehome;
-    cell4.innerHTML = data[i].total;
+    cell4.innerHTML = data[i].total + " mL";
     cell5.innerHTML = ""; // RPh
     cell6.innerHTML = ""; // Patient
     cell7.innerHTML = ""; // Notes
@@ -115,16 +115,26 @@ function insertTableMessage(table, location, message) {
 function buildTable(data) {
   var tables = document.getElementById("tables");
   //var table = document.getElementById("table");
-  var batches = splitData(data, 28);
-  console.log("batches are ", batches);
+
+  //var batches = splitData(data, 28);
+
+  //console.log("batches are ", batches);
+
+  var table = document.createElement("table");
+  table.setAttribute('class', 'table-style');
+  buildTableBody(data, table);
+  tables.appendChild(table);
+
   //TODO: figure out how to get length of multidimensional array
 
-  for(var i=batches.length-1; i>=0; --i){
-    var table = document.createElement("table");
-    table.setAttribute('class', 'table-style');
-    buildTableBody(batches[i], table);
-    tables.appendChild(table);
-  }
+  //for(var i=batches.length-1; i>=0; --i){
+  //  var table = document.createElement("table");
+  //  table.setAttribute('class', 'table-style');
+  //  buildTableBody(batches[i], table);
+  //  tables.appendChild(table);
+  //}
+
+
   //insertTableMessage(table, [data.length], "testing");
 
 }

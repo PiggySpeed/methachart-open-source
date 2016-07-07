@@ -1,5 +1,6 @@
 {
   "name": "methachart",
+  "productName": "MethaChart",
   "version": "1.0.0",
   "description": "generates methadone log forms",
   "main": "main.js",
@@ -39,6 +40,7 @@
     "babel-register": "^6.9.0",
     "classnames": "^2.2.3",
     "css-loader": "^0.23.1",
+    "electron-packager": "^7.2.0",
     "electron-prebuilt": "^1.2.5",
     "expect": "^1.20.1",
     "history": "^2.0.0",
