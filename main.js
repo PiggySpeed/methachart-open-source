@@ -2,10 +2,14 @@ var app = require('electron').app;
 var BrowserWindow = require('electron').BrowserWindow;
 var ipcMain = require('electron').ipcMain;
 
-ipcMain.on('asynchronous-message', function(event, args){
-  event.sender.send('asynchronous-reply', args);
-  console.log('sent message');
-});
+//var fs = require('fs');
+
+//console.log("fs is ", fs);
+
+//ipcMain.on('asynchronous-message', function(event, args){
+//  event.sender.send('asynchronous-reply', args);
+//  console.log('sent message');
+//});
 //ipcMain.send('asynchronous-reply', "pigggggg");
 
 //console.log("ipcmain is ", ipcMain);
