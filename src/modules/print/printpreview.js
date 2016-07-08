@@ -1,10 +1,8 @@
 var ipcRenderer = require('electron').ipcRenderer;
 
 ipcRenderer.on('asynchronous-reply', function(event, data) {
-  buildHeader(data.headerdata);
-  buildTables(data.logdata);
+  buildTables(data.logdata, data.headerdata);
 });
-
 
 function splitData(data, chunksize) {
   /**
@@ -24,18 +22,63 @@ function splitData(data, chunksize) {
   return arr;
 }
 
-function buildHeader(data) {
-  // Add Title
-  var headertitle = document.getElementById("header-title");
-  headertitle.innerHTML = "Methadone Accountability Log";
+function addTableRowDWI(data){
+  var row = document.createElement("tr");
+  row.setAttribute("class", "table-row");
 
-  // Add Name
-  var namelabel = document.getElementById("name-label");
-  namelabel.innerHTML = data.name;
+  var cell0 = row.insertCell(0);
+  var cell1 = row.insertCell(1);
+  var cell2 = row.insertCell(2);
+  var cell3 = row.insertCell(3);
+  var cell4 = row.insertCell(4);
+  var cell5 = row.insertCell(5);
+  var cell6 = row.insertCell(6);
+  var cell7 = row.insertCell(7);
 
-  // Add Details
-  var detailslabel = document.getElementById("details-label");
-  detailslabel.innerHTML = "Start: " + data.startdate + " End: " + data.enddate;
+  cell0.setAttribute('class', 'table-cell');
+  cell1.setAttribute('class', 'table-cell');
+  cell2.setAttribute('class', 'table-cell');
+  cell3.setAttribute('class', 'table-cell');
+  cell4.setAttribute('class', 'table-cell');
+  cell5.setAttribute('class', 'table-cell');
+  cell6.setAttribute('class', 'table-cell');
+  cell7.setAttribute('class', 'table-cell');
+
+  cell0.innerHTML = data.date;
+  cell1.innerHTML = data.rx;
+  cell2.innerHTML = data.witness + " mL";
+  cell3.innerHTML = data.takehome;
+  cell4.innerHTML = data.total + " mL";
+  cell5.innerHTML = ""; // RPh
+  cell6.innerHTML = ""; // Patient
+  cell7.innerHTML = ""; // Notes
+
+  return row;
+}
+
+function addTableRowCarry(data){
+  var row = document.createElement("tr");
+  row.setAttribute("class", "table-row");
+
+  var cell0 = row.insertCell(0);
+  var cell1 = row.insertCell(1);
+
+  cell0.setAttribute('class', 'table-cell-carry');
+  cell0.setAttribute('colspan', 8);
+
+  cell1.setAttribute('class', 'table-cell');
+
+  cell0.innerHTML = data.date;
+  cell1.innerHTML = "CARRY DOSE";
+
+  return row;
+}
+
+function addTableRowMessage(row, message){
+  var cell = row.insertCell(0);
+  cell.setAttribute("colspan", 8);
+  cell.setAttribute('class', 'table-endrow-cell');
+  cell.innerHTML = message;
 }
 
 function buildTableBody(data, table){
@@ -51,37 +94,112 @@ function buildTableBody(data, table){
 
   // Build table body
   for(var i = 0; i<data.length; ++i){
-    var row = table.insertRow(i+1);
-    row.setAttribute('class', 'table-row');
-    var cell0 = row.insertCell(0);
-    var cell1 = row.insertCell(1);
-    var cell2 = row.insertCell(2);
-    var cell3 = row.insertCell(3);
-    var cell4 = row.insertCell(4);
-    var cell5 = row.insertCell(5);
-    var cell6 = row.insertCell(6);
-    var cell7 = row.insertCell(7);
-
-    cell0.setAttribute('class', 'table-cell');
-    cell1.setAttribute('class', 'table-cell');
-    cell2.setAttribute('class', 'table-cell');
-    cell3.setAttribute('class', 'table-cell');
-    cell4.setAttribute('class', 'table-cell');
-    cell5.setAttribute('class', 'table-cell');
-    cell6.setAttribute('class', 'table-cell');
-    cell7.setAttribute('class', 'table-cell');
-
-    cell0.innerHTML = data[i].date;
-    cell1.innerHTML = data[i].rx;
-    cell2.innerHTML = data[i].witness + " mL";
-    cell3.innerHTML = data[i].takehome;
-    cell4.innerHTML = data[i].total + " mL";
-    cell5.innerHTML = ""; // RPh
-    cell6.innerHTML = ""; // Patient
-    cell7.innerHTML = ""; // Notes
+    table.appendChild(addTableRowDWI(data[i]));
   }
+}
 
-  // Add Page Number
+function buildTable(data) {
+  /**
+   * Adds a table to the tablenode.
+   * Returns a reference to the table that was just created.
+   *
+   * data (arr): an array of data objects
+   *
+   * **/
+  var table = document.createElement("table");
+  table.setAttribute('class', 'table-style');
+  buildTableBody(data, table);
+
+  return table;
+}
+
+function addPageNumber(number, max){
+  /**
+   * Returns a <p> element with the current page number
+   * number (int): page number to display
+   * max (int): max number of pages
+   * **/
+  var pageNumber = document.createElement('p');
+  pageNumber.innerHTML = "p. " + number + "/" + max;
+  pageNumber.setAttribute('id', 'page-order-label');
+
+  return pageNumber;
+}
+
+function addPageBreak(){
+  /**
+   * Adds an empty div that create a page break after it.
+   * **/
+  var pageBreak = document.createElement('div');
+  pageBreak.innerHTML = " "; // the page-break-after property won't work on empty divs
+  pageBreak.setAttribute('class', 'page-break');
+  return pageBreak;
+}
+
+function createCheckbox(label) {
+  var container = document.createElement("div");
+  container.setAttribute("class", "checkbox-container");
+
+  var checkbox = document.createElement("input");
+  checkbox.setAttribute("type", "checkbox");
+  checkbox.setAttribute("class", "checkbox-box");
+
+  var checkboxlabel = document.createElement("p");
+  checkboxlabel.innerHTML = label;
+  checkboxlabel.setAttribute("class", "checkbox-label");
+
+  container.appendChild(checkbox);
+  container.appendChild(checkboxlabel);
+
+  return container;
+}
+
+function buildHeader(data) {
+  /**
+   * Returns a header section with data passed into it.
+   * data (obj): data with fields: name, startdate, enddate
+   * **/
+  // Create Header Section
+  var header = document.createElement("header");
+  header.setAttribute("id", "header");
+
+  // Add Title
+  var headertitle = document.createElement("h1");
+  headertitle.setAttribute("id", "header-title");
+  headertitle.innerHTML = "Methadone Accountability Log";
+
+  // Add Name
+  var namelabel = document.createElement("h1");
+  namelabel.setAttribute("id", "name-label");
+  namelabel.innerHTML = data.name;
+
+  // Add Details
+  var detailslabel = document.createElement("p");
+  detailslabel.setAttribute("id", "details-label");
+  detailslabel.innerHTML = "Start: " + data.startdate +  " End: " + data.enddate + " (" + data.timeinterval + " days)";
+
+  // Add Extra Options Area
+  var extraoptions = document.createElement("section");
+  extraoptions.setAttribute("class", "header-options-container");
+
+  extraoptions.appendChild(createCheckbox("Signed original?"));
+  extraoptions.appendChild(detailslabel);
+
+  // Add Label Area
+  var rxlabel = document.createElement("aside");
+  var rxlabeltext = document.createElement("h2");
+  rxlabel.setAttribute("id", "rx-label");
+  rxlabeltext.setAttribute("id", "rx-label-text");
+  rxlabeltext.innerHTML = "Place Label Here";
+  rxlabel.appendChild(rxlabeltext);
+
+  // Add Everything into Header
+  header.appendChild(headertitle);
+  header.appendChild(namelabel);
+  header.appendChild(extraoptions);
+  header.appendChild(rxlabel);
+
+  return header;
 }
 
 function insertTableMessage(table, location, message) {
@@ -97,57 +215,30 @@ function insertTableMessage(table, location, message) {
     table.deleteRow(location[i]);
     var row = table.insertRow(location[i]);
     var rowcell = row.insertCell(0);
-    rowcell.setAttribute('class', 'table-endrow-cell0');
+    rowcell.setAttribute('class', 'table-endrow-cell');
     rowcell.setAttribute('colspan', '8');
     rowcell.innerHTML = message;
   }
 }
 
-function buildTable(data, tablenode) {
-  /**
-   * Adds a table to the tablenode.
-   * Returns a reference to the table that was just created.
-   *
-   * data (arr): an array of data objects
-   * tablenode (obj): the DOM element to append this table to
-   *
-   * **/
-  var table = document.createElement("table");
-  table.setAttribute('class', 'table-style');
-  buildTableBody(data, table);
-  tablenode.appendChild(table);
-  return table;
-}
-
-function addPageNumber(number, max, node){
-  var pageNumber = document.createElement('p');
-  pageNumber.innerHTML = "p. " + number + "/" + max;
-  pageNumber.setAttribute('id', 'page-order-label');
-  node.appendChild(pageNumber);
-}
-
-function addPageBreak(node){
-  /**
-   * Adds an empty div that create a page break after it.
-   *
-   * node (obj): node in which to add the page break to.
-   * **/
-  var pageBreak = document.createElement('div');
-  pageBreak.innerHTML = " "; // the page-break-after property won't work on empty divs
-  pageBreak.setAttribute('class', 'page-break');
-  node.appendChild(pageBreak);
-}
-
-function buildTables(data) {
+function buildTables(data, headerdata) {
   var tables = document.getElementById("tables");
-
-  var batches = splitData(data, 15);
+  var batches = splitData(data, 28);
 
   for(var i=0; i<batches.length; ++i){
-    buildTable(batches[i], tables);
-    addPageNumber(i+1, batches.length, tables);
-    addPageBreak(tables);
+    tables.appendChild(buildHeader(headerdata));
+    var table = buildTable(batches[i]);
+    tables.appendChild(table);
+    if(i == batches.length-1) {
+      var lastRow = table.insertRow(table.rows.length);
+      lastRow.setAttribute("class", "table-endrow");
+      addTableRowMessage(lastRow, "END OF METHADONE RX - SEE DOCTOR FOR REFILLS");
+    }
+    tables.appendChild(addPageNumber(i+1, batches.length));
+    tables.appendChild(addPageBreak());
   }
+  //var lastTable = tables.lastElementChild;
+  //console.log("last element is ", lastTable);
 }
 
 

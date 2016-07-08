@@ -13,7 +13,7 @@ const initialState = Map({
       witness: "6 mL",
       takehome: "3 mL",
       total: "9 mL",
-      active: "true"
+      carry: false
     }
   ])
 });
@@ -45,7 +45,7 @@ const ConfigureSpecificReducer = (state = initialState, action) => {
           witness: state.get("dose"),
           takehome: "none",
           total: state.get("dose"),
-          active: "true"
+          carry: false
         })
       }
       return state.merge({

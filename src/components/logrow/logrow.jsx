@@ -11,7 +11,7 @@ const LogRow = ({ rowdata, rowNumber }) => (
     <TableRowColumn>{rowdata.takehome}</TableRowColumn>
     <TableRowColumn>{rowdata.total}</TableRowColumn>
     <TableRowColumn>
-      {rowdata.active}
+      {rowdata.carry}
     </TableRowColumn>
   </TableRow>
 );
