@@ -1,10 +1,9 @@
 var app = require('electron').app;
 var BrowserWindow = require('electron').BrowserWindow;
 var ipcMain = require('electron').ipcMain;
+var Menu = require('electron').Menu;
 
 //var fs = require('fs');
-
-//console.log("fs is ", fs);
 
 //ipcMain.on('asynchronous-message', function(event, args){
 //  event.sender.send('asynchronous-reply', args);
@@ -34,7 +33,7 @@ app.on('window-all-closed', function() {
 //BrowserWindow.getDevToolsExtension()
 
 app.on('ready', function() {
-  mainWindow = new BrowserWindow({ width: 900, height: 625 });
+  mainWindow = new BrowserWindow({ width: 575, height: 400 });
   mainWindow.loadURL('file://' + __dirname + '/src/index.html');
 
   //var names = Object.keys(BrowserWindow.getDevToolsExtensions());
@@ -46,6 +45,56 @@ app.on('ready', function() {
   mainWindow.on('closed', function() {
     mainWindow = null;
   });
+
+  // Create the application's menu
+  const template = [
+    {
+      label: 'Edit',
+      submenu: [
+        { role: 'undo' },
+        { role: 'redo' },
+        { type: 'separator' },
+        { role: 'cut' },
+        { role: 'copy' },
+        { role: 'paste' },
+        { role: 'pasteandmatchstyle' },
+        { role: 'delete' },
+        { role: 'selectall' } ]
+    },
+    { label: 'View',
+      submenu: [
+        { label: 'Reload', accelerator: 'CmdOrCtrl+R',
+          click(item, focusedWindow) {
+            if (focusedWindow) focusedWindow.reload() } },
+        { role: 'togglefullscreen' },
+        { label: 'Toggle Developer Tools', accelerator: process.platform === 'darwin' ? 'Alt+Command+I' : 'Ctrl+Shift+I',
+          click(item, focusedWindow) {
+            if (focusedWindow)
+              focusedWindow.webContents.toggleDevTools() } } ]
+    },
+    {
+      label: "Print",
+      submenu: [
+        { label: "Print",
+          accelerator: "F10",
+          click(item, focusedWindow) {
+            if (focusedWindow){ipcMain.send('print');}
+          } } ]
+    },
+    { role: 'window',
+      submenu: [
+        { role: 'minimize' },
+        { role: 'close' } ]
+    },
+    { role: 'help',
+      submenu: [
+        { label: 'Learn More',
+          click() { require('electron').shell.openExternal('http://electron.atom.io'); } }
+      ]
+    }
+  ];
+
+  Menu.setApplicationMenu(Menu.buildFromTemplate(template));
 
 });
 

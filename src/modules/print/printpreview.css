@@ -151,7 +151,6 @@ p#page-order-label {
 }
 .page-break {
   width: 100%;
-  margin: 50px 0;
-  border-bottom: 1px dashed #727272;
   page-break-after: always;
 }
+/*border-bottom: 1px dashed #727272;*/

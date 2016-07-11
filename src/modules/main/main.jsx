@@ -8,9 +8,9 @@ import ChartPage from 'modules/chart/chart.jsx';
 import Navigation from 'components/navigation/navigation.jsx';
 import NavigationButton from 'components/navigation/navigationbutton.jsx';
 import Content from 'components/content/content.jsx';
-import Feed from 'components/feed/feed.jsx';
+//import Feed from 'components/feed/feed.jsx';
 import Footer from 'components/footer/footer.jsx';
-import PrintPage from 'modules/print/print.jsx';
+//import PrintPage from 'modules/print/print.jsx';
 
 import { onClick } from './mainactions';
 
@@ -26,11 +26,6 @@ class MainContainer extends React.Component {
   render() {
     return(
       <div className="main-container">
-        <Feed>
-          <div hidden>
-            <PrintPage />
-          </div>
-        </Feed>
         <Content>
           {this.props.children || <ChartPage/>}
           <Footer changeRoute={this.goToRoute.bind(this)} printdata={this.props.printdata} />

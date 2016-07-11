@@ -15,16 +15,15 @@ const styles = {
   }
 };
 
-const ConfigureSpecificContainer = ({ logdata, startdate, enddate, onBuildLog }) => (
+const ConfigureSpecificContainer = ({ logdata, startdate, enddate }) => (
   <section className="configure-specific-container">
     <Table height="300px">
-      <TableHeader displaySelectAll={false}>
-        <TableRow onClick={()=>onBuildLog(startdate, enddate)}>
+      <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
+        <TableRow>
           <TableHeaderColumn>Date</TableHeaderColumn>
           <TableHeaderColumn>Witness</TableHeaderColumn>
           <TableHeaderColumn>Take Home</TableHeaderColumn>
           <TableHeaderColumn>Total</TableHeaderColumn>
-          <TableHeaderColumn>Carries?</TableHeaderColumn>
         </TableRow>
       </TableHeader>
       <TableBody displayRowCheckbox={true}>
@@ -44,8 +43,9 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = (dispatch) => {
   return {
-    onBuildLog: (startdate, enddate) => {dispatch(onBuildLog(startdate, enddate))}
   }
 };
 const ConfigureSpecificPage = connect(mapStateToProps, mapDispatchToProps)(ConfigureSpecificContainer);
 export default ConfigureSpecificPage;
+
+//<TableHeaderColumn>Carries?</TableHeaderColumn>

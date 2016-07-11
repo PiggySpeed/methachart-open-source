@@ -10,10 +10,11 @@ const LogRow = ({ rowdata, rowNumber }) => (
     <TableRowColumn>{rowdata.witness}</TableRowColumn>
     <TableRowColumn>{rowdata.takehome}</TableRowColumn>
     <TableRowColumn>{rowdata.total}</TableRowColumn>
-    <TableRowColumn>
-      {rowdata.carry}
-    </TableRowColumn>
   </TableRow>
 );
 
 export default LogRow;
+
+//<TableRowColumn>
+//  {rowdata.carry}
+//</TableRowColumn>

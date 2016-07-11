@@ -43,7 +43,7 @@ const ConfigureSpecificReducer = (state = initialState, action) => {
           date: dates[i],
           rx: "30224",
           witness: state.get("dose"),
-          takehome: "none",
+          takehome: "-------",
           total: state.get("dose"),
           carry: false
         })
