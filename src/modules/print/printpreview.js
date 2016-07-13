@@ -35,17 +35,17 @@ function addTableRowDWI(data){
   var cell6 = row.insertCell(6);
   var cell7 = row.insertCell(7);
 
-  cell0.setAttribute('class', 'table-cell');
-  cell1.setAttribute('class', 'table-cell');
-  cell2.setAttribute('class', 'table-cell');
-  cell3.setAttribute('class', 'table-cell');
-  cell4.setAttribute('class', 'table-cell');
-  cell5.setAttribute('class', 'table-cell');
-  cell6.setAttribute('class', 'table-cell');
+  cell0.setAttribute('class', 'table-cell col0');
+  cell1.setAttribute('class', 'table-cell col1');
+  cell2.setAttribute('class', 'table-cell col2');
+  cell3.setAttribute('class', 'table-cell col3');
+  cell4.setAttribute('class', 'table-cell col4');
+  cell5.setAttribute('class', 'table-cell col5');
+  cell6.setAttribute('class', 'table-cell col6');
   cell7.setAttribute('class', 'table-cell');
 
   cell0.innerHTML = data.date;
-  cell1.innerHTML = data.rx;
+  cell1.innerHTML = data.rxnum;
   cell2.innerHTML = data.witness + " mL";
   cell3.innerHTML = data.takehome;
   cell4.innerHTML = data.total + " mL";

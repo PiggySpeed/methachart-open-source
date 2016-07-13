@@ -16,11 +16,11 @@ const styles = {
     height: "100%"
   },
   tab: {
-    backgroundColor: "#FF5722",
+    backgroundColor: "#212121",
     height: "100%"
   },
   inkbar: {
-    backgroundColor: "#FF5722"
+    backgroundColor: "#212121"
   }
 };
 

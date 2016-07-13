@@ -33,7 +33,7 @@ const Footer = ({ changeRoute, printdata }) => (
     <IconButton onClick={() => changeRoute("/about")} tooltip="About" tooltipPosition="top-right">
       <ActionInfo />
     </IconButton>
-    <RaisedButton onClick={() => openWindow(PRINT_URL, printdata)} label="PRINT" style={style} backgroundColor="#FF5722" labelColor="#FFFFFF" />
+    <RaisedButton onClick={() => openWindow(PRINT_URL, printdata)} label="PRINT" style={style} backgroundColor="#727272" labelColor="#FFFFFF" />
   </footer>
 );
 

@@ -1,4 +1,5 @@
 const { BrowserWindow } = window.require('electron').remote;
+//var ipcMain = require('electron').ipcMain;
 
 const openWindow = (url, data) => {
   /**
@@ -6,16 +7,16 @@ const openWindow = (url, data) => {
    * **/
   let win = new BrowserWindow({width: 800, height: 600});
   win.loadURL(url);
-  win.openDevTools();
+  //win.openDevTools();
   win.on('closed', () => {
     win = null
   });
 
   win.webContents.on('did-finish-load', () => {
     win.webContents.send('asynchronous-reply', data);
-      //win.webContents.print({}, (error) => {
-      //  if (error) throw error;
-      //});
+    win.webContents.print({}, (error) => {
+      if (error) throw error;
+    });
   });
 
   //win.webContents.on('did-finish-load', () => {
@@ -23,10 +24,6 @@ const openWindow = (url, data) => {
   //  win.webContents.print({}, (error) => {
   //    if (error) throw error;
   //  });
-  //});
-
-  //ipcMain.on('print', function(){
-  //  console.log('i am printing');
   //});
 
   //const printWindow = () => {

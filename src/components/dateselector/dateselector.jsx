@@ -113,7 +113,7 @@ export default class DateSelector extends React.Component {
       <section onBlur={() => this.onAllDatesValidated(this.props.startdate, this.props.enddate)} className="dateselector-container">
         <DateField onDateBlur={this.props.onSetStartDate} label="Start"/>
         <DateField onDateBlur={this.props.onSetEndDate} label="End"/>
-        <h6 className="dateinterval-text">{this.props.startdate} {this.props.startdate && this.props.enddate ? " to " : ""} {this.props.enddate}<br/>{ Number.isInteger(this.props.timeinterval) ? this.props.timeinterval + " days" : this.props.timeinterval }</h6>
+        <h6 className="dateinterval-text">{this.props.startdate} {this.props.startdate && this.props.enddate ? " to " : ""} {this.props.enddate}<br/>{ Number.isInteger(this.props.timeinterval) && this.props.timeinterval>0 ? this.props.timeinterval + " days" : "" }</h6>
       </section>
     );
   }

@@ -1,5 +1,6 @@
 // Constants
 export const ON_NAME_BLUR = "ON_NAME_BLUR";
+export const ON_RXNUM_BLUR = "ON_RXNUM_BLUR";
 export const ON_DRUG_BLUR = "ON_DRUG_BLUR";
 export const ON_DOSE_BLUR = "ON_DOSE_BLUR";
 export const ADD_LOG_ENTRY = "ADD_LOG_ENTRY";
@@ -10,6 +11,12 @@ export const onNameBlur = (name) => {
   return {
     type: ON_NAME_BLUR,
     name: name
+  }
+};
+export const onRxNumBlur = (rxnum) => {
+  return {
+    type: ON_RXNUM_BLUR,
+    rxnum: rxnum
   }
 };
 export const onDrugBlur = (drug) => {

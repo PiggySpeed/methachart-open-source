@@ -8,11 +8,11 @@ const initialState = Map({
   dose: 0,
   logdata: List([
     {
-      date: "June 5, 2016",
-      rx: "30224",
-      witness: "6 mL",
-      takehome: "3 mL",
-      total: "9 mL",
+      date: "", //"June 5, 2016"
+      rxnum: "", //"30224"
+      witness: "", //"6 mL"
+      takehome: "", //"3 mL"
+      total: "", //"9 mL"
       carry: false
     }
   ])
@@ -23,6 +23,11 @@ const ConfigureSpecificReducer = (state = initialState, action) => {
     case types.ON_NAME_BLUR: {
       return state.merge({
         name: action.name
+      })
+    }
+    case types.ON_RXNUM_BLUR: {
+      return state.merge({
+        rxnum: action.rxnum
       })
     }
     case types.ON_DRUG_BLUR: {
@@ -41,7 +46,7 @@ const ConfigureSpecificReducer = (state = initialState, action) => {
       for(var i = 0; i <= dates.length-1; i++ ) {
         newLog.push({
           date: dates[i],
-          rx: "30224",
+          rxnum: state.get("rxnum"),
           witness: state.get("dose"),
           takehome: "-------",
           total: state.get("dose"),

@@ -40,7 +40,8 @@ app.on('ready', function() {
   //if ( !names.indexOf('Redux DevTools') ) {
   //  BrowserWindow.addDevToolsExtension(DEVTOOLS_PATH.redux);
   //}
-  mainWindow.openDevTools();
+
+  //mainWindow.openDevTools();
 
   mainWindow.on('closed', function() {
     mainWindow = null;

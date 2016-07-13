@@ -13,7 +13,7 @@ import CarriesSelector from 'components/carriesselector/carriesselector.jsx';
 
 // Actions
 import {
-  onNameBlur, onDrugBlur, onDoseBlur, onBuildLog
+  onNameBlur, onRxNumBlur, onDrugBlur, onDoseBlur, onBuildLog
   } from 'modules/configurespecific/configurespecificactions';
 import {
   onPickDrug, onSetDrug,
@@ -22,12 +22,16 @@ import {
 
 const styles = {
   name: {
-    width: 300,
-    marginLeft: 24
+    width: 200,
+    marginLeft: 25
+  },
+  rx: {
+    width: 75,
+    marginLeft: 25
   }
 };
 //<CarriesSelector />
-const ConfigureGeneralContainer = ({ onNameBlur, onDrugBlur, onDoseBlur, onBuildLog, onPickDrug,
+const ConfigureGeneralContainer = ({ onNameBlur, onRxNumBlur, onDrugBlur, onDoseBlur, onBuildLog, onPickDrug,
   onSetStartDate, onSetEndDate, startdate, enddate, timeinterval, onSetTimeInterval, maxinterval,
   selecteddrug, druglist}) => (
   <section>
@@ -35,8 +39,14 @@ const ConfigureGeneralContainer = ({ onNameBlur, onDrugBlur, onDoseBlur, onBuild
       onBlur={(e) => onNameBlur(e.target.value)}
       style={styles.name}
       hintText="Name"
-      floatingLabelText="Name"
-    /><br/>
+      floatingLabelText="Name"/>
+    <TextField
+      onBlur={(e) => onRxNumBlur(e.target.value)}
+      style={styles.rx}
+      hintText="Rx#"
+      floatingLabelText="Rx#"/>
+    <h6 className="tip-message"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TAB = forward <br/>Shift+TAB = backwards</h6>
+    <br/>
     <DrugPicker
       selectedDrug={selecteddrug}
       drugList={druglist}
@@ -68,6 +78,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onNameBlur: (name) => {dispatch(onNameBlur(name))},
+    onRxNumBlur: (rxnum) => {dispatch(onRxNumBlur(rxnum))},
     onDrugBlur: (drug) => {dispatch(onDrugBlur(drug))},
     onDoseBlur: (dose) => {dispatch(onDoseBlur(dose))},
     onBuildLog: (startdate, enddate) => {dispatch(onBuildLog(startdate, enddate))},

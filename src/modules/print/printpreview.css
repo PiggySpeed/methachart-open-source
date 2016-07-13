@@ -117,6 +117,15 @@ h2#rx-label-text {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 10pt;
 }
+
+.col0 { width: 115px; }
+.col1 { width: 75px; }
+.col2 { width: 75px; }
+.col3 { width: 75px; }
+.col4 { width: 75px; }
+.col5 { width: 50px; }
+.col6 { width: 100px; }
+
 .table-cell-carry {
   border: 1px solid black;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;

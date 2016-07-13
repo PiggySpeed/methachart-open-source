@@ -9,7 +9,7 @@
     "watch": "webpack-dev-server --hot --watch --inline --progress",
     "test": "mocha ./src/test --compilers js:babel-register --recursive",
     "test:watch": "npm test -- --watch",
-    "build": "electron-packager . MethaChart --platform=win32 --arch=x64 --version=1.2.5"
+    "build": "electron-packager . MethaChart --platform=win32 --arch=x64 --version=1.2.5 --ignore=dist --ignore=build --prune --out=./build"
   },
   "author": "John Lee",
   "license": "MIT",
@@ -17,9 +17,7 @@
     "url": "https://github.com/PiggySpeed/methachart/issues"
   },
   "dependencies": {
-    "express": "^4.13.4",
     "immutable": "^3.7.6",
-    "jquery": "^3.0.0",
     "less": "^2.7.1",
     "material-ui": "^0.15.1",
     "moment": "^2.13.0",
@@ -44,6 +42,7 @@
     "electron-packager": "^7.2.0",
     "electron-prebuilt": "^1.2.5",
     "expect": "^1.20.1",
+    "express": "^4.14.0",
     "history": "^2.0.0",
     "less-loader": "^2.2.3",
     "mocha": "^2.5.3",
