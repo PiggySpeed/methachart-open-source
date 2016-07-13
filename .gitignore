@@ -40,7 +40,7 @@ node_modules
 # bundlejs files
 /public/built/bundle.js
 /public/built/bundle.js.map
+build/
+dist/
 
-/dist
-/build
 src/modules/about/about.css
