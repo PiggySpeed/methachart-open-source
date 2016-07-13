@@ -9,7 +9,7 @@
     "watch": "webpack-dev-server --hot --watch --inline --progress",
     "test": "mocha ./src/test --compilers js:babel-register --recursive",
     "test:watch": "npm test -- --watch",
-    "build": "electron-packager . MethaChart --platform=win32 --arch=x64 --version=1.2.5 --ignore=dist --ignore=build --prune --out=./build"
+    "build": "electron-packager . MethaChart --platform=win32 --arch=x64 --version=1.2.5 --overwrite --ignore=build --prune --out=./build"
   },
   "author": "John Lee",
   "license": "MIT",
