@@ -13,46 +13,88 @@ import CarriesSelector from 'components/carriesselector/carriesselector.jsx';
 
 // Actions
 import {
-  onNameBlur, onRxNumBlur, onDrugBlur, onDoseBlur, onBuildLog
+  onNameChange, onRxNumChange, onDrugBlur, onDoseChange, onBuildLog,
+  onSetStartDate, onSetEndDate, onSetTimeInterval,
   } from 'modules/configurespecific/configurespecificactions';
 import {
-  onPickDrug, onSetDrug,
-  onSetStartDate, onSetEndDate, onSetTimeInterval,
+  onPickDrug, onSetDrug
   } from './configuregeneralactions';
 
 const styles = {
   name: {
     width: 200,
-    marginLeft: 25
+    marginLeft: 25,
+    marginBottom: 10
   },
   rx: {
-    width: 75,
-    marginLeft: 25
+    width: 90,
+    marginLeft: 25,
+    marginBottom: 10
+  },
+  errorstyle: {
+    position: "absolute",
+    top: 70 //This is a workaround for error text display
   }
 };
+
+const IsNumeric = (input) => {
+  var RE = /^\d*\d+$/;
+  return RE.test(input);
+};
+
+class RxNumEntry extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { errorText: '', value: props.value }
+  }
+  onChange(event) {
+    var isItNumeric = IsNumeric(event.target.value);
+    if (isItNumeric) {
+      this.setState({ errorText: '' })
+    } else {
+      this.setState({ errorText: 'Numbers only!' })
+    }
+    return isItNumeric;
+  }
+  render() {
+    return(
+      <TextField
+        errorText={ this.state.errorText }
+        errorStyle={styles.errorstyle}
+        onChange={(e) => {if(this.onChange(e)){
+          this.props.onRxNumChange(e.target.value);
+          this.props.onBuildLog(this.props.startdate, this.props.enddate)}}}
+        style={styles.rx}
+        hintText="Rx#"
+        floatingLabelText="Rx#"/>
+    );
+  }
+}
+
 //<CarriesSelector />
-const ConfigureGeneralContainer = ({ onNameBlur, onRxNumBlur, onDrugBlur, onDoseBlur, onBuildLog, onPickDrug,
+const ConfigureGeneralContainer = ({ onNameChange, onRxNumChange, onDrugBlur, onDoseChange, onBuildLog, onPickDrug,
   onSetStartDate, onSetEndDate, startdate, enddate, timeinterval, onSetTimeInterval, maxinterval,
   selecteddrug, druglist}) => (
   <section>
+
     <TextField
-      onBlur={(e) => onNameBlur(e.target.value)}
+      onBlur={(e) => {onNameChange(e.target.value); onBuildLog(startdate, enddate)}}
       style={styles.name}
       hintText="Name"
       floatingLabelText="Name"/>
-    <TextField
-      onBlur={(e) => onRxNumBlur(e.target.value)}
-      style={styles.rx}
-      hintText="Rx#"
-      floatingLabelText="Rx#"/>
+    <RxNumEntry onRxNumChange={onRxNumChange} onBuildLog={onBuildLog} startdate={startdate} enddate={enddate} />
     <h6 className="tip-message"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TAB = forward <br/>Shift+TAB = backwards</h6>
+
     <br/>
     <DrugPicker
       selectedDrug={selecteddrug}
       drugList={druglist}
+      onBuildLog={onBuildLog}
+      startdate={startdate}
+      enddate={enddate}
       onPickDrug={onDrugBlur}
       onSetDrug={onSetDrug}
-      onDoseBlur={onDoseBlur} />
+      onDoseChange={onDoseChange} />
     <DateSelector
       onValidateDates={(x)=>console.log(x)}
       onBuildLog={onBuildLog}
@@ -67,20 +109,20 @@ const ConfigureGeneralContainer = ({ onNameBlur, onRxNumBlur, onDrugBlur, onDose
 );
 const mapStateToProps = (state) => {
   return {
-    startdate: state.ConfigureGeneralReducer.get("startdate"),
-    enddate: state.ConfigureGeneralReducer.get("enddate"),
-    timeinterval: state.ConfigureGeneralReducer.get("timeinterval"),
-    maxinterval: state.ConfigureGeneralReducer.get("maxinterval"),
+    startdate: state.ConfigureSpecificReducer.get("startdate"),
+    enddate: state.ConfigureSpecificReducer.get("enddate"),
+    timeinterval: state.ConfigureSpecificReducer.get("timeinterval"),
+    maxinterval: state.ConfigureSpecificReducer.get("maxinterval"),
     selecteddrug: state.ConfigureGeneralReducer.get("selecteddrug"),
     druglist: state.ConfigureGeneralReducer.get("druglist")
   }
 };
 const mapDispatchToProps = (dispatch) => {
   return {
-    onNameBlur: (name) => {dispatch(onNameBlur(name))},
-    onRxNumBlur: (rxnum) => {dispatch(onRxNumBlur(rxnum))},
+    onNameChange: (name) => {dispatch(onNameChange(name))},
+    onRxNumChange: (rxnum) => {dispatch(onRxNumChange(rxnum))},
     onDrugBlur: (drug) => {dispatch(onDrugBlur(drug))},
-    onDoseBlur: (dose) => {dispatch(onDoseBlur(dose))},
+    onDoseChange: (dose) => {dispatch(onDoseChange(dose))},
     onBuildLog: (startdate, enddate) => {dispatch(onBuildLog(startdate, enddate))},
     onPickDrug: (drug) => {console.log(drug)}, //dispatch(onPickDrug(drug))
     onSetDrug: (e, din) => {console.log("tree", din); dispatch(onSetDrug(din))},

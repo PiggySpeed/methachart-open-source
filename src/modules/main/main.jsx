@@ -12,8 +12,6 @@ import Content from 'components/content/content.jsx';
 import Footer from 'components/footer/footer.jsx';
 //import PrintPage from 'modules/print/print.jsx';
 
-import { onClick } from './mainactions';
-
 class MainContainer extends React.Component {
   constructor(props){
     super(props)
@@ -38,19 +36,26 @@ MainContainer.contextTypes = {
   router: React.PropTypes.object.isRequired
 };
 
+//printdata: {
+//  headerdata: state.ConfigureSpecificReducer.toJS(),
+//    logdata: state.ConfigureSpecificReducer.get("logdata").toArray()
+//}
+
 const mapStateToProps = (state) => {
   return {
     printdata: {
-      headerdata: state.ConfigureGeneralReducer.toJS(),
-      logdata: state.ConfigureSpecificReducer.get("logdata").toArray()
+      headerdata: {
+        name: state.ConfigureSpecificReducer.get('name'),
+        startdate: state.ConfigureSpecificReducer.get('startdate'),
+        enddate: state.ConfigureSpecificReducer.get('enddate'),
+        timeinterval: state.ConfigureSpecificReducer.get('timeinterval')
+      },
+      logdata: state.ConfigureSpecificReducer.get('logdata').toArray()
     }
   }
 };
 const mapDispatchToProps = (dispatch) => {
   return {
-    onClick: (text) => {
-      dispatch(onClick(text))
-    }
   }
 };
 const MainPage = connect(mapStateToProps, mapDispatchToProps)(MainContainer);

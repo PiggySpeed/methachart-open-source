@@ -157,7 +157,7 @@ function createCheckbox(label) {
 function buildHeader(data) {
   /**
    * Returns a header section with data passed into it.
-   * data (obj): data with fields: name, startdate, enddate
+   * data (obj): data with fields: name, startdate, enddate, and timeinterval
    * **/
   // Create Header Section
   var header = document.createElement("header");

@@ -22,7 +22,7 @@ const styles = {
   }
 };
 
-const DrugPicker = ({ selectedDrug, drugList, onPickDrug, onSetDrug, onDoseBlur }) => (
+const DrugPicker = ({ selectedDrug, onBuildLog, startdate, enddate, drugList, onPickDrug, onSetDrug, onDoseChange }) => (
   <section className="drugpicker-container">
     <DropDownMenu style={styles.dropdown}
                   value={selectedDrug.din}
@@ -32,7 +32,7 @@ const DrugPicker = ({ selectedDrug, drugList, onPickDrug, onSetDrug, onDoseBlur 
     </DropDownMenu>
     <TextField
       style={styles.dose}
-      onChange={(e) => onDoseBlur(e.target.value)}
+      onBlur={(e) => {onDoseChange(e.target.value); onBuildLog(startdate, enddate) }}
       hintText="Dose"
       floatingLabelText="Dose"/>
     <h3 className="drugpicker-unit" >mL</h3>

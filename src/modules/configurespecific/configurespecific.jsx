@@ -37,8 +37,8 @@ const ConfigureSpecificContainer = ({ logdata, startdate, enddate }) => (
 const mapStateToProps = (state) => {
   return {
     logdata: state.ConfigureSpecificReducer.get("logdata"),
-    startdate: state.ConfigureGeneralReducer.get("startdate"),
-    enddate: state.ConfigureGeneralReducer.get("enddate")
+    startdate: state.ConfigureSpecificReducer.get("startdate"),
+    enddate: state.ConfigureSpecificReducer.get("enddate")
   }
 };
 const mapDispatchToProps = (dispatch) => {

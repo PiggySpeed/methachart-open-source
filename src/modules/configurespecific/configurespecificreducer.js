@@ -1,11 +1,16 @@
 import * as types from './configurespecificactions';
 import { Map, List, fromJS } from 'immutable';
 import { getAllDates } from 'shared/utils/date';
+import { createDate, calculateInterval } from 'shared/utils/date';
 
 const initialState = Map({
   name: "",
   drug: { displayname: "Methadone",   drugname: "Methadone 10mg/ml",  din: "02394596", pseudodin: "66999997" },
   dose: 0,
+  startdate: "",
+  enddate: "",
+  timeinterval: 0,
+  maxinterval: 100,
   logdata: List([
     {
       date: "", //"June 5, 2016"
@@ -20,12 +25,12 @@ const initialState = Map({
 
 const ConfigureSpecificReducer = (state = initialState, action) => {
   switch(action.type) {
-    case types.ON_NAME_BLUR: {
+    case types.ON_NAME_CHANGE: {
       return state.merge({
         name: action.name
       })
     }
-    case types.ON_RXNUM_BLUR: {
+    case types.ON_RXNUM_CHANGE: {
       return state.merge({
         rxnum: action.rxnum
       })
@@ -35,7 +40,8 @@ const ConfigureSpecificReducer = (state = initialState, action) => {
         drug: action.drug
       })
     }
-    case types.ON_DOSE_BLUR: {
+    case types.ON_DOSE_CHANGE: {
+      console.log("new dose is ", action.dose);
       return state.merge({
         dose: action.dose
       })
@@ -57,10 +63,24 @@ const ConfigureSpecificReducer = (state = initialState, action) => {
         logdata: List(newLog)
       })
     }
-    case types.ADD_LOG_ENTRY: {
-      var newList = [];
+    case types.ON_SET_START_DATE: {
       return state.merge({
-        logdata: newList
+        startdate: createDate(action.startdate[0], action.startdate[1], action.startdate[2])
+      })
+    }
+    case types.ON_SET_END_DATE: {
+      return state.merge({
+        enddate: createDate(action.enddate[0], action.enddate[1], action.enddate[2])
+      })
+    }
+    case types.ON_SET_TIME_INTERVAL: {
+      return state.merge({
+        timeinterval: calculateInterval(action.startdate, action.enddate, action.maxinterval)
+      })
+    }
+    case types.ON_SET_MAX_INTERVAL: {
+      return state.merge({
+        maxinterval: action.maxinterval
       })
     }
     default:
@@ -68,3 +88,10 @@ const ConfigureSpecificReducer = (state = initialState, action) => {
   }
 };
 export default ConfigureSpecificReducer;
+
+//case types.ADD_LOG_ENTRY: {
+//  var newList = [];
+//  return state.merge({
+//    logdata: newList
+//  })
+//}
