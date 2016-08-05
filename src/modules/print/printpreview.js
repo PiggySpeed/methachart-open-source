@@ -234,13 +234,15 @@ function buildTables(data, headerdata) {
       lastRow.setAttribute("class", "table-endrow");
       addTableRowMessage(lastRow, "END OF METHADONE RX - SEE DOCTOR FOR REFILLS");
     }
-    tables.appendChild(addPageNumber(i+1, batches.length));
-    tables.appendChild(addPageBreak());
+    if(batches.length > 1){
+      // Don't add a page number unless there is >1 pages
+      tables.appendChild(addPageNumber(i+1, batches.length));
+      tables.appendChild(addPageBreak());
+    }
   }
   //var lastTable = tables.lastElementChild;
   //console.log("last element is ", lastTable);
 }
-
 
 //ipcRenderer.send('print');
 //console.log("ipc renderer is ", ipcRenderer);

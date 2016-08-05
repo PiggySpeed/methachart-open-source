@@ -26,7 +26,7 @@ class MainContainer extends React.Component {
       <div className="main-container">
         <Content>
           {this.props.children || <ChartPage/>}
-          <Footer changeRoute={this.goToRoute.bind(this)} printdata={this.props.printdata} />
+          <Footer changeRoute={this.goToRoute.bind(this)} printData={this.props.printdata} />
         </Content>
       </div>
     );

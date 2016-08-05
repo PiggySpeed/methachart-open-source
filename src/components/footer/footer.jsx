@@ -25,7 +25,7 @@ const style = {
   float: 'right'
 };
 
-const Footer = ({ changeRoute, onUpdateLog, printdata }) => (
+const Footer = ({ changeRoute, onUpdateLog, printData }) => (
   <footer className="footer-container">
     <IconButton onClick={() => changeRoute("/")} tooltip="Home" tooltipPosition="top-right">
       <ActionHome />
@@ -33,7 +33,7 @@ const Footer = ({ changeRoute, onUpdateLog, printdata }) => (
     <IconButton onClick={() => changeRoute("/about")} tooltip="About" tooltipPosition="top-right">
       <ActionInfo />
     </IconButton>
-    <RaisedButton onClick={() => { console.log("print is ", printdata); openWindow(PRINT_URL, printdata) }} label="PRINT" style={style} backgroundColor="#727272" labelColor="#FFFFFF" />
+    <RaisedButton onClick={() => { openWindow(PRINT_URL, printData) }} label="PRINT" style={style} backgroundColor="#727272" labelColor="#FFFFFF" />
   </footer>
 );
 

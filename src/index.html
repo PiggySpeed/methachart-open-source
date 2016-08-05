@@ -9,7 +9,7 @@
   <div id="content" style="width:100%; height:100%;"></div>
   <script>
     const script = document.createElement('script');
-    script.src = '../dist/bundle.js';
+    script.src = (process.env.npm_lifecycle_event != 'production') ? 'http://localhost:8080/dist/bundle.js' : '../dist/bundle.js';
 
     document.write(script.outerHTML);
   </script>
@@ -17,5 +17,8 @@
 </html>
 
 <!--script.src = '../dist/bundle.js';-->
-
 <!--script.src = (process.env.npm_lifecycle_event != 'production') ? 'http://localhost:8080/dist/bundle.js' : '../dist/bundle.js';-->
+
+
+
+
