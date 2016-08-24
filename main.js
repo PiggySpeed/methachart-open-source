@@ -49,39 +49,17 @@ app.on('ready', function() {
 
   // Create the application's menu
   const template = [
-    {
-      label: 'Edit',
-      submenu: [
-        { role: 'undo' },
-        { role: 'redo' },
-        { type: 'separator' },
-        { role: 'cut' },
-        { role: 'copy' },
-        { role: 'paste' },
-        { role: 'pasteandmatchstyle' },
-        { role: 'delete' },
-        { role: 'selectall' } ]
-    },
-    { label: 'View',
-      submenu: [
-        { label: 'Reload', accelerator: 'CmdOrCtrl+R',
-          click(item, focusedWindow) {
-            if (focusedWindow) focusedWindow.reload() } },
-        { role: 'togglefullscreen' },
-        { label: 'Toggle Developer Tools', accelerator: process.platform === 'darwin' ? 'Alt+Command+I' : 'Ctrl+Shift+I',
-          click(item, focusedWindow) {
-            if (focusedWindow)
-              focusedWindow.webContents.toggleDevTools() } } ]
-    },
-    {
-      label: "Print",
-      submenu: [
-        { label: "Print",
-          accelerator: "F10",
-          click(item, focusedWindow) {
-            if (focusedWindow){ipcMain.send('print');}
-          } } ]
-    },
+    //{ label: 'View',
+    //  submenu: [
+    //    { label: 'Reload',
+    //      click(item, focusedWindow) {
+    //        if (focusedWindow) focusedWindow.reload() } },
+    //    { role: 'togglefullscreen' },
+    //    { label: 'Toggle Developer Tools', accelerator: process.platform === 'darwin' ? 'Alt+Command+I' : 'Ctrl+Shift+I',
+    //      click(item, focusedWindow) {
+    //        if (focusedWindow)
+    //          focusedWindow.webContents.toggleDevTools() } } ]
+    //},
     { role: 'window',
       submenu: [
         { role: 'minimize' },

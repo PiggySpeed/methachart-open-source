@@ -5,9 +5,7 @@ const initialState = Map({
   drug: "Methadone",
   selecteddrug: { displayname: "Methadone",   drugname: "Methadone 10mg/ml",  din: "02394596", pseudodin: "66999997" },
   druglist: List([
-    { displayname: "Methadone",   drugname: "Methadone 10mg/ml",  din: "02394596", pseudodin: "66999997" },
-    { displayname: "Kadian",      drugname: "Kadian 10 mg",       din: "02184435", pseudodin: "02184435" },
-    { displayname: "Suboxone",    drugname: "Suboxone 2/0.5 mg",  din: "02295695", pseudodin: "02295695" }])
+    { displayname: "Methadone",   drugname: "Methadone 10mg/ml",  din: "02394596", pseudodin: "66999997" }])
 });
 
 const ConfigureGeneralReducer = (state = initialState, action) => {

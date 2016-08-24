@@ -80,7 +80,7 @@ const ConfigureGeneralContainer = ({ onNameChange, onRxNumChange, onDrugBlur, on
     <TextField
       onBlur={(e) => {onNameChange(e.target.value); onBuildLog(startdate, enddate)}}
       style={styles.name}
-      hintText="Name"
+      hintText="e.g. Lee, John"
       floatingLabelText="Name"/>
     <RxNumEntry onRxNumChange={onRxNumChange} onBuildLog={onBuildLog} startdate={startdate} enddate={enddate} />
     <h6 className="tip-message"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TAB = forward <br/>Shift+TAB = backwards</h6>

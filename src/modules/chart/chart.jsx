@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { Tabs, Tab } from 'material-ui/Tabs';
 
 import ConfigureGeneralPage from 'modules/configuregeneral/configuregeneral.jsx';
-import ConfigureSpecificPage from 'modules/configurespecific/configurespecific.jsx';
+//import ConfigureSpecificPage from 'modules/configurespecific/configurespecific.jsx';
 
 const styles = {
   tabcontainer: {
@@ -20,7 +20,7 @@ const styles = {
     height: "100%"
   },
   inkbar: {
-    backgroundColor: "#212121"
+    color: "#212121"
   }
 };
 
@@ -28,16 +28,22 @@ class ChartContainer extends React.Component {
   render() {
     return(
       <Tabs style={styles.tabcontainer} >
-        <Tab inkBarStyle={styles.inkbar} style={styles.tab} label="Main">
+        <Tab inkBarStyle={styles.inkbar} style={styles.tab} label="Methadone Log Builder">
           <ConfigureGeneralPage />
-        </Tab>
-        <Tab inkBarStyle={styles.inkbar} style={styles.tab} label="Preview">
-          <ConfigureSpecificPage />
         </Tab>
       </Tabs>
     );
   }
 }
+
+// TODO: do something with the preview panel
+//<Tabs style={styles.tabcontainer} >
+//  <Tab inkBarStyle={styles.inkbar} style={styles.tab} label="Main">
+//  </Tab>
+//  <Tab inkBarStyle={styles.inkbar} style={styles.tab} label="Preview">
+//    <ConfigureSpecificPage />
+//  </Tab>
+//</Tabs>
 
 const mapStateToProps = (state) => {
   return { }
