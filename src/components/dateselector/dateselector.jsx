@@ -1,7 +1,6 @@
 'use strict';
 import './dateselector.less';
-import React from 'react';
-
+import React, { Component, PropTypes } from 'react';
 import TextField from 'material-ui/TextField';
 
 const styles = {
@@ -27,7 +26,12 @@ const styles = {
   }
 };
 
-class DateField extends React.Component {
+const IsNumeric = (input) => {
+  var RE = /^\d*\d+$/;
+  return RE.test(input);
+};
+
+class DateField extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -88,7 +92,7 @@ class DateField extends React.Component {
     );
   }
 }
-export default class DateSelector extends React.Component {
+export default class DateSelector extends Component {
   /**
    * onValidateDates: function
    * **/
@@ -104,10 +108,19 @@ export default class DateSelector extends React.Component {
     if(date1 && date2){this.props.onBuildLog(date1, date2)}
     return this.props.onSetTimeInterval(date1, date2, this.props.maxinterval);
   }
-  areDatesValid(dates) {
-    /** Calls the onValidateDates function onChange and onBlur **/
-    this.props.onValidateDates(dates.every(item => item.valid == true))
-  }
+  //onChange(event) {
+  //  var isItNumeric = IsNumeric(event.target.value);
+  //  if (isItNumeric) {
+  //    this.setState({ errorText: '' })
+  //  } else {
+  //    this.setState({ errorText: 'Numbers only!' })
+  //  }
+  //  return isItNumeric;
+  //}
+  //areDatesValid(dates) {
+  //  /** Calls the onValidateDates function onChange and onBlur **/
+  //  this.props.onValidateDates(dates.every(item => item.valid == true))
+  //}
   render() {
     return(
       <section onBlur={() => this.onAllDatesValidated(this.props.startdate, this.props.enddate)} className="dateselector-container">
@@ -119,7 +132,7 @@ export default class DateSelector extends React.Component {
   }
 }
 DateSelector.propTypes = {
-  onValidateDates: React.PropTypes.func.isRequired
+  //onValidateDates: React.PropTypes.func.isRequired
 };
 //onClick={this.props.onSetTimeInterval(this.props.startdate, this.props.enddate)}
 

@@ -4,7 +4,7 @@ const initialState = {
   pig: "hi"
 };
 
-const MainReducer = (state = initialState, action) => {
+const Main = (state = initialState, action) => {
   switch(action.type) {
     case types.ON_CLICK: {
       console.log("reducer ", action.text);
@@ -17,4 +17,4 @@ const MainReducer = (state = initialState, action) => {
       return {...state}
   }
 };
-export default MainReducer;
+export default Main;

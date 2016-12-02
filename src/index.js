@@ -1,6 +1,6 @@
-import 'shared/styles/index.less';
+import 'styles/index.less';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import routes from 'routes.jsx';
+import routes from './config/routes.jsx';
 
 ReactDOM.render( routes, document.getElementById('content') );

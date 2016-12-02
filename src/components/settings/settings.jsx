@@ -1,9 +1,7 @@
 'use strict';
-import './../../containers/settings.less';
 import React from 'react';
-import { connect } from 'react-redux';
-
 import TextField from 'material-ui/TextField';
+import { ViewCol } from '../';
 
 const styles = {
   printerfieldinput: {
@@ -18,21 +16,15 @@ const styles = {
   }
 };
 
-const SettingsPageContainer = ({ }) => (
-  <article>
+const Settings = () => (
+  <ViewCol>
     <h1>Settings</h1>
     <TextField
       style={styles.printerfieldinput}
       hintStyle={styles.hintstyle}
       hintText="printer path..."
     />
-  </article>
+  </ViewCol>
 );
-const mapStateToProps = (state) => {
-  return { }
-};
-const mapDispatchToProps = (dispatch) => {
-  return { }
-};
-const SettingsPage = connect(mapStateToProps, mapDispatchToProps)(SettingsPageContainer);
-export default SettingsPage;
+
+export default Settings;

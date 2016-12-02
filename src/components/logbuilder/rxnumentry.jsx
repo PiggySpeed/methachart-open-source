@@ -1,20 +1,7 @@
 'use strict';
 import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
 
 import TextField from 'material-ui/TextField';
-import DrugPicker from '../drugpicker/drugpicker.jsx';
-import DateSelector from '../dateselector/dateselector.jsx';
-import CarriesSelector from '../carriesselector/carriesselector.jsx';
-
-// Actions
-import {
-  onNameChange, onRxNumChange, onDrugBlur, onDoseChange, onBuildLog,
-  onSetStartDate, onSetEndDate, onSetTimeInterval,
-  } from 'modules/configurespecific/configurespecificactions';
-import {
-  onPickDrug, onSetDrug
-  } from '../../actions/configuregeneralactions';
 
 const styles = {
   name: {
@@ -27,7 +14,7 @@ const styles = {
     marginLeft: 25,
     marginBottom: 10
   },
-  errorstyle: {
+  error: {
     position: "absolute",
     top: 70 //This is a workaround for error text display
   },
@@ -64,7 +51,7 @@ class RxNumEntry extends Component {
     return(
       <TextField
         errorText={ this.state.errorText }
-        errorStyle={styles.errorstyle}
+        errorStyle={styles.error}
         onChange={(e) => {if(this.onChange(e)){
           this.props.onRxNumChange(e.target.value);
           this.props.onBuildLog(this.props.startdate, this.props.enddate)}}}
@@ -75,61 +62,5 @@ class RxNumEntry extends Component {
   }
 }
 
-//<CarriesSelector />
-const LogBuilder = ({ onNameChange, onRxNumChange, onDrugBlur, onDoseChange, onBuildLog, onPickDrug,
-  onSetStartDate, onSetEndDate, startdate, enddate, timeinterval, onSetTimeInterval, maxinterval,
-  selecteddrug, druglist}) => (
-  <section>
 
-    <TextField
-      onBlur={(e) => {onNameChange(e.target.value); onBuildLog(startdate, enddate)}}
-      style={styles.name}
-      hintText="e.g. Lee, John"
-      floatingLabelText="Name"/>
-    <RxNumEntry onRxNumChange={onRxNumChange} onBuildLog={onBuildLog} startdate={startdate} enddate={enddate} />
-    <h6 style={styles.tipMessage}> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TAB = forward <br/>Shift+TAB = backwards</h6>
-
-    <br/>
-    <DrugPicker
-      selectedDrug={selecteddrug}
-      drugList={druglist}
-      onBuildLog={onBuildLog}
-      startdate={startdate}
-      enddate={enddate}
-      onPickDrug={onDrugBlur}
-      onSetDrug={onSetDrug}
-      onDoseChange={onDoseChange} />
-    <DateSelector
-      onValidateDates={(x)=>console.log(x)}
-      onBuildLog={onBuildLog}
-      onSetTimeInterval={onSetTimeInterval}
-      timeinterval={timeinterval}
-      maxinterval={maxinterval}
-      startdate={startdate}
-      enddate={enddate}
-      onSetStartDate={onSetStartDate}
-      onSetEndDate={onSetEndDate} />
-  </section>
-);
-
-LogBuilder.propTypes = {
-  startdate: PropTypes.string.isRequired,
-  enddate: PropTypes.string.isRequired,
-  timeinterval: PropTypes.number.isRequired,
-  maxinterval: PropTypes.string.isRequired,
-  selecteddrug: PropTypes.object.isRequired,
-  druglist: PropTypes.array.isRequired,
-
-  onNameChange: PropTypes.func.isRequired,
-  onRxNumChange: PropTypes.func.isRequired,
-  onDrugBlur: PropTypes.func.isRequired,
-  onDoseChange: PropTypes.func.isRequired,
-  onBuildLog: PropTypes.func.isRequired,
-  onPickDrug: PropTypes.func.isRequired,
-  onSetDrug: PropTypes.func.isRequired,
-  onSetStartDate: PropTypes.func.isRequired,
-  onSetEndDate: PropTypes.func.isRequired,
-  onSetTimeInterval: PropTypes.func.isRequired,
-};
-
-export default LogBuilder;
+export default RxNumEntry;

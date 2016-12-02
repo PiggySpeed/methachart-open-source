@@ -1,68 +1,48 @@
 'use strict';
-import './main.less';
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Router, Route } from 'react-router';
+import { redirect } from '../config/routes.jsx';
 
-import ChartPage from 'modules/chart/chart.jsx';
+import { LogBuilderContainer } from './';
 import Navigation from 'components/navigation/navigation.jsx';
 import NavigationButton from 'components/navigation/navigationbutton.jsx';
-import Content from 'components/content/content.jsx';
-//import Feed from 'components/feed/feed.jsx';
 import Footer from 'components/footer/footer.jsx';
-//import PrintPage from 'modules/print/print.jsx';
+import { ViewCol } from '../components';
 
-class MainContainer extends React.Component {
+class MainWrapper extends Component {
   constructor(props){
-    super(props)
+    super(props);
+    this.changeRoute = this.changeRoute.bind(this);
   }
-  goToRoute(routeURL) {
-    this.context.router.push({
-      pathname: routeURL
-    })
+  changeRoute(routeURL) {
+    redirect(routeURL)
   }
   render() {
+    const { children, printdata } = this.props;
     return(
-      <div className="main-container">
-        <Content>
-          {this.props.children || <ChartPage/>}
-          <Footer changeRoute={this.goToRoute.bind(this)} printData={this.props.printdata} />
-        </Content>
-      </div>
+      <ViewCol>
+        { children || <LogBuilderContainer /> }
+        <Footer changeRoute={this.changeRoute} printData={printdata} />
+      </ViewCol>
     );
   }
 }
-MainContainer.contextTypes = {
-  router: React.PropTypes.object.isRequired
-};
 
-//printdata: {
-//  headerdata: state.ConfigureSpecificReducer.toJS(),
-//    logdata: state.ConfigureSpecificReducer.get("logdata").toArray()
-//}
-
-const mapStateToProps = (state) => {
+const mapStateToProps = ({LogBuilder}) => {
   return {
     printdata: {
       headerdata: {
-        name: state.ConfigureSpecificReducer.get('name'),
-        startdate: state.ConfigureSpecificReducer.get('startdate'),
-        enddate: state.ConfigureSpecificReducer.get('enddate'),
-        timeinterval: state.ConfigureSpecificReducer.get('timeinterval')
+        name:         LogBuilder.get('name'),
+        startdate:    LogBuilder.get('startdate'),
+        enddate:      LogBuilder.get('enddate'),
+        timeinterval: LogBuilder.get('timeinterval')
       },
-      logdata: state.ConfigureSpecificReducer.get('logdata').toArray()
+      logdata:        LogBuilder.get('logdata').toArray()
     }
   }
 };
 const mapDispatchToProps = (dispatch) => {
-  return {
-  }
+  return { }
 };
-const MainPage = connect(mapStateToProps, mapDispatchToProps)(MainContainer);
-export default MainPage;
-
-//<Navigation>
-//  <NavigationButton path="/" text="Home" />
-//  <NavigationButton path="/about" text="About" />
-//  <button className="testbtn" onClick={() => this.props.onClick("tree")}>teee</button>
-//</Navigation>
+const MainContainer = connect(mapStateToProps, mapDispatchToProps)(MainWrapper);
+export default MainContainer;

@@ -1,5 +1,5 @@
 import chai from 'chai';
-import { createDate, calculateInterval, getAllDates } from './../shared/utils/date.js';
+import { createDate, calculateInterval, getAllDates } from '../utils/date.js';
 const expect = chai.expect;
 
 describe('Date Functions', () => {

@@ -4,8 +4,6 @@ injectTapEventPlugin();
 import React, { Component, PropTypes } from 'react';
 import { Tabs, Tab } from 'material-ui/Tabs';
 
-import ConfigureGeneralPage from 'modules/configuregeneral/configuregeneral.jsx';
-
 const styles = {
   tabcontainer: {
     position: "relative",

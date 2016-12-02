@@ -1,26 +1,21 @@
 'use strict';
 import { connect } from 'react-redux';
-
 import { LogBuilder } from '../components';
 
-// Actions
 import {
+  onPickDrug, onSetDrug,
   onNameChange, onRxNumChange, onDrugBlur, onDoseChange, onBuildLog,
   onSetStartDate, onSetEndDate, onSetTimeInterval,
-  } from 'modules/configurespecific/configurespecificactions';
-import {
-  onPickDrug, onSetDrug
-} from './../actions/configuregeneralactions';
+} from '../actions/logbuilder';
 
-
-const mapStateToProps = (state) => {
+const mapStateToProps = ({LogBuilder}) => {
   return {
-    startdate: state.ConfigureSpecificReducer.get("startdate"),
-    enddate: state.ConfigureSpecificReducer.get("enddate"),
-    timeinterval: state.ConfigureSpecificReducer.get("timeinterval"),
-    maxinterval: state.ConfigureSpecificReducer.get("maxinterval"),
-    selecteddrug: state.ConfigureGeneralReducer.get("selecteddrug"),
-    druglist: state.ConfigureGeneralReducer.get("druglist")
+    startdate:        LogBuilder.get("startdate"),
+    enddate:          LogBuilder.get("enddate"),
+    timeinterval:     LogBuilder.get("timeinterval"),
+    maxinterval:      LogBuilder.get("maxinterval"),
+    selecteddrug:     LogBuilder.get("selecteddrug"),
+    druglist:         LogBuilder.get("druglist")
   }
 };
 const mapDispatchToProps = (dispatch) => {

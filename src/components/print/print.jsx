@@ -1,20 +1,20 @@
 'use strict';
 import './print.less';
-import React from 'react';
-import { connect } from 'react-redux';
+import React, { PropTypes } from 'react';
 
-export const printDocument = () => {
-  window.frames["printf"].focus();
-  window.frames["printf"].print();
-  //window.document.getElementById("print").print();
-  //window.frames["printf"].print();
-  //var pri = document.getElementById("ifmcontentstoprint").contentWindow;
-  //pri.document.open();
-  //pri.document.write(this.props.children || <h1>Error!</h1>);
-  //pri.document.close();
-  //pri.focus();
-  //pri.print();
-};
+//export const printDocument = () => {
+//  window.frames["printf"].focus();
+//  window.frames["printf"].print();
+
+//  window.document.getElementById("print").print();
+//  window.frames["printf"].print();
+//  var pri = document.getElementById("ifmcontentstoprint").contentWindow;
+//  pri.document.open();
+//  pri.document.write(this.props.children || <h1>Error!</h1>);
+//  pri.document.close();
+//  pri.focus();
+//  pri.print();
+//};
 
 //function printDiv(divName) {
 //  var printContents = document.getElementById(divName).innerHTML;
@@ -24,20 +24,13 @@ export const printDocument = () => {
 //  document.body.innerHTML = originalContents;
 //}
 
-const PrintContainer = ({ logdata }) => (
+const Print = ({ logdata }) => (
   <div className="print-container">
     <button onClick={()=>console.log(logdata)} >send info to print preview</button>
   </div>
 );
-const mapStateToProps = (state) => {
-  return {
-    logdata: state.ConfigureSpecificReducer.get("logdata")
-  }
+Print.propTypes = {
+  logdata: PropTypes.array.isRequired
 };
-const mapDispatchToProps = (dispatch) => {
-  return { }
-};
-const PrintPage = connect(mapStateToProps, mapDispatchToProps)(PrintContainer);
-export default PrintPage;
 
-//<iframe id="printf" name="printf" src="modules/print/print.html" height="98%" width="70%"></iframe>
+export default Print;

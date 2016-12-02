@@ -1,5 +1,5 @@
 import chai from 'chai';
-import * as actions from './../modules/main/mainactions';
+import * as actions from './../actions/mainactions';
 const expect = chai.expect;
 
 //describe('actions', () => {

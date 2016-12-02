@@ -1,4 +1,4 @@
-import * as types from './../actions/configurespecificactions';
+import * as types from './../actions/logbuilder';
 import { Map, List, fromJS } from 'immutable';
 import { getAllDates } from 'shared/utils/date';
 import { createDate, calculateInterval } from 'shared/utils/date';
@@ -41,7 +41,7 @@ const initialState = Map({
   ])
 });
 
-const ConfigureSpecificReducer = (state = initialState, action) => {
+const LogBuilder = (state = initialState, action) => {
   switch(action.type) {
     case types.ON_PICK_DRUG: {
       return state.merge({
@@ -116,11 +116,4 @@ const ConfigureSpecificReducer = (state = initialState, action) => {
       return state
   }
 };
-export default ConfigureSpecificReducer;
-
-//case types.ADD_LOG_ENTRY: {
-//  var newList = [];
-//  return state.merge({
-//    logdata: newList
-//  })
-//}
+export default LogBuilder;
