@@ -1,4 +1,4 @@
-import * as types from './mainactions';
+import * as types from './../actions/mainactions';
 
 const initialState = {
   pig: "hi"

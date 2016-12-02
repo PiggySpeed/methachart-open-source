@@ -1,5 +1,5 @@
 'use strict';
-import './settings.less';
+import './../../containers/settings.less';
 import React from 'react';
 import { connect } from 'react-redux';
 

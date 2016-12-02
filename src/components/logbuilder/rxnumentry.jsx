@@ -1,15 +1,11 @@
 'use strict';
-import './configuregeneral.less';
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
-// MUI Components
 import TextField from 'material-ui/TextField';
-
-// Local Components
-import DrugPicker from 'components/drugpicker/drugpicker.jsx';
-import DateSelector from 'components/dateselector/dateselector.jsx';
-import CarriesSelector from 'components/carriesselector/carriesselector.jsx';
+import DrugPicker from '../drugpicker/drugpicker.jsx';
+import DateSelector from '../dateselector/dateselector.jsx';
+import CarriesSelector from '../carriesselector/carriesselector.jsx';
 
 // Actions
 import {
@@ -18,7 +14,7 @@ import {
   } from 'modules/configurespecific/configurespecificactions';
 import {
   onPickDrug, onSetDrug
-  } from './configuregeneralactions';
+  } from '../../actions/configuregeneralactions';
 
 const styles = {
   name: {
@@ -34,6 +30,14 @@ const styles = {
   errorstyle: {
     position: "absolute",
     top: 70 //This is a workaround for error text display
+  },
+  tipMessage: {
+    position: 'relative',
+    float: 'right',
+    height: '20px',
+    padding: '2px',
+    marginTop: '36px',
+    marginRight: '24px'
   }
 };
 
@@ -42,7 +46,7 @@ const IsNumeric = (input) => {
   return RE.test(input);
 };
 
-class RxNumEntry extends React.Component {
+class RxNumEntry extends Component {
   constructor(props) {
     super(props);
     this.state = { errorText: '', value: props.value }
@@ -72,7 +76,7 @@ class RxNumEntry extends React.Component {
 }
 
 //<CarriesSelector />
-const ConfigureGeneralContainer = ({ onNameChange, onRxNumChange, onDrugBlur, onDoseChange, onBuildLog, onPickDrug,
+const LogBuilder = ({ onNameChange, onRxNumChange, onDrugBlur, onDoseChange, onBuildLog, onPickDrug,
   onSetStartDate, onSetEndDate, startdate, enddate, timeinterval, onSetTimeInterval, maxinterval,
   selecteddrug, druglist}) => (
   <section>
@@ -83,7 +87,7 @@ const ConfigureGeneralContainer = ({ onNameChange, onRxNumChange, onDrugBlur, on
       hintText="e.g. Lee, John"
       floatingLabelText="Name"/>
     <RxNumEntry onRxNumChange={onRxNumChange} onBuildLog={onBuildLog} startdate={startdate} enddate={enddate} />
-    <h6 className="tip-message"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TAB = forward <br/>Shift+TAB = backwards</h6>
+    <h6 style={styles.tipMessage}> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TAB = forward <br/>Shift+TAB = backwards</h6>
 
     <br/>
     <DrugPicker
@@ -107,29 +111,25 @@ const ConfigureGeneralContainer = ({ onNameChange, onRxNumChange, onDrugBlur, on
       onSetEndDate={onSetEndDate} />
   </section>
 );
-const mapStateToProps = (state) => {
-  return {
-    startdate: state.ConfigureSpecificReducer.get("startdate"),
-    enddate: state.ConfigureSpecificReducer.get("enddate"),
-    timeinterval: state.ConfigureSpecificReducer.get("timeinterval"),
-    maxinterval: state.ConfigureSpecificReducer.get("maxinterval"),
-    selecteddrug: state.ConfigureGeneralReducer.get("selecteddrug"),
-    druglist: state.ConfigureGeneralReducer.get("druglist")
-  }
+
+LogBuilder.propTypes = {
+  startdate: PropTypes.string.isRequired,
+  enddate: PropTypes.string.isRequired,
+  timeinterval: PropTypes.number.isRequired,
+  maxinterval: PropTypes.string.isRequired,
+  selecteddrug: PropTypes.object.isRequired,
+  druglist: PropTypes.array.isRequired,
+
+  onNameChange: PropTypes.func.isRequired,
+  onRxNumChange: PropTypes.func.isRequired,
+  onDrugBlur: PropTypes.func.isRequired,
+  onDoseChange: PropTypes.func.isRequired,
+  onBuildLog: PropTypes.func.isRequired,
+  onPickDrug: PropTypes.func.isRequired,
+  onSetDrug: PropTypes.func.isRequired,
+  onSetStartDate: PropTypes.func.isRequired,
+  onSetEndDate: PropTypes.func.isRequired,
+  onSetTimeInterval: PropTypes.func.isRequired,
 };
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onNameChange: (name) => {dispatch(onNameChange(name))},
-    onRxNumChange: (rxnum) => {dispatch(onRxNumChange(rxnum))},
-    onDrugBlur: (drug) => {dispatch(onDrugBlur(drug))},
-    onDoseChange: (dose) => {dispatch(onDoseChange(dose))},
-    onBuildLog: (startdate, enddate) => {dispatch(onBuildLog(startdate, enddate))},
-    onPickDrug: (drug) => {console.log(drug)}, //dispatch(onPickDrug(drug))
-    onSetDrug: (e, din) => {console.log("tree", din); dispatch(onSetDrug(din))},
-    onSetStartDate: (startdate) => { if(startdate){dispatch(onSetStartDate(startdate))} },
-    onSetEndDate: (enddate) => { if(enddate){dispatch(onSetEndDate(enddate)) }},
-    onSetTimeInterval: (startdate, enddate, maxinterval) => { if(startdate && enddate){dispatch(onSetTimeInterval(startdate, enddate, maxinterval))} }
-  }
-};
-const ConfigureGeneralPage = connect(mapStateToProps, mapDispatchToProps)(ConfigureGeneralContainer);
-export default ConfigureGeneralPage;
+
+export default LogBuilder;

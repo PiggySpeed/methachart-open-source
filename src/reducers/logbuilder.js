@@ -1,11 +1,29 @@
-import * as types from './configurespecificactions';
+import * as types from './../actions/configurespecificactions';
 import { Map, List, fromJS } from 'immutable';
 import { getAllDates } from 'shared/utils/date';
 import { createDate, calculateInterval } from 'shared/utils/date';
 
 const initialState = Map({
+  selecteddrug: {
+    displayname: "Methadone",
+    drugname: "Methadone 10mg/ml",
+    din: "02394596",
+    pseudodin: "66999997"
+  },
+  druglist: List([{
+    displayname: "Methadone",
+    drugname: "Methadone 10mg/ml",
+    din: "02394596",
+    pseudodin: "66999997"
+  }]),
+
   name: "",
-  drug: { displayname: "Methadone",   drugname: "Methadone 10mg/ml",  din: "02394596", pseudodin: "66999997" },
+  drug: {
+    displayname: "Methadone",
+    drugname: "Methadone 10mg/ml",
+    din: "02394596",
+    pseudodin: "66999997"
+  },
   dose: 0,
   startdate: "",
   enddate: "",
@@ -25,6 +43,17 @@ const initialState = Map({
 
 const ConfigureSpecificReducer = (state = initialState, action) => {
   switch(action.type) {
+    case types.ON_PICK_DRUG: {
+      return state.merge({
+        drug: action.drug
+      })
+    }
+    case types.ON_SET_DRUG: {
+      console.log(action.din);
+      return state.merge({
+        selecteddrug: state.druglist.filter((x) => x.din == action.din)
+      })
+    }
     case types.ON_NAME_CHANGE: {
       return state.merge({
         name: action.name

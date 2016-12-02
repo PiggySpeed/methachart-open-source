@@ -4,18 +4,18 @@ import { Router, Route, hashHistory, IndexRoute } from 'react-router';
 import { Provider } from 'react-redux';
 
 // Main Store
-import store from 'mainstore/store';
+import store from 'store';
 
 // Pages
-import MainPage from 'modules/main/main.jsx';
-import AboutPage from 'modules/about/about.jsx';
-import ChartPage from 'modules/chart/chart.jsx';
-import SettingsPage from 'modules/settings/settings.jsx';
-import PrintPage from 'modules/print/print.jsx';
+import MainPage from '../modules/main/main.jsx';
+import AboutPage from '../modules/about/about.jsx';
+import ChartPage from '../modules/chart/chart.jsx';
+import SettingsPage from '../modules/settings/settings.jsx';
+import PrintPage from '../modules/print/print.jsx';
 
 // Material UI Theme Provider
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from '../../node_modules/material-ui/styles/getMuiTheme';
+import MuiThemeProvider from '../../node_modules/material-ui/styles/MuiThemeProvider';
 
 const routes = (
   <MuiThemeProvider muiTheme={getMuiTheme()}>
