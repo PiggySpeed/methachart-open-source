@@ -10,8 +10,6 @@ const store = createStore(
     MainReducer,
     ConfigureGeneralReducer,
     ConfigureSpecificReducer
-  }),
-  {},
-  window.devToolsExtension && window.devToolsExtension()
+  })
 );
 export default store;

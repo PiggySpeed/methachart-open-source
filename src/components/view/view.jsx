@@ -1,23 +1,23 @@
 'use strict';
-import './viewport.less';
 import React, { PropTypes } from 'react';
 
 
-export const ViewportRow = ({ children, className, display, justify, align, flex }) => {
-  const style = {
+export const ViewRow = ({ children, style, className, display, justify, align, flex }) => {
+  const newStyle = {
     display:            display || 'flex',
     flexFlow:           'row',
     justifyContent:     justify || 'center',
     alignItems:         align || 'center',
-    flex:               flex || 1
+    flex:               flex || 1,
+    ...style
   };
   return (
-    <div style={style} className={className || ''}>
+    <div style={newStyle} className={className || ''}>
       {children}
     </div>
   )
 };
-ViewportRow.propTypes = {
+ViewRow.propTypes = {
   children:             PropTypes.node,
   className:            PropTypes.string,
   display:              PropTypes.oneOf(['flex', 'none']),
@@ -27,21 +27,22 @@ ViewportRow.propTypes = {
 };
 
 
-export const ViewportCol = ({ children, className, display, justify, align, flex }) => {
-  const style = {
+export const ViewCol = ({ children, style, className, display, justify, align, flex }) => {
+  const newStyle = {
     display:            display || 'flex',
     flexFlow:           'column',
     justifyContent:     justify || 'center',
     alignItems:         align || 'center',
-    flex:               flex || 1
+    flex:               flex || 1,
+    ...style
   };
   return (
-    <div style={style} className={className || ''}>
+    <div style={newStyle} className={className || ''}>
       {children}
     </div>
   )
 };
-ViewportCol.propTypes = {
+ViewCol.propTypes = {
   children:           PropTypes.node,
   className:          PropTypes.string,
   display:            PropTypes.oneOf(['flex', 'none']),

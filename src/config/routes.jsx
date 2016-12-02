@@ -1,31 +1,31 @@
+'use strict';
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { Router, Route, hashHistory, IndexRoute } from 'react-router';
 import { Provider } from 'react-redux';
-
-// Main Store
-import store from 'store';
-
-// Pages
-import MainPage from '../modules/main/main.jsx';
-import AboutPage from '../modules/about/about.jsx';
-import ChartPage from '../modules/chart/chart.jsx';
-import SettingsPage from '../modules/settings/settings.jsx';
-import PrintPage from '../modules/print/print.jsx';
+import store from '../reducers';
+import {
+  MainContainer,
+  AboutContainer,
+  LogBuilderContainer,
+  PrintContainer
+} from '../containers';
 
 // Material UI Theme Provider
 import getMuiTheme from '../../node_modules/material-ui/styles/getMuiTheme';
 import MuiThemeProvider from '../../node_modules/material-ui/styles/MuiThemeProvider';
 
+export const redirect = (to) => {
+  hashHistory.push(to);
+};
+
 const routes = (
   <MuiThemeProvider muiTheme={getMuiTheme()}>
     <Provider store={store}>
       <Router history={hashHistory}>
-        <Route path="/" component={MainPage}>
-          <IndexRoute component={ChartPage}/>
-          <Route path="/about" component={AboutPage}/>
-          <Route path="/settings" component={SettingsPage}/>
-          <Route path="/print" component={PrintPage}/>
+        <Route path="/" component={MainContainer}>
+          <IndexRoute component={LogBuilderContainer}/>
+          <Route path="/about" component={AboutContainer}/>
+          <Route path="/print" component={PrintContainer}/>
         </Route>
       </Router>
     </Provider>
