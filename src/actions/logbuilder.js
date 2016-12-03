@@ -1,86 +1,42 @@
-// Constants
-export const ON_PICK_DRUG = "ON_PICK_DRUG";
+export const ON_NAME_BLUR = "ON_NAME_BLUR";
+export const ON_RXNUM_BLUR = "ON_RXNUM_BLUR";
+export const ON_DRUG_BLUR = "ON_DRUG_BLUR";
+export const ON_DOSE_BLUR = "ON_DOSE_BLUR";
+
+export const ON_BUILD_LOG = "ON_BUILD_LOG";
 export const ON_SET_DRUG = "ON_SET_DRUG";
 
-export const ON_NAME_CHANGE = "ON_NAME_CHANGE";
-export const ON_RXNUM_CHANGE = "ON_RXNUM_CHANGE";
-export const ON_DRUG_BLUR = "ON_DRUG_BLUR";
-export const ON_DOSE_CHANGE = "ON_DOSE_CHANGE";
-export const ON_BUILD_LOG = "ON_BUILD_LOG";
-
-export const ON_SET_START_DATE = "ON_SET_START_DATE";
-export const ON_SET_END_DATE = "ON_SET_END_DATE";
-export const ON_SET_TIME_INTERVAL = "ON_SET_TIME_INTERVAL";
-export const ON_SET_MAX_INTERVAL = "ON_SET_MAX_INTERVAL";
-
-
-// Actions
-export const onPickDrug = (drug) => {
-  return {
-    type: ON_PICK_DRUG,
-    drug: drug
+// UI Interactions
+export const onNameBlur = (name) => {
+  return dispatch => {
+    dispatch({ type: ON_NAME_BLUR, name })
   }
 };
-export const onSetDrug = (din) => {
-  return {
-    type: ON_SET_DRUG,
-    din: din
-  }
-};
-export const onNameChange = (name) => {
-  return {
-    type: ON_NAME_CHANGE,
-    name: name
-  }
-};
-export const onRxNumChange = (rxnum) => {
-  return {
-    type: ON_RXNUM_CHANGE,
-    rxnum: rxnum
+export const onRxNumBlur = (rxnum) => {
+  return dispatch => {
+    dispatch({ type: ON_RXNUM_BLUR, rxnum })
   }
 };
 export const onDrugBlur = (drug) => {
-  return {
-    type: ON_DRUG_BLUR,
-    drug: drug
+  return dispatch => {
+    dispatch({ type: ON_DRUG_BLUR, drug })
   }
 };
-export const onDoseChange = (dose) => {
-  return {
-    type: ON_DOSE_CHANGE,
-    dose: dose
+export const onDoseBlur = (dose) => {
+  return dispatch => {
+    dispatch({ type: ON_DOSE_BLUR, dose })
   }
 };
-export const onBuildLog = (startdate, enddate ) => {
-  return {
-    type: ON_BUILD_LOG,
-    startdate: startdate,
-    enddate: enddate
+
+
+export const onBuildLog = (startdate, enddate) => {
+  return dispatch => {
+    dispatch({ type: ON_BUILD_LOG, startdate, enddate })
   }
 };
-export const onSetStartDate = (startdate) => {
-  return {
-    type: ON_SET_START_DATE,
-    startdate: startdate
-  }
-};
-export const onSetEndDate = (enddate) => {
-  return {
-    type: ON_SET_END_DATE,
-    enddate: enddate
-  }
-};
-export const onSetTimeInterval = (startdate, enddate, maxinterval) => {
-  return {
-    type: ON_SET_TIME_INTERVAL,
-    startdate: startdate,
-    enddate: enddate,
-    maxinterval: maxinterval
-  }
-};
-export const onSetMaxInterval = (maxinterval) => {
-  return {
-    type: ON_SET_MAX_INTERVAL,
-    maxinterval: maxinterval
+
+export const onSetDrug = (din) => {
+  return dispatch => {
+    dispatch({ type: ON_SET_DRUG, din })
   }
 };

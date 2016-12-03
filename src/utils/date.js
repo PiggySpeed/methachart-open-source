@@ -2,6 +2,7 @@
 import moment from 'moment';
 import { isNonEmptyString, isValidDateDDMMYY, isValidDateMMMDDYYYY } from './typechecking';
 
+
 const pad = (n) => {
   /**
    * Returns values with a leading zero, up to a max of 2 digits
@@ -11,6 +12,7 @@ const pad = (n) => {
    * **/
   return (+n < 10 && n.length === 1) ? '0'+n : n
 };
+
 
 export const createDate = ( dd, mm, yy ) => {
   /**
@@ -40,6 +42,7 @@ export const createDate = ( dd, mm, yy ) => {
   return moment(paddedDate.join(' '), 'DD MM YY', true).format('MMM DD, YYYY');
 };
 
+
 export const calculateInterval = ( startdate, enddate, maxinterval, errcb ) => {
   /**
    * Returns the number of days between startdate and enddate, inclusive
@@ -53,7 +56,6 @@ export const calculateInterval = ( startdate, enddate, maxinterval, errcb ) => {
    *
    * Returns an int
    * **/
-
   if(maxinterval < 1){
     errcb
       ? errcb('MAX INTERVAL CANNOT BE BELOW 1')
@@ -101,6 +103,7 @@ export const calculateInterval = ( startdate, enddate, maxinterval, errcb ) => {
   return calculatedInterval;
 };
 
+
 export const getAllDates = ( startdate, enddate, maxinterval, errcb ) => {
   /**
    * Returns an array of all dates between startdate and enddate, inclusive
@@ -113,7 +116,6 @@ export const getAllDates = ( startdate, enddate, maxinterval, errcb ) => {
    * errcb (func): error callback
    *
    * **/
-
   if(maxinterval < 1){
     errcb
       ? errcb('MAX INTERVAL CANNOT BE BELOW 1')

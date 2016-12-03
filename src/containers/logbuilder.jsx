@@ -1,36 +1,106 @@
 'use strict';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { LogBuilder } from '../components';
+import { bindActionCreators } from 'redux';
+import * as logBuilderActions from '../actions/logbuilder';
 
+import { View } from 'react-native';
+import TextField from 'material-ui/TextField';
 import {
-  onPickDrug, onSetDrug,
-  onNameChange, onRxNumChange, onDrugBlur, onDoseChange, onBuildLog,
-  onSetStartDate, onSetEndDate, onSetTimeInterval,
-} from '../actions/logbuilder';
+  TabsWrapper,
+  NameInput,
+  RxNumInput,
+  DrugPicker,
+  DateSelector,
+  Tip,
+  MethadoneDosePicker
+} from '../components';
+
+
+class LogBuilderWrapper extends Component {
+  constructor(props){
+    super(props);
+
+  }
+  render() {
+    const {
+      startdate,
+      enddate,
+      timeinterval,
+      maxinterval,
+      selecteddrug,
+      druglist,
+
+      onNameBlur,
+      onRxNumBlur,
+      onDrugBlur,
+      onDoseBlur,
+      onBuildLog,
+      onSetDrug
+    } = this.props;
+
+    return(
+      <TabsWrapper>
+
+        <NameInput onBlur={onNameBlur} />
+
+        <Tip />
+
+        <RxNumInput onBlur={onRxNumBlur} />
+
+        <DrugPicker
+          selectedDrug={selecteddrug}
+          drugList={druglist}
+          onBuildLog={onBuildLog}
+          startdate={startdate}
+          enddate={enddate}
+          onPickDrug={onDrugBlur}
+          onSetDrug={onSetDrug}
+        />
+
+        <MethadoneDosePicker onBlur={onDoseBlur} />
+
+        <DateSelector
+          onBuildLog={onBuildLog}
+          timeinterval={timeinterval}
+          maxinterval={maxinterval}
+          startdate={startdate}
+          enddate={enddate}
+        />
+
+      </TabsWrapper>
+    );
+  }
+}
+LogBuilderWrapper.propTypes = {
+  startdate:              PropTypes.string.isRequired,
+  enddate:                PropTypes.string.isRequired,
+  timeinterval:           PropTypes.number.isRequired,
+  maxinterval:            PropTypes.number.isRequired,
+  selecteddrug:           PropTypes.object.isRequired,
+  druglist:               PropTypes.object.isRequired,
+
+  onNameBlur:             PropTypes.func.isRequired,
+  onRxNumBlur:            PropTypes.func.isRequired,
+  onDrugBlur:             PropTypes.func.isRequired,
+  onDoseBlur:             PropTypes.func.isRequired,
+  onBuildLog:             PropTypes.func.isRequired,
+  onSetDrug:              PropTypes.func.isRequired
+};
+
 
 const mapStateToProps = ({LogBuilder}) => {
   return {
-    startdate:        LogBuilder.get("startdate"),
-    enddate:          LogBuilder.get("enddate"),
-    timeinterval:     LogBuilder.get("timeinterval"),
-    maxinterval:      LogBuilder.get("maxinterval"),
-    selecteddrug:     LogBuilder.get("selecteddrug"),
-    druglist:         LogBuilder.get("druglist")
+    startdate:        LogBuilder.get('startdate'),
+    enddate:          LogBuilder.get('enddate'),
+    timeinterval:     LogBuilder.get('timeinterval'),
+    maxinterval:      LogBuilder.get('maxinterval'),
+    selecteddrug:     LogBuilder.get('selecteddrug'),
+    druglist:         LogBuilder.get('druglist')
   }
 };
 const mapDispatchToProps = (dispatch) => {
-  return {
-    onNameChange: (name) => {dispatch(onNameChange(name))},
-    onRxNumChange: (rxnum) => {dispatch(onRxNumChange(rxnum))},
-    onDrugBlur: (drug) => {dispatch(onDrugBlur(drug))},
-    onDoseChange: (dose) => {dispatch(onDoseChange(dose))},
-    onBuildLog: (startdate, enddate) => {dispatch(onBuildLog(startdate, enddate))},
-    onPickDrug: (drug) => {console.log(drug)}, //dispatch(onPickDrug(drug))
-    onSetDrug: (e, din) => {console.log("tree", din); dispatch(onSetDrug(din))},
-    onSetStartDate: (startdate) => { if(startdate){dispatch(onSetStartDate(startdate))} },
-    onSetEndDate: (enddate) => { if(enddate){dispatch(onSetEndDate(enddate)) }},
-    onSetTimeInterval: (startdate, enddate, maxinterval) => { if(startdate && enddate){dispatch(onSetTimeInterval(startdate, enddate, maxinterval))} }
-  }
+  return bindActionCreators({...logBuilderActions}, dispatch)
 };
-const LogBuilderContainer = connect(mapStateToProps, mapDispatchToProps)(LogBuilder);
+const LogBuilderContainer = connect(mapStateToProps, mapDispatchToProps)(LogBuilderWrapper);
 export default LogBuilderContainer;
