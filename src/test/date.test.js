@@ -7,11 +7,15 @@ import {
 } from '../utils/date.js';
 
 const MOCK_DATA = {
-  months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-  falsy: ['', null, undefined, 0, {}, NaN],
-  isString: {
-    returnFalse: [null, undefined, 0, {}, NaN, []],
-    returnTrue: ['', 'x']
+  getAllDates: {
+    returnFalse1: { args: ['Jan 1, 2017', 'Jan 09, 2017', 28],  expLength: 0 }, // invalid format
+    returnFalse2: { args: ['Jan 01, 2017', 'Jan 09, 2017', 366], expLength: 0 }, // maxinterval cannot exceed 365 days
+    returnFalse3: { args: ['Feb 29, 2019', 'Mar 07, 2019', 56],  expLength: 0 }, // is not leap year
+    returnFalse4: { args: ['Feb 01, 2020', 'Mar 29, 2020', 28],  expLength: 0 }, // exceeds maxinterval by 1 day
+    returnTrue1:  { args: ['Dec 25, 2016', 'Dec 25, 2016', 28],  expLength: 1 },
+    returnTrue2:  { args: ['Dec 25, 2016', 'Dec 26, 2016', 28],  expLength: 2 },
+    returnTrue3:  { args: ['Feb 23, 2020', 'Mar 07, 2020', 365], expLength: 14 },
+    returnTrue4:  { args: ['Jan 01, 2017', 'Dec 31, 2017', 365], expLength: 365 }
   },
   calculateInterval: {
     returnFalse: [
@@ -162,6 +166,7 @@ describe('/utils/date.js', () => {
   });
 
   describe('calculateInterval():', () => {
+
     it('should return the correct number of days between two dates, inclusive', () => {
       const checkTrue = MOCK_DATA.calculateInterval.returnTrue.every( item => {
         return calculateInterval(...item.args) === item.interval
@@ -169,6 +174,7 @@ describe('/utils/date.js', () => {
 
       expect(checkTrue).to.equal(true);
     });
+
     it('should return an error message when the dates or interval are invalid', () => {
       const errcb = sinon.spy();
 
@@ -182,12 +188,81 @@ describe('/utils/date.js', () => {
   });
 
   describe('getAllDates():', () => {
-    it('should return an array of all dates between two specified dates', () => {
-      expect(getAllDates("Jan 01, 2016", "Jan 03, 2016")).to.have.same.members(["Jan 01, 2016", "Jan 02, 2016", "Jan 03, 2016"])
+
+    // Checking For True Values
+    it('should return an array of all dates between two specified dates [test1]', () => {
+      const datesList = getAllDates(...MOCK_DATA.getAllDates.returnTrue1.args);
+      const checkTrue = datesList.every( item => {
+        return item.date.length === 12;
+      });
+
+      expect(checkTrue).to.equal(true);
+      expect(datesList.length).to.equal(MOCK_DATA.getAllDates.returnTrue1.expLength);
     });
-    it('should return an error message when the startdate comes after the enddate', () => {
-      expect(getAllDates("Jan 03, 2016", "Jan 01, 2016")).to.have.same.members(["Error: enddate should be after startdate"])
-    })
+
+    it('should return an array of all dates between two specified dates [test2]', () => {
+      const datesList = getAllDates(...MOCK_DATA.getAllDates.returnTrue2.args);
+      const checkTrue = datesList.every( item => {
+        return item.date.length === 12;
+      });
+
+      expect(checkTrue).to.equal(true);
+      expect(datesList.length).to.equal(MOCK_DATA.getAllDates.returnTrue2.expLength);
+    });
+
+    it('should return an array of all dates between two specified dates [test3]', () => {
+      const datesList = getAllDates(...MOCK_DATA.getAllDates.returnTrue3.args);
+      const checkTrue = datesList.every( item => {
+        return item.date.length === 12;
+      });
+
+      expect(checkTrue).to.equal(true);
+      expect(datesList.length).to.equal(MOCK_DATA.getAllDates.returnTrue3.expLength);
+    });
+
+    it('should return an array of all dates between two specified dates [test4]', () => {
+      const datesList = getAllDates(...MOCK_DATA.getAllDates.returnTrue4.args);
+      const checkTrue = datesList.every( item => {
+        return item.date.length === 12;
+      });
+
+      expect(checkTrue).to.equal(true);
+      expect(datesList.length).to.equal(MOCK_DATA.getAllDates.returnTrue4.expLength);
+    });
+
+    // Checking For False Values
+    it('should return an empty array and invoke the errcb when the values are in an invalid format', () => {
+      const errcb = sinon.spy();
+      const datesList = getAllDates(...MOCK_DATA.getAllDates.returnFalse1.args, errcb);
+
+      sinon.assert.calledOnce(errcb);
+      expect(datesList.length).to.equal(MOCK_DATA.getAllDates.returnFalse1.expLength);
+    });
+
+    it('should return an empty array and invoke the errcb when the maxinterval exceeds 365 days', () => {
+      const errcb = sinon.spy();
+      const datesList = getAllDates(...MOCK_DATA.getAllDates.returnFalse2.args, errcb);
+
+      sinon.assert.calledOnce(errcb);
+      expect(datesList.length).to.equal(MOCK_DATA.getAllDates.returnFalse2.expLength);
+    });
+
+    it('should return an empty array and invoke the errcb when start or end day is a leap day that doesn\'t exist that year', () => {
+      const errcb = sinon.spy();
+      const datesList = getAllDates(...MOCK_DATA.getAllDates.returnFalse3.args, errcb);
+
+      sinon.assert.calledOnce(errcb);
+      expect(datesList.length).to.equal(MOCK_DATA.getAllDates.returnFalse3.expLength);
+    });
+
+    it('should return an empty array and invoke the errcb when the values exceeds the maximum specified interval', () => {
+      const errcb = sinon.spy();
+      const datesList = getAllDates(...MOCK_DATA.getAllDates.returnFalse4.args, errcb);
+
+      sinon.assert.calledOnce(errcb);
+      expect(datesList.length).to.equal(MOCK_DATA.getAllDates.returnFalse4.expLength);
+    });
+
   });
 
 });

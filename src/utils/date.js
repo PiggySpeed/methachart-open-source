@@ -101,24 +101,76 @@ export const calculateInterval = ( startdate, enddate, maxinterval, errcb ) => {
   return calculatedInterval;
 };
 
-export const getAllDates = ( startdate, enddate ) => {
+export const getAllDates = ( startdate, enddate, maxinterval, errcb ) => {
   /**
    * Returns an array of all dates between startdate and enddate, inclusive
+   * Returns all dates in the format { date: 'MMM DD, YYYY, weekday: 'e' }
+   * Returns an empty array if the dates or interval are invalid
    *
-   * startdate (str): start date in format "MMM DD, YYYY"
-   * enddate (str): end date in format "MMM DD, YYYY"
+   * startdate (str): start date in format 'MMM DD, YYYY'
+   * enddate (str): end date in format 'MMM DD, YYYY'
+   * maxinterval (int, 1-365): the max range of days that is allowed be displayed (to prevent ridiculous values like 1000days)
+   * errcb (func): error callback
    *
    * **/
 
-  var dates = [];
-  var start = moment(startdate, 'MMM DD, YYYY', true);
-  var end = moment(enddate, 'MMM DD, YYYY', true).add(1, 'days'); //need to add 1 day to be inclusive
-  if(end.isAfter(start)){
-    for (var i = moment(start); i.isBefore(end); i.add(1, 'days')) {
-      dates.push(i.format('MMM DD, YYYY'));
-    }
-    return dates;
-  } else {
-    return ["Error: enddate should be after startdate"]
+  if(maxinterval < 1){
+    errcb
+      ? errcb('MAX INTERVAL CANNOT BE BELOW 1')
+      : console.warn('MAX INTERVAL CANNOT BE BELOW 1');
+    return []
   }
+
+  if(maxinterval > 365){
+    errcb
+      ? errcb('MAX INTERVAL CANNOT BE ABOVE 365 DAYS')
+      : console.warn('MAX INTERVAL CANNOT BE ABOVE 365 DAYS');
+    return []
+  }
+
+  const datesAreValid = isValidDateMMMDDYYYY(startdate) && isValidDateMMMDDYYYY(enddate);
+  if(!datesAreValid){
+    errcb
+      ? errcb('INVALID DATE(S)')
+      : console.warn('INVALID DATE(S)');
+    return [];
+  }
+
+  const dates = [];
+  const start = moment(startdate, 'MMM DD, YYYY', true);
+  const end = moment(enddate, 'MMM DD, YYYY', true);
+
+  if(end.isSame(start)){
+    return [{date: start.format('MMM DD, YYYY'), weekday: start.format('e')}];
+  }
+
+  if(!end.isAfter(start)){
+    errcb
+      ? errcb('END DATE CANNOT PRECEDE START DATE')
+      : console.warn('END DATE CANNOT PRECEDE START DATE');
+    return [];
+  }
+
+  // for the purposes of this loop, we need to account for the inclusion of the end date
+  const inclusiveEnd = end.add(1, 'days');
+  for(let date = start; date.isBefore(inclusiveEnd); date.add(1, 'days')) {
+
+    dates.push({
+      date: date.format('MMM DD, YYYY'),
+      weekday: date.format('e')
+    });
+  }
+
+  if(dates.length > maxinterval){
+    errcb
+      ? errcb(`NUMBER OF DATES CANNOT EXCEED MAX INTERVAL: ${maxinterval}`)
+      : console.warn(`NUMBER OF DATES CANNOT EXCEED MAX INTERVAL:
+      GOT: ${dates.length} MAX: ${maxinterval} DATES:
+       ${start.format('MMM DD, YYYY')}
+      ${end.format('MMM DD, YYYY')} ${startdate} ${enddate}`);
+    return [];
+  }
+
+  return dates;
+
 };
