@@ -1,25 +1,21 @@
-#  Reactron
-`reactron` is a boilerplate program that lets you rapidly prototype web apps built using electron, react, and redux. It is great for learning since it leaves a lot of room for further customization.
+# MethaChart
+MethaChart is an application that helps pharmacies reliable build methadone log forms. It is a
+simple and lightweight system that achieves the following goals:
+1. Safe administration of methadone
+2. Reduced documentation burden
 
-## Start
-To start using this code
-1. Ensure you have the latest version of nodejs/npm installed
-2. Open a console and enter "npm install"
-3. Open a console and enter "npm run-script watch"
-4. Open another console and enter "npm start"
-5. HMR should be working, in which case any changes to the code (that have nothing to do with package.json or webpack.config.js) will be reflected instantly in the runtime.
+## Dates
+All Dates must be represented either in the form 'MMM DD, YYYY' or 'MM DD YYYY'. This is 
+intentional. This ensures that the user doesn't misread 'Jan 1 2016' as 'Jan 12, 2016' or make
+stray pen marks on 'Jan 1, 2016' to make it look like 'Jan 11, 2016'. The leading zero is
+important and should stay there.
+;tldr
+BAD: 'Jan 1, 2016',
+GOOD: 'Jan 01, 2016'
 
-To run the code in the future, you only need to run steps 3 and 4.
+This application accounts for leap years.
 
-## Development Rules
-1. Four levels of components: 1) shared components, 2) modules, 3) module components, 4) external components. File structure must be maintained.
-2. Shared components are not connected to redux store. They receive props from parents. They can be used in any module or module component.
-3. Modules are container components that control layout and data flow of child components. They are connected to Redux store, and are not allowed to contain styling except under exceptional circumstances.
-4. Module components share the same properties of shared components, except that they are only accessible and used by their parent module.
-5. External components are those originating from node modules, such as Material-UI components. They can be used anywhere.
-6. React.PropTypes checking is MANDATORY for shared components and RECOMMENDED for all other components.
-7. SetState is only for UI animations (e.g. when using `react-motion`).
+## Open Source
 
-## DevTools
-In order to use devtool extensions in electron, follow this link: https://github.com/electron/electron/blob/master/docs/tutorial/devtools-extension.md
-Currently, only Redux DevTools is working.
+
+## About the Developer
