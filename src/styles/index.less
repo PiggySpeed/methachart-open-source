@@ -65,7 +65,7 @@ body {
 @font-m: 16pt;
 @font-ms: 14pt;
 @font-s: 12pt;
-@font-xs: 8pt;
+@font-xs: 10pt;
 @font-xxs: 6pt;
 
 /* Text Styling */
@@ -119,15 +119,61 @@ h6 {
 p {
   text-align: left;
   font-family: @body-font-family-sans;
-  font-size: @font-ms;
+  font-size: @font-s;
   color: @secondary-text-color;
   padding: @standard-text-padding;
+}
+ol {
+  margin-left: 50px;
 }
 li {
   text-align: left;
   font-family: @body-font-family-sans;
-  font-size: @font-ms;
+  font-size: @font-s;
   color: @secondary-text-color;
   padding: @standard-text-padding;
-  padding-left: 20px;
+
+}
+
+
+// Animations
+.fade-in-opacity {
+  -moz-animation-name: fadeInOpacity;
+  -moz-animation-iteration-count: 1;
+  -moz-animation-timing-function: ease-out;
+  -moz-animation-duration: 0.5s;
+
+  -webkit-animation-name: fadeInOpacity;
+  -webkit-animation-iteration-count: 1;
+  -webkit-animation-timing-function: ease-out;
+  -webkit-animation-duration: 0.5s;
+
+  animation-name: fadeInOpacity;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-out;
+  animation-duration: 0.5s;
+}
+@-moz-keyframes fadeInOpacity {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes fadeInOpacity {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fadeInOpacity {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }

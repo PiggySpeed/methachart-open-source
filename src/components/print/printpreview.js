@@ -34,6 +34,7 @@ function addTableRowDWI(data){
   var cell5 = row.insertCell(5);
   var cell6 = row.insertCell(6);
   var cell7 = row.insertCell(7);
+  var cell8 = row.insertCell(8);
 
   cell0.setAttribute('class', 'table-cell col0');
   cell1.setAttribute('class', 'table-cell col1');
@@ -42,16 +43,18 @@ function addTableRowDWI(data){
   cell4.setAttribute('class', 'table-cell col4');
   cell5.setAttribute('class', 'table-cell col5');
   cell6.setAttribute('class', 'table-cell col6');
-  cell7.setAttribute('class', 'table-cell');
+  cell7.setAttribute('class', 'table-cell col7');
+  cell8.setAttribute('class', 'table-cell');
 
-  cell0.innerHTML = data.date;
-  cell1.innerHTML = data.rxnum;
-  cell2.innerHTML = data.witness + " mL";
-  cell3.innerHTML = data.takehome;
-  cell4.innerHTML = data.total + " mL";
-  cell5.innerHTML = ""; // RPh
-  cell6.innerHTML = ""; // Patient
-  cell7.innerHTML = ""; // Notes
+  cell0.innerHTML = data.weekday;
+  cell1.innerHTML = data.date;
+  cell2.innerHTML = data.rxnum;
+  cell3.innerHTML = data.witness + " mL";
+  cell4.innerHTML = data.takehome + (data.takehome !== '-------' ? ' mL' : '');
+  cell5.innerHTML = data.total + " mL";
+  cell6.innerHTML = ""; // RPh
+  cell7.innerHTML = ""; // Patient
+  cell8.innerHTML = ""; // Notes
 
   return row;
 }
@@ -64,7 +67,7 @@ function addTableRowCarry(data){
   var cell1 = row.insertCell(1);
 
   cell0.setAttribute('class', 'table-cell-carry');
-  cell0.setAttribute('colspan', 8);
+  cell0.setAttribute('colspan', 9);
 
   cell1.setAttribute('class', 'table-cell');
 
@@ -76,14 +79,14 @@ function addTableRowCarry(data){
 
 function addTableRowMessage(row, message){
   var cell = row.insertCell(0);
-  cell.setAttribute("colspan", 8);
+  cell.setAttribute("colspan", 9);
   cell.setAttribute('class', 'table-endrow-cell');
   cell.innerHTML = message;
 }
 
 function buildTableBody(data, table){
   // Build table header
-  var tableheaders = ["Date", "Rx#", "Witness", "Take Home", "Total", "RPh", "Patient Initials", "Notes"];
+  var tableheaders = ["", "Date", "Rx#", "Witness", "Take Home", "Total", "RPh", "Patient Initials", "Notes"];
   var tableheaderrow = table.insertRow(0);
   tableheaderrow.setAttribute('class', 'table-header');
   for(var n = 0; n<tableheaders.length; ++n ) {
@@ -176,7 +179,7 @@ function buildHeader(data) {
   // Add Details
   var detailslabel = document.createElement("p");
   detailslabel.setAttribute("id", "details-label");
-  detailslabel.innerHTML = "Start: " + data.startdate +  " End: " + data.enddate + " (" + data.timeinterval + " days)";
+  detailslabel.innerHTML = `Start: ${data.startdate}&nbsp;&nbsp;&nbsp;End: ${data.enddate} (${data.timeinterval} days)`;
 
   // Add Extra Options Area
   var extraoptions = document.createElement("section");
@@ -216,13 +219,15 @@ function insertTableMessage(table, location, message) {
     var row = table.insertRow(location[i]);
     var rowcell = row.insertCell(0);
     rowcell.setAttribute('class', 'table-endrow-cell');
-    rowcell.setAttribute('colspan', '8');
+    rowcell.setAttribute('colspan', '9');
     rowcell.innerHTML = message;
   }
 }
 
 function buildTables(data, headerdata) {
   var tables = document.getElementById("tables");
+
+  // Divide the log data into 28 rows per page
   var batches = splitData(data, 28);
 
   for(var i=0; i<batches.length; ++i){

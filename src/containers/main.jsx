@@ -12,7 +12,7 @@ import { ViewCol, Header, Footer } from '../components';
 const MainWrapper = ({ children, onPrintRequest }) => (
   <ViewCol width='100vw' height='100vh' >
 
-    <Header title='MethaChart Log Builder'/>
+    <Header title={'MethaChart Log Builder'}/>
 
     { children || <LogBuilderContainer /> }
 

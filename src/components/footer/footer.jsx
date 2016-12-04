@@ -1,5 +1,4 @@
 'use strict';
-import './footer.less';
 import React, { PropTypes } from 'react';
 
 import IconButton from 'material-ui/IconButton';

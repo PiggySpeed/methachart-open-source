@@ -6,12 +6,14 @@ import MenuItem from 'material-ui/MenuItem';
 
 const styles = {
   dropdown: {
-    width: 250
+    width: 200,
+    marginBottom: '8px'
   }
 };
 
 const DrugPicker = ({ selectedDrug, drugList, onSetDrug }) => (
   <DropDownMenu
+    tabIndex={-1}
     style={styles.dropdown}
     value={selectedDrug.din}
     onChange={(event, index, value) => onSetDrug(value)}

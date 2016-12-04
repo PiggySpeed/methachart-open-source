@@ -8,8 +8,8 @@ const initialState = {
     pseudodin: "66999997"
   },
   name: '',
-  dose: 0,
-  takehome: 0,
+  dose: '',
+  takehome: '0',
   startdate: '',
   enddate: '',
   timeinterval: 0,

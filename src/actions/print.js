@@ -3,13 +3,13 @@ import openWindow from '../utils/newwindow';
 import { PRINT_URL } from '../utils/url';
 
 const WEEKDAYS = {
-  [0]: 'SUN',
-  [1]: 'MON',
-  [2]: 'TUE',
-  [3]: 'WED',
-  [4]: 'THU',
-  [5]: 'FRI',
-  [6]: 'SAT'
+  [0]: 'Su',
+  [1]: 'Mo',
+  [2]: 'Tu',
+  [3]: 'We',
+  [4]: 'Th',
+  [5]: 'Fr',
+  [6]: 'Sa'
 };
 
 export const ON_PRINT_REQUEST = 'ON_PRINT_REQUEST';
@@ -52,6 +52,10 @@ export const onPrintRequest = () => {
         timeinterval
     };
 
+    const total = (takehome === '0') || (takehome === '')
+      ? dose
+      : +dose + +takehome;
+
     // Assemble logdata
     const logdata = [];
     for(var i = 0; i < allDates.length; i++ ) {
@@ -60,9 +64,9 @@ export const onPrintRequest = () => {
         weekday: WEEKDAYS[allDates[i].weekday],
         rxnum: rxnum,
         witness: dose,
-        takehome: (takehome === 0) ? '-------' : takehome,
-        total: dose,
-        carry: !!takehome
+        takehome: (takehome === '0') || (takehome === '')  ? '-------' : takehome,
+        total: total,
+        carry: false
       })
     }
 

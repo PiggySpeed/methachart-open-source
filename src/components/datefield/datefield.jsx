@@ -1,5 +1,4 @@
 'use strict';
-import './datefield.less';
 import React, { Component, PropTypes } from 'react';
 
 import moment from 'moment';
@@ -21,7 +20,7 @@ const styles = {
   },
   label: {
     position: 'absolute',
-    top: '-10px',
+    top: '-13px',
     left: '15px',
     backgroundColor: '#FFFFFF'
   },

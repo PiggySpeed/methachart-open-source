@@ -5,18 +5,18 @@ export const DRUG_LIST = [
     din: "02394596",
     pseudodin: "66999997"
   },
-  {
-    displayname: "Suboxone",
-    drugname: "Buprenorphine/Naloxone",
-    din: "1",
-    pseudodin: "66999997"
-  },
-  {
-    displayname: "Kadian",
-    drugname: "Buprenorphine/Naloxone",
-    din: "3",
-    pseudodin: "66999997"
-  }
+  //{
+  //  displayname: "Suboxone",
+  //  drugname: "Buprenorphine/Naloxone",
+  //  din: "1",
+  //  pseudodin: "66999997"
+  //},
+  //{
+  //  displayname: "Kadian",
+  //  drugname: "Buprenorphine/Naloxone",
+  //  din: "3",
+  //  pseudodin: "66999997"
+  //}
 ];
 
 export const ON_NAME_BLUR = 'ON_NAME_BLUR';
@@ -47,8 +47,8 @@ export const onDoseBlur = (dose) => {
     dispatch({ type: ON_DOSE_BLUR, dose })
   }
 };
-export const onTakehomeBlur = (dose) => {
+export const onTakehomeBlur = (takehome) => {
   return dispatch => {
-    dispatch({ type: ON_DOSE_BLUR, dose })
+    dispatch({ type: ON_TAKEHOME_BLUR, takehome })
   }
 };

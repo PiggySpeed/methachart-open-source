@@ -8,7 +8,6 @@ import {
   NameInput,
   RxNumInput,
   DrugPicker,
-  Tip,
   MethadoneDosePicker,
   ViewCol,
   ViewRow
@@ -27,24 +26,24 @@ class LogBuilderWrapper extends Component {
       onRxNumBlur,
       onDoseBlur,
       onSetDrug,
+      onTakehomeBlur
     } = this.props;
 
     return(
       <ViewCol align='flex-start' width='100%'>
 
-        <ViewRow justify='flex-start' width='100%' flex='none'>
+        <ViewRow justify='flex-start' width='100%' flex='none' height='75px'>
           <NameInput onBlur={onNameBlur} />
           <RxNumInput onBlur={onRxNumBlur} />
-          <Tip />
         </ViewRow>
 
-        <ViewRow justify='flex-start' width='100%' flex='none'>
+        <ViewRow justify='flex-start' align='flex-end' width='100%' flex='none' height='75px'>
           <DrugPicker
             selectedDrug={selecteddrug}
             drugList={DRUG_LIST}
             onSetDrug={onSetDrug}
           />
-          <MethadoneDosePicker onBlur={onDoseBlur} />
+          <MethadoneDosePicker onDoseBlur={onDoseBlur} onTakehomeBlur={onTakehomeBlur} />
         </ViewRow>
 
         <ViewRow style={{ marginTop: '25px' }} justify='flex-start' align='flex-start' width='100%'>
@@ -61,7 +60,8 @@ LogBuilderWrapper.propTypes = {
   onNameBlur:             PropTypes.func.isRequired,
   onRxNumBlur:            PropTypes.func.isRequired,
   onDoseBlur:             PropTypes.func.isRequired,
-  onSetDrug:              PropTypes.func.isRequired
+  onSetDrug:              PropTypes.func.isRequired,
+  onTakehomeBlur:         PropTypes.func.isRequired
 };
 
 
