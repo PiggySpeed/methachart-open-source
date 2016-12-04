@@ -3,100 +3,74 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as logBuilderActions from '../actions/logbuilder';
-
-import { View } from 'react-native';
-import TextField from 'material-ui/TextField';
+import { DRUG_LIST } from '../actions/logbuilder';
 import {
-  TabsWrapper,
   NameInput,
   RxNumInput,
   DrugPicker,
-  DateSelector,
   Tip,
-  MethadoneDosePicker
+  MethadoneDosePicker,
+  ViewCol,
+  ViewRow
 } from '../components';
-
+import { DateSelectorContainer } from './';
 
 class LogBuilderWrapper extends Component {
   constructor(props){
     super(props);
-
   }
   render() {
     const {
-      startdate,
-      enddate,
-      timeinterval,
-      maxinterval,
       selecteddrug,
-      druglist,
 
       onNameBlur,
       onRxNumBlur,
-      onDrugBlur,
       onDoseBlur,
-      onBuildLog,
-      onSetDrug
+      onSetDrug,
     } = this.props;
 
     return(
-      <TabsWrapper>
+      <ViewCol align='flex-start' width='100%'>
 
-        <NameInput onBlur={onNameBlur} />
+        <ViewRow justify='flex-start' width='100%' flex='none'>
+          <NameInput onBlur={onNameBlur} />
+          <RxNumInput onBlur={onRxNumBlur} />
+          <Tip />
+        </ViewRow>
 
-        <Tip />
+        <ViewRow justify='flex-start' width='100%' flex='none'>
+          <DrugPicker
+            selectedDrug={selecteddrug}
+            drugList={DRUG_LIST}
+            onSetDrug={onSetDrug}
+          />
+          <MethadoneDosePicker onBlur={onDoseBlur} />
+        </ViewRow>
 
-        <RxNumInput onBlur={onRxNumBlur} />
+        <ViewRow style={{ marginTop: '25px' }} justify='flex-start' align='flex-start' width='100%'>
+          <DateSelectorContainer />
+        </ViewRow>
 
-        <DrugPicker
-          selectedDrug={selecteddrug}
-          drugList={druglist}
-          onBuildLog={onBuildLog}
-          startdate={startdate}
-          enddate={enddate}
-          onPickDrug={onDrugBlur}
-          onSetDrug={onSetDrug}
-        />
-
-        <MethadoneDosePicker onBlur={onDoseBlur} />
-
-        <DateSelector
-          onBuildLog={onBuildLog}
-          timeinterval={timeinterval}
-          maxinterval={maxinterval}
-          startdate={startdate}
-          enddate={enddate}
-        />
-
-      </TabsWrapper>
+      </ViewCol>
     );
   }
 }
 LogBuilderWrapper.propTypes = {
-  startdate:              PropTypes.string.isRequired,
-  enddate:                PropTypes.string.isRequired,
-  timeinterval:           PropTypes.number.isRequired,
-  maxinterval:            PropTypes.number.isRequired,
   selecteddrug:           PropTypes.object.isRequired,
-  druglist:               PropTypes.object.isRequired,
 
   onNameBlur:             PropTypes.func.isRequired,
   onRxNumBlur:            PropTypes.func.isRequired,
-  onDrugBlur:             PropTypes.func.isRequired,
   onDoseBlur:             PropTypes.func.isRequired,
-  onBuildLog:             PropTypes.func.isRequired,
   onSetDrug:              PropTypes.func.isRequired
 };
 
 
 const mapStateToProps = ({LogBuilder}) => {
   return {
-    startdate:        LogBuilder.get('startdate'),
-    enddate:          LogBuilder.get('enddate'),
-    timeinterval:     LogBuilder.get('timeinterval'),
-    maxinterval:      LogBuilder.get('maxinterval'),
-    selecteddrug:     LogBuilder.get('selecteddrug'),
-    druglist:         LogBuilder.get('druglist')
+    startdate:        LogBuilder.startdate,
+    enddate:          LogBuilder.enddate,
+    timeinterval:     LogBuilder.timeinterval,
+    selecteddrug:     LogBuilder.selecteddrug
   }
 };
 const mapDispatchToProps = (dispatch) => {

@@ -20,19 +20,22 @@ class RxNumInput extends Component {
     super(props);
     this.state = {
       errorText: '',
-      value: props.value
+      value: ''
     };
+    this.isNumeric = this.isNumeric.bind(this);
     this.onChange = this.onChange.bind(this);
   }
-  static isNumeric(input){
+  isNumeric(input){
     const RE = new  RegExp(/^\d*\d+$/);
     return RE.test(input);
   }
   onChange(e) {
-    if(this.isNumeric(e.target.value)) {
+    if(e.target.value === ''){
       this.setState({ errorText: '' })
-    } else {
+    } else if(!this.isNumeric(e.target.value)) {
       this.setState({ errorText: 'Numbers only!' })
+    } else {
+      this.setState({ errorText: '' })
     }
   }
   render() {
@@ -42,7 +45,7 @@ class RxNumInput extends Component {
         errorStyle={styles.error}
         style={styles.rx}
         onChange={this.onChange}
-        onBlur={this.props.onBlur}
+        onBlur={e => this.props.onBlur(e.target.value)}
         hintText="Rx#"
         floatingLabelText="Rx#"/>
     );

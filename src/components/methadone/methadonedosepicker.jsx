@@ -1,6 +1,7 @@
 'use strict';
 import React, { Component, PropTypes } from 'react';
 import { ViewRow } from '../';
+import TextField from 'material-ui/TextField/TextField';
 
 const styles = {
   dose: {
@@ -22,19 +23,24 @@ class MethadoneDosePicker extends Component {
     this.state = {
       errorText: ''
     };
+    this.isNumeric = this.isNumeric.bind(this);
     this.onChange = this.onChange.bind(this);
   }
-  static isNumeric(input){
+  isNumeric(input){
     const RE = new  RegExp(/^\d*\d+$/);
     return RE.test(input);
   }
   onChange(e) {
-    if(!this.isNumeric(e.target.value)){
+    const dose = e.target.value;
+
+    if(dose === ''){
+      this.setState({ errorText: '' })
+    } else if(!this.isNumeric(dose)){
       this.setState({ errorText: 'Numbers only!' });
-    } else if(+e.target.value > 50){
-      return this.setState({ errorText: 'High Dose!'})
+    } else if(+dose > 50){
+      this.setState({ errorText: 'High Dose!' })
     } else {
-      return this.setState({ errorText: '' })
+      this.setState({ errorText: '' })
     }
   }
   render() {
@@ -45,7 +51,7 @@ class MethadoneDosePicker extends Component {
           errorStyle={styles.error}
           style={styles.dose}
           onChange={this.onChange}
-          onBlur={this.props.onBlur}
+          onBlur={e => this.props.onBlur(e.target.value)}
           hintText='Dose'
           floatingLabelText='Dose'
         />

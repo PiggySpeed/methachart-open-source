@@ -1,15 +1,12 @@
-import { createStore, combineReducers } from 'redux';
+import { combineReducers } from 'redux';
 
-// Reducers
-import Main from './main';
 import LogBuilder from './logbuilder';
-import DateSelector from './dateselector';
+import dates from './dateselector';
+import printData from './print';
 
-const store = createStore(
-  combineReducers({
-    Main,
-    LogBuilder,
-    DateSelector
-  })
-);
-export default store;
+const rootReducer = combineReducers({
+  LogBuilder,
+  dates,
+  printData
+});
+export default rootReducer;

@@ -30,7 +30,8 @@ const base = {
   module: {
     loaders: [
       { test: /\.jsx?$/, exclude: /node_modules/, loader: 'babel' },
-      { test: /\.less$/, exclude: /node_modules/, loader: 'style!css!less' }
+      { test: /\.less$/, exclude: /node_modules/, loader: 'style!css!less' },
+      { test: /\.json$/, loader: 'json' }, //needs to include node_modules to work
     ]
   },
   resolve: {

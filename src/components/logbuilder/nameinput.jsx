@@ -12,7 +12,7 @@ const styles = {
 
 const NameInput = ({onBlur}) => (
   <TextField
-    onBlur={(e) => onBlur(e.target.value)}
+    onBlur={e => onBlur(e.target.value)}
     style={styles.name}
     hintText="e.g. Lee, John"
     floatingLabelText="Name"

@@ -3,9 +3,7 @@ import { connect } from 'react-redux';
 import { Print } from '../components';
 
 const mapStateToProps = (state) => {
-  return {
-    logdata: state.LogBuilder.get("logdata")
-  }
+  return { }
 };
 const mapDispatchToProps = (dispatch) => {
   return { }

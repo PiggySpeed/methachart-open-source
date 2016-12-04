@@ -6,16 +6,13 @@ import { Tabs, Tab } from 'material-ui/Tabs';
 
 const styles = {
   tabcontainer: {
-    position: "relative",
-    width: "100%",
-    height: "100%"
+    height: '100%',
+    width: '100%'
   },
   tab: {
     backgroundColor: "#212121",
-    height: "100%"
-  },
-  inkbar: {
-    color: "#212121"
+    height: '100%',
+    width: '100%'
   }
 };
 
@@ -23,7 +20,7 @@ class TabsWrapper extends Component {
   render() {
     return(
       <Tabs style={styles.tabcontainer} >
-        <Tab inkBarStyle={styles.inkbar} style={styles.tab} label="Methadone Log Builder">
+        <Tab style={styles.tab} label="Methadone Log Builder">
           { this.props.children }
         </Tab>
       </Tabs>

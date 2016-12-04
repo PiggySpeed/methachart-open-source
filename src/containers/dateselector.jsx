@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as dateSelectorActions from '../actions/dateselector';
 
-import { ViewRow } from '../components';
+import { ViewRow, DateField } from '../components';
 
 class DateSelectorWrapper extends Component {
   constructor(props) {
@@ -36,18 +36,18 @@ class DateSelectorWrapper extends Component {
       } = this.props;
 
     return(
-      <ViewRow flex='none'>
+      <ViewRow width='100%' justify='flex-start'>
 
-          <DateField onDateBlur={onSetStartDate} label="Start"/>
-          <DateField onDateBlur={onSetEndDate} label="End"/>
+        <DateField onDateBlur={onSetStartDate} label="Start"/>
+        <DateField onDateBlur={onSetEndDate} label="End"/>
 
-          <h6 className="dateinterval-text">
-            {startdate}
-            {startdate && enddate ? " to " : ""}
-            {enddate}<br/>{ Number.isInteger(timeinterval) && timeinterval>0
-            ? timeinterval + " days"
-            : "" }
-          </h6>
+        <h6 className="dateinterval-text">
+          {startdate}
+          {startdate && enddate ? " to " : ""}
+          {enddate}<br/>{ Number.isInteger(timeinterval) && timeinterval>0
+          ? timeinterval + " days"
+          : "" }
+        </h6>
 
       </ViewRow>
     );
@@ -63,15 +63,15 @@ DateSelectorWrapper.propTypes = {
   onSetTimeInterval:     PropTypes.func.isRequired
 };
 
-const mapStateToProps = ({DateSelector}) => {
+const mapStateToProps = ({dates}) => {
   return {
-    startdate:          DateSelector.get('startdate'),
-    enddate:            DateSelector.get('enddate'),
-    timeinterval:       DateSelector.get('timeinterval')
+    startdate:          dates.startdate,
+    enddate:            dates.enddate,
+    timeinterval:       dates.timeinterval
   }
 };
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({...dateSelectorActions}, dispatch)
 };
-const DateSelector = connect(mapStateToProps, mapDispatchToProps)(DateSelectorWrapper);
-export default DateSelector;
+const DateSelectorContainer = connect(mapStateToProps, mapDispatchToProps)(DateSelectorWrapper);
+export default DateSelectorContainer;

@@ -7,6 +7,7 @@ import {
 } from '../utils/date.js';
 
 const MOCK_DATA = {
+  months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
   getAllDates: {
     returnFalse1: { args: ['Jan 1, 2017', 'Jan 09, 2017', 28],  expLength: 0 }, // invalid format
     returnFalse2: { args: ['Jan 01, 2017', 'Jan 09, 2017', 366], expLength: 0 }, // maxinterval cannot exceed 365 days

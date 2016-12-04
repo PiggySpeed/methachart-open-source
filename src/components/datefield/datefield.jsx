@@ -1,14 +1,29 @@
 'use strict';
 import './datefield.less';
 import React, { Component, PropTypes } from 'react';
+
+import moment from 'moment';
 import TextField from 'material-ui/TextField';
+import { ViewRow } from '../';
 
 const styles = {
-  datefieldtextinput: {
+  container: {
     position: 'relative',
-    float: 'left',
-    width: 35,
+    flex: 'none',
+    width: '150px',
+    border: '1px solid #CCCCCC',
+    height: '50px',
+    margin: '2px 0 2px 25px'
+  },
+  datefieldtextinput: {
+    width: '35px',
     margin: "0px 4px"
+  },
+  label: {
+    position: 'absolute',
+    top: '-10px',
+    left: '15px',
+    backgroundColor: '#FFFFFF'
   },
   inputstyle: {
     textAlign: "center"
@@ -23,78 +38,108 @@ class DateField extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      validDay: null,
-      validMonth: null,
-      validYear: true,
       day: null,
       month: null,
-      year: "16"
+      year: '16',
+      dayError: '',
+      monthError: '',
+      yearError: ''
+    };
+    this.onBlur = this.onBlur.bind(this);
+    this.isNumeric = this.isNumeric.bind(this);
+    this.validateDay = this.validateDay.bind(this);
+    this.validateMonth = this.validateMonth.bind(this);
+    this.validateYear = this.validateYear.bind(this);
+  }
+  onBlur(){
+    (this.state.day && this.state.month && this.state.year)
+      ? this.props.onDateBlur([this.state.day, this.state.month, this.state.year])
+      : null;
+  }
+  isNumeric(input){
+    const RE = new RegExp(/^\d*\d+$/);
+    return RE.test(input);
+  }
+  validateDay(e){
+    const DD = e.target.value;
+
+    if(DD === ''){
+      this.setState({ dayError: ''})
+    } else if(!this.isNumeric(DD)){
+      this.setState({ dayError: 'Must Be A Number!'})
+    } else {
+      +DD <= 31 && +DD >= 1
+        ? this.setState({ validDay: true, day: DD, dayError: '' })
+        : this.setState({ validDay: false, dayError: 'Invalid Day!' })
     }
   }
-  validateDay(DD){
-    parseInt(DD, 10) <= 31 && parseInt(DD, 10) >= 1
-      ? this.setState({ validDay: true, day: DD })
-      : this.setState({ validDay: false })
-  }
-  validateMonth(MM){
-    parseInt(MM, 10) <= 12 && parseInt(MM, 10) >= 1
-      ? this.setState({ validMonth: true, month: MM })
-      : this.setState({ validMonth: false })
-  }
-  validateYear(YY){
-    parseInt(YY, 10) <= 17 && parseInt(YY, 10) >= 16
-      ? this.setState({ validYear: true, year: YY })
-      : this.setState({ validYear: false })
-  }
-  isDateValid(){
-    return ( this.state.validDay && this.state.validMonth && this.state.validYear )
-  }
-  displayError(key) {
-    switch(key) {
-      case "day":   { return this.state.validDay ? "" : this.state.day ? "Invalid Day" : "" }
-      case "month": { return this.state.validMonth ? "" : this.state.month ? "Invalid Month" : "" }
-      case "year":  { return this.state.validYear ? "" : this.state.year ? "Invalid Year" : "" }
-      default: { return "" }
+  validateMonth(e){
+    const MM = e.target.value;
+
+    if(MM === ''){
+      this.setState({ monthError: ''})
+    } else if(!this.isNumeric(MM)){
+      this.setState({ monthError: 'Must Be A Number!'})
+    } else {
+      +MM <= 12 && +MM >= 1
+        ? this.setState({ validMonth: true, month: MM, monthError: '' })
+        : this.setState({ validMonth: false, monthError: 'Invalid Month!' })
     }
   }
-  onDateValidate() {
-    this.props()
-  }
-  componentDidUpdate() {
-    if(this.isDateValid()){
-      this.props.onDateBlur([this.state.day, this.state.month, this.state.year]) }
+  validateYear(e){
+    const currentYear = moment().get('year');
+    const nextYear = currentYear + 1;
+    const YY = e.target.value;
+    const YYYY = +YY + 2000;
+
+    if(YY === ''){
+      this.setState({ yearError: ''})
+    } else if(!this.isNumeric(YY)){
+      this.setState({ yearError: 'Must Be A Number!'})
+    } else {
+      ( YYYY === currentYear) || ( YYYY === nextYear )
+        ? this.setState({ validYear: true, year: YY, yearError: '' })
+        : this.setState({ validYear: false, yearError: 'Invalid year!' })
+    }
   }
   render() {
     return(
-      <section className="date-field-container">
-        <h6 className="date-field-label">{this.props.label}</h6>
+      <ViewRow style={styles.container} onBlur={this.onBlur}>
+        <h6 style={styles.label}>{this.props.label}</h6>
         <TextField
-          errorText={ this.displayError("day") }
+          key='day'
+          errorText={this.state.dayError}
           style={styles.datefieldtextinput}
           inputStyle={styles.inputstyle}
           hintStyle={styles.hintstyle}
           hintText="dd"
           maxLength="2"
-          onChange={(e) => this.validateDay(e.target.value)}/>
+          onChange={this.validateDay}/>
         <TextField
-          errorText={ this.displayError("month") }
+          key='month'
+          errorText={this.state.monthError}
           style={styles.datefieldtextinput}
           inputStyle={styles.inputstyle}
           hintStyle={styles.hintstyle}
           hintText="mm"
           maxLength="2"
-          onChange={(e) => this.validateMonth(e.target.value)}/>
+          onChange={this.validateMonth}/>
         <TextField
+          key='year'
           defaultValue="16"
-          errorText={ this.displayError("year") }
+          errorText={this.state.yearError}
           style={styles.datefieldtextinput}
           inputStyle={styles.inputstyle}
           hintStyle={styles.hintstyle}
           hintText="yy"
           maxLength="2"
-          onChange={(e) => this.validateYear(e.target.value)}/>
-      </section>
+          onChange={this.validateYear}/>
+      </ViewRow>
     );
   }
 }
+DateField.propTypes = {
+  label: PropTypes.string.isRequired,
+  onDateBlur: PropTypes.func.isRequired,
+};
 export default DateField;

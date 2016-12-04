@@ -1,15 +1,11 @@
-import { createStore, combineReducers } from 'redux';
-
-// Reducers
-import MainReducer from 'modules/main/mainreducer';
-import ConfigureGeneralReducer from 'modules/configuregeneral/configuregeneralreducer';
-import ConfigureSpecificReducer from 'modules/configurespecific/configurespecificreducer';
+import { createStore, applyMiddleware } from 'redux';
+import thunkMiddleware from 'redux-thunk';
+import rootReducer from '../reducers';
 
 const store = createStore(
-  combineReducers({
-    MainReducer,
-    ConfigureGeneralReducer,
-    ConfigureSpecificReducer
-  })
+  rootReducer,
+  applyMiddleware(
+    thunkMiddleware
+  )
 );
 export default store;
