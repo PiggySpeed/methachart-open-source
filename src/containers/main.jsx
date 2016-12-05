@@ -9,22 +9,47 @@ import * as printActions from '../actions/print';
 import { LogBuilderContainer } from './';
 import { ViewCol, TitleBar, Footer } from '../components';
 
-const MainWrapper = ({ children, onPrintRequest }) => (
-  <ViewCol width='100vw' height='100vh' >
+class MainWrapper extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      errorText: this.props.printErrorText
+    };
+    this.showErrorText = this.showErrorText.bind(this);
+  }
+  showErrorText(){
+    setTimeout( () => this.setState({ errorText: '' }), 4000 )
+  }
+  render() {
+    const {
+      children,
+      onPrintRequest
+    } = this.props;
 
-    <TitleBar />
+    this.props.printErrorText !== ''
+      ? this.showErrorText()
+      : null;
 
-    <div style={{display: 'flex', flex: 1, overflowY: 'auto', width: '100vw'}} >
-    { children || <LogBuilderContainer /> }
-    </div>
+    return (
+      <ViewCol width='100vw' height='100vh'>
 
-    <Footer changeRoute={redirect} onPrintClick={onPrintRequest} />
+        <TitleBar />
 
-  </ViewCol>
-);
+        <div style={{display: 'flex', flex: 1, overflowY: 'auto', width: '100vw'}}>
+          { children || <LogBuilderContainer /> }
+        </div>
 
-const mapStateToProps = (state) => {
-  return {}
+        <Footer changeRoute={redirect} onPrintClick={onPrintRequest} printErrorText={this.state.errorText}/>
+
+      </ViewCol>
+    )
+  }
+}
+
+const mapStateToProps = ({printData}) => {
+  return {
+    printErrorText: printData.errorText
+  }
 };
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({...printActions}, dispatch)

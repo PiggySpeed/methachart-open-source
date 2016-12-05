@@ -21,7 +21,7 @@ const style = {
   }
 };
 
-const Footer = ({ changeRoute, onPrintClick }) => (
+const Footer = ({ printErrorText, changeRoute, onPrintClick }) => (
   <ViewRow style={style.container} flex='none' justify='space-between'>
 
     <span>
@@ -33,6 +33,8 @@ const Footer = ({ changeRoute, onPrintClick }) => (
       </IconButton>
     </span>
 
+    <h4 style={{ color: '#f41d1b'}} className='fade-in-out-opacity'>{printErrorText}</h4>
+
     <RaisedButton
       style={style.print}
       onClick={onPrintClick}
@@ -43,6 +45,7 @@ const Footer = ({ changeRoute, onPrintClick }) => (
   </ViewRow>
 );
 Footer.propTypes = {
+  printErrorText: PropTypes.string.isRequired,
   changeRoute: PropTypes.func.isRequired,
   onPrintClick: PropTypes.func.isRequired
 };

@@ -49,12 +49,12 @@ function addTableRowDWI(data){
   cell0.innerHTML = data.weekday;
   cell1.innerHTML = data.date;
   cell2.innerHTML = data.rxnum;
-  cell3.innerHTML = data.witness + " mL";
-  cell4.innerHTML = data.takehome + (data.takehome !== '-------' ? ' mL' : '');
-  cell5.innerHTML = data.total + " mL";
-  cell6.innerHTML = ""; // RPh
-  cell7.innerHTML = ""; // Patient
-  cell8.innerHTML = ""; // Notes
+  cell3.innerHTML = data.witness;
+  cell4.innerHTML = data.takehome;
+  cell5.innerHTML = data.total;
+  cell6.innerHTML = ''; // RPh
+  cell7.innerHTML = ''; // Patient
+  cell8.innerHTML = ''; // Notes
 
   return row;
 }

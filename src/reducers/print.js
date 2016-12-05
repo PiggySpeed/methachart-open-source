@@ -1,15 +1,15 @@
 import * as types from '../actions/print';
 
-const printData = (state = {}, action) => {
+const printData = (state = { errorText: '' }, action) => {
   switch(action.type) {
     case types.ON_PRINT_REQUEST: {
-      return {};
+      return { errorText: '' };
     }
     case types.ON_PRINT_FAILURE: {
       return {errorText: action.errorText};
     }
     case types.ON_PRINT_SUCCESS: {
-      return {};
+      return { errorText: '' };
     }
     default:
       return state;

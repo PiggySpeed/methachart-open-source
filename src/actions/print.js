@@ -33,13 +33,15 @@ export const onPrintRequest = () => {
     const { startdate, enddate } = dates; // dates must be in form MMM DD, YYYY
     let errorText = 'The start or end dates are invalid.';
 
+    // Generate Time Interval and Check if it is Valid
     const timeinterval = calculateInterval(startdate, enddate, 168, err => { errorText = err });
     if(timeinterval === 0){
       return dispatch(onPrintFailure(errorText))
     }
 
+    // Generate Array of Dates and Check if it is Valid
     const allDates = getAllDates(startdate, enddate, 168, err => { errorText = err });
-    if(allDates.length === []){
+    if(allDates === []){
       return dispatch(onPrintFailure(errorText))
     }
 
@@ -52,9 +54,10 @@ export const onPrintRequest = () => {
         timeinterval
     };
 
-    const total = (takehome === '0') || (takehome === '')
-      ? dose
-      : +dose + +takehome;
+    // Calculate total dose
+    const total = (takehome > 0)
+      ? dose + takehome
+      : dose;
 
     // Assemble logdata
     const logdata = [];
@@ -63,9 +66,9 @@ export const onPrintRequest = () => {
         date: allDates[i].date,
         weekday: WEEKDAYS[allDates[i].weekday],
         rxnum: rxnum,
-        witness: dose,
-        takehome: (takehome === '0') || (takehome === '')  ? '-------' : takehome,
-        total: total,
+        witness: dose + ' mL',
+        takehome: takehome ? takehome + ' mL' : '-------' ,
+        total: total + ' mL',
         carry: false
       })
     }
