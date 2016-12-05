@@ -151,7 +151,8 @@ p {
   color: #727272;
   padding: 4px;
 }
-ol {
+ol,
+ul {
   margin-left: 50px;
 }
 li {

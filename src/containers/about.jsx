@@ -8,27 +8,30 @@ const AboutContainer = () => (
       <h1>MethaChart v1.3</h1>
       <h4>Dec 04, 2016 | by jlee</h4><br/>
     </ViewCol>
-    <p>Bug Fixes: Added Weekdays, Take Home Dosing, Years support (up to 2100).</p><br/>
-
-    <h4>How to use MethaChart Effectively:</h4>
+    <br/>
+    <h4>Features and Bug Fixes:</h4>
+    <ul>
+      <li>Weekdays now appear on logs.</li>
+      <li>Same-day take-home dosing.</li>
+      <li>Dates up to year 2100 are now supported.</li>
+    </ul>
+    <br/>
+    <br/>
+    <h4>Using MethaChart:</h4>
     <p>
       Use Tab and Shift+Tab to go forwards or backwards.
     </p>
-
+    <br/>
     <p>
-      While MethaChart tries to make sure you're entering valid dates and values
-      it can't prevent you from entering incorrect date intervals or incorrect doses.
-      It also can't prevent you from grabbing the wrong log sheet from the printer.
-
-      I like to use these steps to make sure everything is 100% correct.
+      MethaChart prevents entering of nonsensical dates and doses, but it can't prevent you from
+      entering incorrect doses, date ranges, or patient names. Use the following tips to help you
+      check a log sheet prior to use:
     </p>
     <ol>
-      <li>Compare the NAME with the original Rx, circle if valid.</li>
-      <li>Compare the START and END dates with the original Rx, circle both if valid.</li>
-      <li>Compare the DOSE with the original Rx, circle if valid.</li>
+      <li>Compare the NAME with the original Rx, circle if correct.</li>
+      <li>Compare the START and END dates with the original Rx, circle both if correct.</li>
+      <li>Compare the DOSE with the original Rx, circle if correct.</li>
     </ol>
-
-    <p>This dates may be inaccurate when entering year 2100, so make sure you check for an update by then!</p>
   </ViewCol>
 );
 

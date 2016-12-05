@@ -21,7 +21,7 @@ const style = {
   }
 };
 
-const Footer = ({ changeRoute,  onPrintClick }) => (
+const Footer = ({ changeRoute, onPrintClick }) => (
   <ViewRow style={style.container} flex='none' justify='space-between'>
 
     <span>
