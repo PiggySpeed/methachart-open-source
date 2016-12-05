@@ -1,6 +1,6 @@
 export {ViewCol, ViewRow} from './view/view.jsx';
 
-export {default as Header} from './header/header.jsx';
+export {default as TitleBar} from './titlebar/titlebar.jsx';
 export {default as Footer} from './footer/footer.jsx';
 export {default as NameInput} from './logbuilder/nameinput.jsx';
 export {default as RxNumInput} from './logbuilder/rxnuminput.jsx';

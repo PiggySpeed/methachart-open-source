@@ -12,7 +12,7 @@ app.on('window-all-closed', function() {
 });
 
 app.on('ready', function() {
-  mainWindow = new BrowserWindow({ width: 575, height: 400 });
+  mainWindow = new BrowserWindow({ width: 575, height: 400, icon: 'src/resources/methachart-favicon.ico' });
   mainWindow.loadURL('file://' + __dirname + '/src/index.html');
   mainWindow.openDevTools();
 

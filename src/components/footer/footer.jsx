@@ -2,7 +2,7 @@
 import React, { PropTypes } from 'react';
 
 import IconButton from 'material-ui/IconButton';
-import ActionHome from 'material-ui/svg-icons/action/home';
+import ActionViewList from 'material-ui/svg-icons/action/view-list';
 import ActionSettings from 'material-ui/svg-icons/action/settings';
 import ActionInfo from 'material-ui/svg-icons/action/info';
 import ActionPrint from 'material-ui/svg-icons/action/print';
@@ -25,8 +25,8 @@ const Footer = ({ changeRoute,  onPrintClick }) => (
   <ViewRow style={style.container} flex='none' justify='space-between'>
 
     <span>
-      <IconButton onClick={() => changeRoute("/")} tooltip="Home" tooltipPosition="top-right">
-        <ActionHome />
+      <IconButton onClick={() => changeRoute("/")} tooltip="Log Builder" tooltipPosition="top-right">
+        <ActionViewList />
       </IconButton>
       <IconButton onClick={() => changeRoute("/about")} tooltip="About" tooltipPosition="top-right">
         <ActionInfo />

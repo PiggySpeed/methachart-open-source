@@ -1,0 +1,45 @@
+.titlebar {
+  -webkit-app-region: drag;
+}
+
+.topnav-container {
+  align-self: flex-start;
+  align-items: flex-start;
+  display: flex;
+  flex-flow: row-reverse;
+  background-color: transparent;
+  height: 40px;
+  -webkit-app-region: drag;
+}
+
+.topnav-button {
+  width: 35px;
+  height: 30px;
+  padding: 0;
+  background-color: transparent;
+  border-top: none;
+  border-right: none;
+  border-left: 1px solid #0D0D0D;
+  border-bottom: 1px solid #0D0D0D;
+  outline: none;
+  -webkit-app-region: no-drag;
+  &:hover {
+    background-color: #444452;
+  }
+  &:active {
+    background-color: #0f0f14;
+  }
+}
+
+.topnav-button-close {
+  &:hover {
+    background-color: red;
+  }
+}
+
+.topnav-divider {
+  height: 20px;
+  width: 1px;
+  margin: 0 5px;
+  border-left: 1px solid #39393f;
+}
