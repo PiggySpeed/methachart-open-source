@@ -4,42 +4,27 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as dateSelectorActions from '../actions/dateselector';
 
-import { ViewRow, DateField } from '../components';
-
-const SupportText = ({ startdate, enddate, timeinterval, takehome }) => (
-  <h6 style={{ margin: '2px 0 2px 5px', minWidth: '125px'}}>
-
-    {startdate} {startdate && enddate ? " to " : ""} {enddate}
-
-    <br/>
-
-    { Number.isInteger(timeinterval) && timeinterval > 0
-      ? timeinterval + " days"
-      : ""
-    }
-
-    {(takehome !== '0') && (takehome !== '') ? `Take home ${takehome} mL each day` : 'No take-home doses'}
-
-  </h6>
-);
+import { ViewRow, DateField, SupportText } from '../components';
 
 class DateSelectorWrapper extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      allDatesValid: false,
-      startdateValid: false,
-      enddateValid: false
+      errorDateText: ''
     };
     this.onBlur = this.onBlur.bind(this);
-  }
-  onBlur() {
-    return this.props.onSetTimeInterval(this.props.startdate, this.props.enddate, this.props.maxinterval);
+    this.onInvalidDate = this.onInvalidDate.bind(this);
   }
   get timeInterval(){
     if(!!this.props.startdate && !!this.props.enddate){
       return null
     }
+  }
+  onBlur() {
+    return this.props.onSetTimeInterval(this.props.startdate, this.props.enddate, this.props.maxinterval);
+  }
+  onInvalidDate(err) {
+    this.setState({ errorDateText: err });
   }
   render() {
     const {
@@ -49,19 +34,27 @@ class DateSelectorWrapper extends Component {
       takehome,
 
       onSetStartDate,
-      onSetEndDate,
-      onSetTimeInterval
+      onSetEndDate
       } = this.props;
 
     return(
       <ViewRow width='100%' justify='flex-start'>
 
-        <DateField onDateBlur={onSetStartDate} label="Start"/>
-        <DateField onDateBlur={onSetEndDate} label="End"/>
+        <DateField
+          label='Start'
+          onDateBlur={onSetStartDate}
+          onInvalidDate={this.onInvalidDate}
+        />
+        <DateField
+          label='End'
+          onDateBlur={onSetEndDate}
+          onInvalidDate={this.onInvalidDate}
+        />
 
         <SupportText
           startdate={startdate}
           enddate={enddate}
+          errorDateText={this.state.errorDateText}
           timeinterval={timeinterval}
           takehome={takehome}
         />
@@ -74,7 +67,7 @@ DateSelectorWrapper.propTypes = {
   startdate:              PropTypes.string.isRequired,
   enddate:                PropTypes.string.isRequired,
   timeinterval:           PropTypes.number.isRequired,
-  takehome:               PropTypes.string.isRequired,
+  takehome:               PropTypes.number.isRequired,
 
   onSetStartDate:         PropTypes.func.isRequired,
   onSetEndDate:           PropTypes.func.isRequired,

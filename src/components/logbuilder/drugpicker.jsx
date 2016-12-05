@@ -6,7 +6,7 @@ import MenuItem from 'material-ui/MenuItem';
 
 const styles = {
   dropdown: {
-    width: 200,
+    width: 250,
     marginBottom: '8px'
   }
 };

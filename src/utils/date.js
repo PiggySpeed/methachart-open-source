@@ -13,7 +13,6 @@ const pad = (n) => {
   return (+n < 10 && n.length === 1) ? '0'+n : n
 };
 
-
 export const createDate = ( dd, mm, yy ) => {
   /**
    * Returns dates in a format MMM DD, YYYY (as a string)

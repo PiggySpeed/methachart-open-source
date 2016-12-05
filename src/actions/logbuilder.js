@@ -4,7 +4,7 @@ export const DRUG_LIST = [
     drugname: "Methadone 10mg/ml",
     din: "02394596",
     pseudodin: "66999997"
-  },
+  }
   //{
   //  displayname: "Suboxone",
   //  drugname: "Buprenorphine/Naloxone",
