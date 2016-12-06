@@ -1,13 +1,47 @@
 import { expect } from 'chai';
 import sinon from 'sinon';
 import {
+  pad,
   createDate,
   calculateInterval,
-  getAllDates
+  getAllDates,
 } from '../utils/date.js';
 
 const MOCK_DATA = {
   months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+  pad: {
+    returnTrue: [
+      '1',
+      '01',
+      '11',
+      '5',
+      '99'
+    ],
+    returnFalse: [
+      null,
+      '',
+      '  ',
+      undefined,
+      0,
+      1.01,
+      0.1,
+      .1,
+      {},
+      [],
+      NaN,
+      '0',
+      ' 1',
+      'a',
+      'EE',
+      '-1',
+      '.1',
+      '0.1',
+      '000',
+      '050',
+      '00',
+      '100'
+    ]
+  },
   getAllDates: {
     returnFalse1: { args: ['Jan 1, 2017', 'Jan 09, 2017', 28],  expLength: 0 }, // invalid format
     returnFalse2: { args: ['Jan 01, 2017', 'Jan 09, 2017', 366], expLength: 0 }, // maxinterval cannot exceed 365 days
@@ -100,6 +134,27 @@ const MOCK_DATA = {
 
 describe('/utils/date.js', () => {
 
+  describe('pad():', () => {
+
+    it('should convert single or double-digit numbers/strings into padded strings', () => {
+      const checkTrue = MOCK_DATA.pad.returnTrue.every( item => {
+        if(pad(item) === 'ERROR'){ console.log('>>> ', item)}
+        return pad(item) !== 'ERROR'
+      });
+
+      expect(checkTrue).to.equal(true);
+    });
+
+    it('should return \'ERROR\' when the input value is invalid', () => {
+      const checkFalse = MOCK_DATA.pad.returnFalse.every( item => {
+        if(pad(item) !== 'ERROR'){ console.log('err >>> ', item)}
+        return pad(item) === 'ERROR';
+      });
+
+      expect(checkFalse).to.equal(true);
+    })
+  });
+
   describe('createDate():', () => {
 
     it('should correctly convert \'dd mm yy\' into \'MMM DD, YYYY\'', () => {
@@ -133,6 +188,7 @@ describe('/utils/date.js', () => {
 
     it('should return \'INVALID DATE\' for invalid input', () => {
       const checkFalse = MOCK_DATA.createDate.returnFalse.every( item => {
+        if(createDate(...item) !== 'INVALID DATE'){ console.log('failed at ', item)}
         return createDate(...item) === 'INVALID DATE';
       });
 

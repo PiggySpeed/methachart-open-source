@@ -2,6 +2,7 @@
 import React, { Component, PropTypes } from 'react';
 import moment from 'moment';
 import { isStringPosNum } from '../../utils/validation';
+import { pad } from '../../utils/date';
 
 import TextField from 'material-ui/TextField';
 import { ViewRow } from '../';
@@ -52,7 +53,7 @@ class DateField extends Component {
   }
   onBlur(){
     (this.state.day && this.state.month && this.state.year)
-      ? this.props.onDateBlur([this.state.day, this.state.month, this.state.year])
+      ? this.props.onDateBlur(pad(this.state.day), pad(this.state.month), pad(this.state.year))
       : this.props.onInvalidDate(`${this.props.label} date is invalid!`);
     this.props.onInvalidDate('');
   }
@@ -94,7 +95,7 @@ class DateField extends Component {
     } else if(!isStringPosNum(YY)){
       this.setState({ year: 0, yearError: 'Must Be A Number!' })
     } else {
-      const numericYYYY = YY + 2000;
+      const numericYYYY = +YY + 2000;
       ( numericYYYY === currentYear) || ( numericYYYY === nextYear )
         ? this.setState({ year: YY, yearError: '' })
         : this.setState({ year: 0, yearError: 'Invalid year!' })

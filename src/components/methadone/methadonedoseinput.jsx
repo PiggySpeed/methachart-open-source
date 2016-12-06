@@ -23,6 +23,7 @@ class MethadoneDoseInput extends Component {
       errorText: ''
     };
     this.onChange = this.onChange.bind(this);
+    this.onBlur = this.onBlur.bind(this);
   }
   onChange(e) {
     const dose = e.target.value;
@@ -37,6 +38,9 @@ class MethadoneDoseInput extends Component {
       this.setState({ errorText: '' })
     }
   }
+  onBlur(e){
+    this.props.onBlur(e.target.value);
+  }
   render() {
     return (
       <TextField
@@ -44,7 +48,7 @@ class MethadoneDoseInput extends Component {
         errorStyle={styles.error}
         style={styles.dose}
         onChange={this.onChange}
-        onBlur={this.props.onBlur}
+        onBlur={this.onBlur}
         hintText='Dose'
         floatingLabelText='Dose'
         maxLength='5'

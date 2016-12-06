@@ -3,14 +3,51 @@ import moment from 'moment';
 import { isNonEmptyString, isValidDateDDMMYY, isValidDateMMMDDYYYY } from './typechecking';
 
 
-const pad = (n) => {
+export const pad = (n) => {
   /**
    * Returns values with a leading zero, up to a max of 2 digits
-   * coerces numbers to string
+   * Input must represent a positive integer
+   * Coerces numbers to string
+   * Does not accept values with leading spaces (e.g. ' 1', ' 15')
+   * Returns 'ERROR' for invalid input
    *
    * n (str or num): the single or double-digit value
+   *
    * **/
-  return (+n < 10 && n.length === 1) ? '0'+n : n
+
+  const isString = Object.prototype.toString.call(n) === '[object String]';
+  const isNumber = Object.prototype.toString.call(n) === '[object Number]';
+  if(!isString && !isNumber){
+    //console.log('err1 ', n);
+    return 'ERROR'
+  }
+
+  const hasLeadingSpace = isString && (n !== n.trim());
+  if(hasLeadingSpace){
+    return 'ERROR'
+  }
+
+  const num = +n;
+  const isNumeric = (num == n) && ( (n + '').length > 0 );
+  if(!isNumeric){
+    return 'ERROR'
+  }
+
+  const x = parseFloat(num);
+  const isPosInteger = ((x | 0) === x ) && (num > 0);
+  if(!isPosInteger){
+    return 'ERROR'
+  }
+
+  const str = n + '';
+  const isLengthOneOrTwo = (str.length === 2) || (str.length === 1);
+  if(!isLengthOneOrTwo){
+    //console.log('[0] length of 01 is ', ('001' + '').length );
+    //console.log('[1] length of [', str, '] is', str.length);
+    return 'ERROR'
+  }
+
+  return (str.length === 1) ? '0'+str : str;
 };
 
 export const createDate = ( dd, mm, yy ) => {

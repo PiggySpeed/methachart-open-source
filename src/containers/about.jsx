@@ -11,9 +11,11 @@ const AboutContainer = () => (
     <br/>
     <h4>Features and Bug Fixes:</h4>
     <ul>
+      <li>Validation of input.</li>
       <li>Weekdays now appear on logs.</li>
-      <li>Same-day take-home dosing.</li>
+      <li>Same day take-home dosing.</li>
       <li>Dates up to year 2100 are now supported.</li>
+      <li>Multiple tests implemented to ensure correct handling of data.</li>
     </ul>
     <br/>
     <br/>

@@ -121,7 +121,7 @@ h2#rx-label-text {
 .col0 { width: 25px; font-size: 8pt; }
 .col1 { width: 110px; }
 .col2 { width: 75px; }
-.col3 { width: 75px; }
+.col3 { width: 75px; font-weight: bold; border: 2px solid black; }
 .col4 { width: 75px; }
 .col5 { width: 75px; }
 .col6 { width: 50px; }

@@ -1,5 +1,5 @@
 'use strict';
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 
 import IconButton from 'material-ui/IconButton';
 import ActionViewList from 'material-ui/svg-icons/action/view-list';
@@ -21,33 +21,45 @@ const style = {
   }
 };
 
-const Footer = ({ printErrorText, changeRoute, onPrintClick }) => (
-  <ViewRow style={style.container} flex='none' justify='space-between'>
+class Footer extends Component {
+  constructor(props){
+    super(props);
+  }
+  render() {
+    return (
+      <ViewRow style={style.container} flex='none' justify='space-between'>
 
-    <span>
-      <IconButton onClick={() => changeRoute("/")} tooltip="Log Builder" tooltipPosition="top-right">
-        <ActionViewList />
-      </IconButton>
-      <IconButton onClick={() => changeRoute("/about")} tooltip="About" tooltipPosition="top-right">
-        <ActionInfo />
-      </IconButton>
-    </span>
+        <span>
+          <IconButton onClick={() => this.props.changeRoute("/")} tooltip="Log Builder" tooltipPosition="top-right">
+            <ActionViewList />
+          </IconButton>
+          <IconButton onClick={() => this.props.changeRoute("/about")} tooltip="About" tooltipPosition="top-right">
+            <ActionInfo />
+          </IconButton>
+        </span>
 
-    <h4 style={{ color: '#f41d1b'}} className='fade-in-out-opacity'>{printErrorText}</h4>
+        { this.props.printErrorText !== ''
+          ? <h4 style={{ color: '#f41d1b' }} className='fade-in-out-opacity'>{this.props.printErrorText}</h4>
+          : null
+        }
 
-    <RaisedButton
-      style={style.print}
-      onClick={onPrintClick}
-      label="PRINT"
-      backgroundColor="#212121"
-      labelColor="#FFFFFF" />
+        <RaisedButton
+          style={style.print}
+          onClick={this.props.onPrintClick}
+          label="PRINT"
+          backgroundColor="#212121"
+          labelColor="#FFFFFF"
+        />
 
-  </ViewRow>
-);
+      </ViewRow>
+    )
+  }
+}
 Footer.propTypes = {
   printErrorText: PropTypes.string.isRequired,
   changeRoute: PropTypes.func.isRequired,
-  onPrintClick: PropTypes.func.isRequired
+  onPrintClick: PropTypes.func.isRequired,
+  onDeletePrintError: PropTypes.func.isRequired
 };
 
 export default Footer;

@@ -13,32 +13,18 @@ class MethadoneDosePicker extends Component {
     this.state = {
       errorText: ''
     };
-    this.onChange = this.onChange.bind(this);
     this.onDoseBlur = this.onDoseBlur.bind(this);
     this.onTakehomeBlur = this.onTakehomeBlur.bind(this);
   }
-  onChange(e) {
-    const dose = e.target.value;
-
-    if(dose === ''){
-      this.setState({ errorText: '' })
-    } else if(!isStringPosNum(dose)){
-      this.setState({ errorText: 'Numbers only!' });
-    } else if(+dose > 50){
-      this.setState({ errorText: 'High Dose!' })
-    } else {
-      this.setState({ errorText: '' })
-    }
-  }
-  onDoseBlur(e){
-    if(!isStringPosNum(e.target.value)){
-      const numericDose = +e.target.value;
+  onDoseBlur(value){
+    if(isStringPosNum(value)){
+      const numericDose = +value;
       this.props.onDoseBlur(numericDose);
     }
   }
-  onTakehomeBlur(e){
-    if(!isStringPosNum(e.target.value)){
-      const numericDose = +e.target.value;
+  onTakehomeBlur(value){
+    if(isStringPosNum(value)){
+      const numericDose = +value;
       this.props.onTakehomeBlur(numericDose);
     }
   }

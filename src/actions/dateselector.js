@@ -4,17 +4,17 @@ export const ON_SET_START_DATE = 'ON_SET_START_DATE';
 export const ON_SET_END_DATE = 'ON_SET_END_DATE';
 export const ON_SET_TIME_INTERVAL = 'ON_SET_TIME_INTERVAL';
 
-export const onSetStartDate = (ddmmyy) => {
+export const onSetStartDate = (dd, mm, yy) => {
   return dispatch => {
     // Date validation occurs in createDate
-    const startdate = createDate(ddmmyy[0], ddmmyy[1], ddmmyy[2]);
+    const startdate = createDate(dd, mm, yy);
     dispatch({ type: ON_SET_START_DATE, startdate })
   }
 };
-export const onSetEndDate = (ddmmyy) => {
+export const onSetEndDate = (dd, mm, yy) => {
   return dispatch => {
     // Date validation occurs in createDate
-    const enddate = createDate(ddmmyy[0], ddmmyy[1], ddmmyy[2]);
+    const enddate = createDate(dd, mm, yy);
     dispatch({ type: ON_SET_END_DATE, enddate })
   }
 };

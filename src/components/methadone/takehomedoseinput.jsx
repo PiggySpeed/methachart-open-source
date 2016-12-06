@@ -21,6 +21,7 @@ class TakeHomeDoseInput extends Component {
       errorText: ''
     };
     this.onChange = this.onChange.bind(this);
+    this.onBlur = this.onBlur.bind(this);
   }
   onChange(e){
     const dose = e.target.value;
@@ -33,6 +34,9 @@ class TakeHomeDoseInput extends Component {
       this.setState({ errorText: '' })
     }
   }
+  onBlur(e){
+    this.props.onBlur(e.target.value);
+  }
   render() {
     return(
       <TextField
@@ -42,7 +46,7 @@ class TakeHomeDoseInput extends Component {
         style={styles.dose}
         inputStyle={{textAlign: 'center', color: '#727272'}}
         onChange={this.onChange}
-        onBlur={this.props.onBlur}
+        onBlur={this.onBlur}
         defaultValue='0'
         floatingLabelText='Take Home (optional):'
         floatingLabelFixed={true}
