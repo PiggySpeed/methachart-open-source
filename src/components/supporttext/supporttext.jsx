@@ -12,20 +12,19 @@ class SupportText extends Component {
       : `${this.props.startdate} ${this.props.startdate && this.props.enddate ? ' to ' : ''} ${this.props.enddate || ''}`;
   }
   get timeIntervalText() {
-    return Number.isInteger(this.props.timeinterval) && this.props.timeinterval > 0
-      ? this.props.timeinterval + ' days'
+    return Number.isInteger(this.props.timeinterval) && (this.props.timeinterval > 0)
+      ? `(${this.props.timeinterval} days)`
       : '';
   }
   render() {
+    console.log(this.props.timeinterval);
 
     return(
       <h6 style={{ margin: '2px 0 2px 5px', minWidth: '125px'}}>
 
-        {this.dateRangeText}
+        {`${this.dateRangeText} ${this.timeIntervalText}`}
 
         <br/>
-
-        {this.timeIntervalText}
 
         {this.props.takehome ? `Take home ${this.props.takehome} mL each day` : 'No take-home doses'}
 

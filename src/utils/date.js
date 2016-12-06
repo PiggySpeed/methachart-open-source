@@ -110,7 +110,7 @@ export const calculateInterval = ( startdate, enddate, maxinterval, errcb ) => {
   if(!datesAreValid){
     errcb
       ? errcb('INVALID DATE(S)')
-      : console.warn('INVALID DATE(S)');
+      : null;
     return 0
   }
 

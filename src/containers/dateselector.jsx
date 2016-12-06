@@ -15,13 +15,13 @@ class DateSelectorWrapper extends Component {
     this.onBlur = this.onBlur.bind(this);
     this.onInvalidDate = this.onInvalidDate.bind(this);
   }
-  get timeInterval(){
-    if(!!this.props.startdate && !!this.props.enddate){
-      return null
-    }
-  }
+  //get timeInterval(){
+  //  if(!!this.props.startdate && !!this.props.enddate){
+  //    return null
+  //  }
+  //}
   onBlur() {
-    return this.props.onSetTimeInterval(this.props.startdate, this.props.enddate, this.props.maxinterval);
+    return this.props.onSetTimeInterval(this.props.startdate, this.props.enddate);
   }
   onInvalidDate(err) {
     this.setState({ errorDateText: err });
@@ -38,7 +38,7 @@ class DateSelectorWrapper extends Component {
       } = this.props;
 
     return(
-      <ViewRow width='100%' justify='flex-start'>
+      <ViewRow width='100%' justify='flex-start' onBlur={this.onBlur}>
 
         <DateField
           label='Start'

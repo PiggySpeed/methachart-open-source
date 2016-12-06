@@ -24,6 +24,7 @@ export const onSetTimeInterval = () => {
 
     // date validation occurs in calculateInterval, returns 0 if invalid
     const timeinterval = calculateInterval(dates.startdate, dates.enddate, 168);
+    console.log('action is giving ', timeinterval);
     dispatch({
       type: ON_SET_TIME_INTERVAL,
       timeinterval
