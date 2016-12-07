@@ -42,5 +42,6 @@ node_modules
 /public/built/bundle.js.map
 build/
 dist/
+/src/dist/
 
 src/modules/about/about.css

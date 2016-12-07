@@ -13,7 +13,7 @@ app.on('window-all-closed', function() {
 
 app.on('ready', function() {
   mainWindow = new BrowserWindow({
-    width: 575,
+    width: 600,
     height: 475,
     icon: 'src/resources/methachart-favicon.ico',
     frame: false

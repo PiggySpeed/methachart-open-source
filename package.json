@@ -23,8 +23,7 @@
     "dist": "build --win --x64"
   },
   "build": {
-    "appId": "cnstimulant.methachart",
-    "app-category-type": "public.app-category.productivity"
+    "appId": "cnstimulant.methachart"
   },
   "dependencies": {
     "less": "^2.7.1",

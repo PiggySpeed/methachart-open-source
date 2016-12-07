@@ -3,7 +3,7 @@ import webpack from 'webpack';
 
 const PATHS = {
   app: path.join(__dirname, 'src'),
-  build: path.join(__dirname, 'dist'),
+  build: path.join(__dirname, 'src/dist'),
   publicPath: 'http://localhost:8080/dist/'
 };
 
