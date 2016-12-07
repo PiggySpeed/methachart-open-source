@@ -6,8 +6,7 @@ const openWindow = (url, data) => {
    * url (str): must be a complete path
    * **/
   let win = new BrowserWindow({width: 800, height: 600, icon: 'src/resources/methachart-favicon.ico'});
-
-  win.openDevTools();
+  //win.openDevTools();
 
   win.loadURL(url);
   win.on('closed', () => {
