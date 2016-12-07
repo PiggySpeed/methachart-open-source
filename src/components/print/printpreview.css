@@ -58,7 +58,7 @@ h2#rx-label-text {
   position: relative;
   float: left;
   clear: left;
-  min-width: 450px;
+  min-width: 440px;
   min-height: 120px;
   margin: 2px;
   padding: 0;
@@ -119,11 +119,11 @@ h2#rx-label-text {
 }
 
 .col0 { width: 25px; font-size: 8pt; }
-.col1 { width: 110px; }
-.col2 { width: 75px; }
+.col1 { width: 100px; }
+.col2 { width: 65px; }
 .col3 { width: 75px; font-weight: bold; border: 2px solid black; }
-.col4 { width: 75px; }
-.col5 { width: 75px; }
+.col4 { width: 75px; font-style: italic; }
+.col5 { width: 75px; font-style: italic; }
 .col6 { width: 50px; }
 .col7 { width: 100px; }
 
@@ -147,13 +147,27 @@ h2#rx-label-text {
 }
 
 /* Footer Styles */
+.footer {
+  display: flex;
+  justify-content: space-between;
+  /*width: 100%;*/
+}
+
+p#timestamp {
+  font-size: 10pt;
+  color: #727272;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin: 2px;
+  padding: 0;
+}
+
 p#page-order-label {
-  position: relative;
-  float: right;
-  clear: right;
-  width: 100%;
+  /*position: relative;*/
+  /*float: right;*/
+  /*clear: right;*/
+  /*width: 100%;*/
   text-align: right;
-  font-size: 12pt;
+  font-size: 10pt;
   color: #727272;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   margin: 2px;

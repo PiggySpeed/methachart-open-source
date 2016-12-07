@@ -6,7 +6,7 @@ import { isStringPosNum } from '../../utils/validation';
 const styles = {
   dose: {
     marginLeft: '25px',
-    width: 25
+    width: 35
   },
   error: {
     position: "absolute",

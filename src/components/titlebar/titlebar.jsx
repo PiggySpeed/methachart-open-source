@@ -7,15 +7,6 @@ const winFunc = applyWindowFunctions();
 import { ViewRow, Print } from '../';
 
 const style = {
-  container: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    height: '40px',
-    width: '100vw',
-    paddingLeft: '10px',
-    backgroundColor: "#212121",
-    borderBottom: '2px solid #cf2d36'
-  },
   text: {
     fontWeight: 500,
     color: '#FFFFFF',
@@ -27,9 +18,9 @@ const style = {
 };
 
 const TitleBar = () => (
-  <header style={style.container} className='titlebar'>
+  <header className='titlebar'>
 
-    <ViewRow justify='flex-start'>
+    <ViewRow className='draggable' justify='flex-start'>
       <img src='resources/methachart-icon.png' width='25px'/>
       <h3 style={style.text}>MethaChart</h3>
     </ViewRow>

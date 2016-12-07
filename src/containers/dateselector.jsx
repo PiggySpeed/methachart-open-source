@@ -15,11 +15,6 @@ class DateSelectorWrapper extends Component {
     this.onBlur = this.onBlur.bind(this);
     this.onInvalidDate = this.onInvalidDate.bind(this);
   }
-  //get timeInterval(){
-  //  if(!!this.props.startdate && !!this.props.enddate){
-  //    return null
-  //  }
-  //}
   onBlur() {
     return this.props.onSetTimeInterval(this.props.startdate, this.props.enddate);
   }

@@ -17,16 +17,14 @@ class MethadoneDosePicker extends Component {
     this.onTakehomeBlur = this.onTakehomeBlur.bind(this);
   }
   onDoseBlur(value){
-    if(isStringPosNum(value)){
-      const numericDose = +value;
-      this.props.onDoseBlur(numericDose);
-    }
+    isStringPosNum(value)
+      ? this.props.onDoseBlur(+value)
+      : this.props.onDoseBlur(0);
   }
   onTakehomeBlur(value){
-    if(isStringPosNum(value)){
-      const numericDose = +value;
-      this.props.onTakehomeBlur(numericDose);
-    }
+    isStringPosNum(value)
+      ? this.props.onTakehomeBlur(+value)
+      : this.props.onTakehomeBlur(0);
   }
   render() {
     return (

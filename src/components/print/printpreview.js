@@ -116,6 +116,20 @@ function buildTable(data) {
   return table;
 }
 
+function addPageFooter(number, max, timestamp){
+  var footer = document.createElement('div');
+  footer.setAttribute('class', 'footer');
+
+  var date = document.createElement('p');
+  date.innerHTML = `Generated on ${timestamp}`;
+  date.setAttribute('id', 'timestamp');
+
+  footer.appendChild(date);
+  footer.appendChild(addPageNumber(number, max));
+
+  return footer;
+}
+
 function addPageNumber(number, max){
   /**
    * Returns a <p> element with the current page number
@@ -239,15 +253,10 @@ function buildTables(data, headerdata) {
       lastRow.setAttribute("class", "table-endrow");
       addTableRowMessage(lastRow, "END OF METHADONE RX - SEE DOCTOR FOR REFILLS");
     }
-    if(batches.length > 1){
-      // Don't add a page number unless there is >1 pages
-      tables.appendChild(addPageNumber(i+1, batches.length));
-      tables.appendChild(addPageBreak());
-    }
-  }
-  //var lastTable = tables.lastElementChild;
-  //console.log("last element is ", lastTable);
-}
 
-//ipcRenderer.send('print');
-//console.log("ipc renderer is ", ipcRenderer);
+    // Add Page Number
+    tables.appendChild(addPageFooter(i+1, batches.length, headerdata.timestamp));
+    //tables.appendChild(addPageNumber(i+1, batches.length));
+    tables.appendChild(addPageBreak());
+  }
+}

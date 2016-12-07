@@ -41,7 +41,7 @@ class DateField extends Component {
     this.state = {
       day: 0,
       month: 0,
-      year: 16,
+      year: (moment().get('year') + '').slice(2),
       dayError: '',
       monthError: '',
       yearError: ''
@@ -52,10 +52,10 @@ class DateField extends Component {
     this.validateYear = this.validateYear.bind(this);
   }
   onBlur(){
-    (this.state.day && this.state.month && this.state.year)
-      ? this.props.onDateBlur(pad(this.state.day), pad(this.state.month), pad(this.state.year))
-      : this.props.onInvalidDate(`${this.props.label} date is invalid!`);
-    this.props.onInvalidDate('');
+    this.props.onDateBlur(pad(this.state.day), pad(this.state.month), pad(this.state.year));
+    !(this.state.day && this.state.month && this.state.year)
+      ? this.props.onInvalidDate(`${this.props.label} date is invalid`)
+      : this.props.onInvalidDate('');
   }
   validateDay(e){
     const DD = e.target.value;

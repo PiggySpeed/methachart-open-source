@@ -1,6 +1,7 @@
 import { calculateInterval, getAllDates } from '../utils/date';
 import openWindow from '../utils/newwindow';
 import { PRINT_URL } from '../utils/url';
+import moment from 'moment';
 
 const WEEKDAYS = {
   [0]: 'Su',
@@ -22,7 +23,7 @@ export const onDeletePrintError = () => {
   return { type: ON_DELETE_PRINT_ERROR }
 };
 
-const onPrintFailure = (errorText) => {
+export const onPrintFailure = (errorText) => {
   return { type: ON_PRINT_FAILURE, errorText }
 };
 const onPrintSuccess = (headerdata, logdata) => {
@@ -72,7 +73,8 @@ export const onPrintRequest = () => {
         selecteddrug,
         startdate,
         enddate,
-        timeinterval
+        timeinterval,
+        timestamp: moment().format('MMM DD, YYYY (HH:mm:ss)')
     };
 
     // Calculate total dose

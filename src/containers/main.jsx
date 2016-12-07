@@ -13,7 +13,7 @@ class MainWrapper extends Component {
   }
   render() {
     return (
-      <ViewCol width='100vw' height='100vh'>
+      <ViewCol width='100vw' height='100vh' style={{ border: '1px solid #727272', borderTop: 'none'}}>
 
         <TitleBar />
 

@@ -17,7 +17,6 @@ class SupportText extends Component {
       : '';
   }
   render() {
-    console.log(this.props.timeinterval);
 
     return(
       <h6 style={{ margin: '2px 0 2px 5px', minWidth: '125px'}}>

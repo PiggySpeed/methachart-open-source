@@ -1,4 +1,5 @@
 import { createDate, calculateInterval, getAllDates } from '../utils/date';
+import { onPrintFailure } from './print';
 
 export const ON_SET_START_DATE = 'ON_SET_START_DATE';
 export const ON_SET_END_DATE = 'ON_SET_END_DATE';
@@ -23,8 +24,7 @@ export const onSetTimeInterval = () => {
     const { dates } = getState();
 
     // date validation occurs in calculateInterval, returns 0 if invalid
-    const timeinterval = calculateInterval(dates.startdate, dates.enddate, 168);
-    console.log('action is giving ', timeinterval);
+    const timeinterval = calculateInterval(dates.startdate, dates.enddate, 169, err => onPrintFailure(err) );
     dispatch({
       type: ON_SET_TIME_INTERVAL,
       timeinterval
