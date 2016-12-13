@@ -1,5 +1,10 @@
-import * as types from '../actions/logbuilder';
-
+import {
+  ON_NAME_BLUR,
+  ON_RXNUM_BLUR,
+  ON_SET_DRUG,
+  ON_DOSE_BLUR,
+  ON_TAKEHOME_BLUR
+} from '../actions/_constants';
 const initialState = {
   selecteddrug: {
     displayname: "Methadone",
@@ -18,19 +23,19 @@ const initialState = {
 
 const LogBuilder = (state = initialState, action) => {
   switch(action.type) {
-    case types.ON_NAME_BLUR: {
+    case ON_NAME_BLUR: {
       return {...state, name: action.name }
     }
-    case types.ON_RXNUM_BLUR: {
+    case ON_RXNUM_BLUR: {
       return {...state, rxnum: action.rxnum }
     }
-    case types.ON_SET_DRUG: {
+    case ON_SET_DRUG: {
       return {...state, selecteddrug: action.selecteddrug }
     }
-    case types.ON_DOSE_BLUR: {
+    case ON_DOSE_BLUR: {
       return {...state, dose: action.dose }
     }
-    case types.ON_TAKEHOME_BLUR: {
+    case ON_TAKEHOME_BLUR: {
       return {...state, takehome: action.takehome }
     }
     default:

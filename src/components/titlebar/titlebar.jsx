@@ -22,7 +22,7 @@ const TitleBar = () => (
 
     <ViewRow className='draggable' justify='flex-start'>
       <img src='resources/methachart-icon.png' width='25px'/>
-      <h3 style={style.text}>MethaChart</h3>
+      <h3 style={style.text}>MethaChart v.1.3.1</h3>
     </ViewRow>
 
     <span className='topnav-container'>

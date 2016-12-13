@@ -5,11 +5,15 @@ import { ViewCol } from '../components';
 const AboutContainer = () => (
   <ViewCol style={{padding: '50px 25px', minHeight: 'min-content', alignItems: 'flex-start'}}>
     <ViewCol style={{alignSelf: 'center'}}>
-      <h1>MethaChart v1.3</h1>
-      <h4>Dec 06, 2016 | by jlee</h4><br/>
+      <h1>MethaChart v1.3.1</h1>
+      <h4>Dec 13, 2016 | by jlee</h4><br/>
     </ViewCol>
     <br/>
-    <h4>Features and Bug Fixes:</h4>
+    <h4>Features and Bug Fixes (v.1.3.1):</h4>
+    <ul>
+      <li>Printing 28 rows will now fit the footer on the page. Same for other multiples of 28.</li>
+    </ul>
+    <h4>Features and Bug Fixes (v.1.3.0):</h4>
     <ul>
       <li>Input is validated.</li>
       <li>Weekdays now appear on logs.</li>
