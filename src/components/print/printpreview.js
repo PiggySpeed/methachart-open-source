@@ -176,6 +176,7 @@ function buildHeader(data) {
    * Returns a header section with data passed into it.
    * data (obj): data with fields: name, startdate, enddate, and timeinterval
    * **/
+
   // Create Header Section
   var header = document.createElement("header");
   header.setAttribute("id", "header");
@@ -256,7 +257,9 @@ function buildTables(data, headerdata) {
 
     // Add Page Number
     tables.appendChild(addPageFooter(i+1, batches.length, headerdata.timestamp));
-    //tables.appendChild(addPageNumber(i+1, batches.length));
-    tables.appendChild(addPageBreak());
+
+    if(i < batches.length){
+      tables.appendChild(addPageBreak());
+    }
   }
 }

@@ -1,3 +1,9 @@
+import {
+  ON_DELETE_PRINT_ERROR,
+  ON_PRINT_REQUEST,
+  ON_PRINT_FAILURE,
+  ON_PRINT_SUCCESS
+} from './_constants';
 import { calculateInterval, getAllDates } from '../utils/date';
 import openWindow from '../utils/newwindow';
 import { PRINT_URL } from '../utils/url';
@@ -13,17 +19,12 @@ const WEEKDAYS = {
   [6]: 'Sa'
 };
 
-export const ON_DELETE_PRINT_ERROR = 'ON_DELETE_PRINT_ERROR';
-
-export const ON_PRINT_REQUEST = 'ON_PRINT_REQUEST';
-export const ON_PRINT_FAILURE = 'ON_PRINT_FAILURE';
-export const ON_PRINT_SUCCESS = 'ON_PRINT_SUCCESS';
-
 export const onDeletePrintError = () => {
   return { type: ON_DELETE_PRINT_ERROR }
 };
 
 export const onPrintFailure = (errorText) => {
+  console.log(errorText);
   return { type: ON_PRINT_FAILURE, errorText }
 };
 const onPrintSuccess = (headerdata, logdata) => {

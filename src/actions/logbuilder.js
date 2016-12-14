@@ -1,3 +1,11 @@
+import {
+  ON_NAME_BLUR,
+  ON_RXNUM_BLUR,
+  ON_SET_DRUG,
+  ON_DOSE_BLUR,
+  ON_TAKEHOME_BLUR
+} from './_constants';
+
 export const DRUG_LIST = [
   {
     displayname: "Methadone",
@@ -19,12 +27,6 @@ export const DRUG_LIST = [
   //}
 ];
 
-export const ON_NAME_BLUR = 'ON_NAME_BLUR';
-export const ON_RXNUM_BLUR = 'ON_RXNUM_BLUR';
-export const ON_SET_DRUG = "ON_SET_DRUG";
-export const ON_DOSE_BLUR = 'ON_DOSE_BLUR';
-export const ON_TAKEHOME_BLUR = 'ON_TAKEHOME_BLUR';
-
 export const onNameBlur = (name) => {
   return dispatch => {
     dispatch({ type: ON_NAME_BLUR, name })
@@ -37,7 +39,7 @@ export const onRxNumBlur = (rxnum) => {
 };
 export const onSetDrug = (din) => {
   return dispatch => {
-    const selecteddrug =  DRUG_LIST.filter( drug => drug.din == din)[0];
+    const selecteddrug = DRUG_LIST.filter( drug => drug.din == din)[0];
 
     dispatch({ type: ON_SET_DRUG, selecteddrug })
   }
