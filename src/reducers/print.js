@@ -1,17 +1,22 @@
-import * as types from '../actions/print';
+import {
+  ON_DELETE_PRINT_ERROR,
+  ON_PRINT_REQUEST,
+  ON_PRINT_FAILURE,
+  ON_PRINT_SUCCESS
+} from '../actions/_constants';
 
 const printData = (state = { errorText: '' }, action) => {
   switch(action.type) {
-    case types.ON_DELETE_PRINT_ERROR: {
+    case ON_DELETE_PRINT_ERROR: {
       return { errorText: '' };
     }
-    case types.ON_PRINT_REQUEST: {
+    case ON_PRINT_REQUEST: {
       return { errorText: '' };
     }
-    case types.ON_PRINT_FAILURE: {
+    case ON_PRINT_FAILURE: {
       return { errorText: action.errorText };
     }
-    case types.ON_PRINT_SUCCESS: {
+    case ON_PRINT_SUCCESS: {
       return { errorText: '' };
     }
     default:

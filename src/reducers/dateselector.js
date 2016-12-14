@@ -1,5 +1,8 @@
-import * as types from '../actions/dateselector';
-
+import {
+  ON_SET_START_DATE,
+  ON_SET_END_DATE,
+  ON_SET_TIME_INTERVAL,
+} from '../actions/_constants';
 const initialState = {
   startdate: '',
   enddate: '',
@@ -8,13 +11,13 @@ const initialState = {
 
 const dates = (state = initialState, action) => {
   switch(action.type) {
-    case types.ON_SET_START_DATE: {
+    case ON_SET_START_DATE: {
       return {...state, startdate: action.startdate}
     }
-    case types.ON_SET_END_DATE: {
+    case ON_SET_END_DATE: {
       return {...state, enddate: action.enddate}
     }
-    case types.ON_SET_TIME_INTERVAL: {
+    case ON_SET_TIME_INTERVAL: {
       return {...state, timeinterval: action.timeinterval}
     }
     default:

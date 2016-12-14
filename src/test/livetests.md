@@ -14,3 +14,4 @@ UI Operations
 Print Operations
 1. Fill out all fields correctly. Print a sheet. Then ONLY change one field. Then print again.
 2. Print the same page twice.
+3. Printing 28, 56, 84, 112 rows should fit 28 rows to a page exactly. It should not print a second empty page.
