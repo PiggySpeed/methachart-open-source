@@ -12,7 +12,9 @@ const AboutContainer = () => (
     <h4>Features and Bug Fixes (v.1.3.1):</h4>
     <ul>
       <li>Printing 28 rows will now fit the footer on the page. Same for other multiples of 28.</li>
+      <li>The total dose will now handle decimal numbers with full precision (values like "14.399999..." won't appear anymore).</li>
     </ul>
+    <br/>
     <h4>Features and Bug Fixes (v.1.3.0):</h4>
     <ul>
       <li>Input is validated.</li>

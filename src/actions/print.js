@@ -78,9 +78,10 @@ export const onPrintRequest = () => {
         timestamp: moment().format('MMM DD, YYYY (HH:mm:ss)')
     };
 
-    // Calculate total dose
+    // Calculate total dose - calculations must handle the floating-point problem in javascript
+    const cx = 10;
     const total = (takehome > 0)
-      ? dose + takehome
+      ? ((dose*cx) + (takehome*cx))/(cx)
       : dose;
 
     // Assemble logdata
