@@ -9,10 +9,19 @@ import {
   RxNumInput,
   DrugPicker,
   MethadoneDosePicker,
+  Panel,
   ViewCol,
-  ViewRow
 } from '../components';
 import { DateSelectorContainer } from './';
+
+const styles = {
+  container: {
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+    width: '100%',
+    height: '100%'
+  }
+};
 
 class LogBuilderWrapper extends Component {
   constructor(props){
@@ -30,25 +39,25 @@ class LogBuilderWrapper extends Component {
     } = this.props;
 
     return(
-      <ViewCol style={{ alignItems: 'flex-start', width: '100%', height: '100%' }}>
+      <ViewCol style={styles.container}>
 
-        <ViewRow style={{ justifyContent: 'flex-start', flex: 'none', height: '75px', width: '100%' }}>
+        <Panel>
           <NameInput onBlur={onNameBlur} />
           <RxNumInput onBlur={onRxNumBlur} />
-        </ViewRow>
+        </Panel>
 
-        <ViewRow style={{ justifyContent: 'flex-start', alignItems: 'flex-end', flex: 'none', height: '75px', width: '100%' }}>
+        <Panel>
           <DrugPicker
             selectedDrug={selecteddrug}
             drugList={DRUG_LIST}
             onSetDrug={onSetDrug}
           />
           <MethadoneDosePicker onDoseBlur={onDoseBlur} onTakehomeBlur={onTakehomeBlur} />
-        </ViewRow>
+        </Panel>
 
-        <ViewRow style={{ marginTop: '25px', justifyContent: 'flex-start', alignItems: 'flex-start', width: '100%' }}>
+        <Panel style={{ marginTop: '25px' }}>
           <DateSelectorContainer />
-        </ViewRow>
+        </Panel>
 
       </ViewCol>
     );

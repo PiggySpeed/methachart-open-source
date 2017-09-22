@@ -1,4 +1,5 @@
 export {ViewCol, ViewRow} from './view/view.jsx';
+export {default as Panel} from './panel/panel.jsx'
 
 export {default as TitleBar} from './titlebar/titlebar.jsx';
 export {default as Footer} from './footer/footer.jsx';
