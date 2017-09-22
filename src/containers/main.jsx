@@ -13,11 +13,11 @@ class MainWrapper extends Component {
   }
   render() {
     return (
-      <ViewCol width='100vw' height='100vh' style={{ border: '1px solid #727272', borderTop: 'none'}}>
+      <ViewCol style={{ border: '1px solid #727272', borderTop: 'none', width: '100vw', height: '100vh' }}>
 
         <TitleBar />
 
-        <div style={{display: 'flex', flex: 1, overflowY: 'auto', width: '100vw'}}>
+        <div style={{display: 'flex', flex: 1, overflowY: 'auto', width: '100%', height: '100%'}}>
           { this.props.children || <LogBuilderContainer /> }
         </div>
 

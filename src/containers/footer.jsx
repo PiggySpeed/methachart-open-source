@@ -5,7 +5,7 @@ import { redirect } from '../config/routes.jsx';
 import { bindActionCreators } from 'redux';
 import * as printActions from '../actions/print';
 
-import { ViewRow, Footer } from '../components';
+import { Footer } from '../components';
 
 class FooterWrapper extends Component {
   constructor(props) {

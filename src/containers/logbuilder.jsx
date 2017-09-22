@@ -30,14 +30,14 @@ class LogBuilderWrapper extends Component {
     } = this.props;
 
     return(
-      <ViewCol align='flex-start' width='100%'>
+      <ViewCol style={{ alignItems: 'flex-start', width: '100%', height: '100%' }}>
 
-        <ViewRow justify='flex-start' width='100%' flex='none' height='75px'>
+        <ViewRow style={{ justifyContent: 'flex-start', flex: 'none', height: '75px', width: '100%' }}>
           <NameInput onBlur={onNameBlur} />
           <RxNumInput onBlur={onRxNumBlur} />
         </ViewRow>
 
-        <ViewRow justify='flex-start' align='flex-end' width='100%' flex='none' height='75px'>
+        <ViewRow style={{ justifyContent: 'flex-start', alignItems: 'flex-end', flex: 'none', height: '75px', width: '100%' }}>
           <DrugPicker
             selectedDrug={selecteddrug}
             drugList={DRUG_LIST}
@@ -46,7 +46,7 @@ class LogBuilderWrapper extends Component {
           <MethadoneDosePicker onDoseBlur={onDoseBlur} onTakehomeBlur={onTakehomeBlur} />
         </ViewRow>
 
-        <ViewRow style={{ marginTop: '25px' }} justify='flex-start' align='flex-start' width='100%'>
+        <ViewRow style={{ marginTop: '25px', justifyContent: 'flex-start', alignItems: 'flex-start', width: '100%' }}>
           <DateSelectorContainer />
         </ViewRow>
 

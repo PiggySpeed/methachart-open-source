@@ -33,7 +33,7 @@ class DateSelectorWrapper extends Component {
       } = this.props;
 
     return(
-      <ViewRow width='100%' justify='flex-start' onBlur={this.onBlur}>
+      <ViewRow style={{ width: '100%', justifyContent: 'flex-start' }} onBlur={this.onBlur}>
 
         <DateField
           label='Start'
