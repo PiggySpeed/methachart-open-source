@@ -1,5 +1,5 @@
 {
-  "name": "MethaChart",
+  "name": "MethaChart (Open Source)",
   "version": "1.3.1",
   "description": "Generates methadone log forms",
   "main": "main.js",
@@ -7,10 +7,10 @@
   "license": "BSD-3-Clause",
   "repository": {
     "type": "git",
-    "url": "https://github.com/PiggySpeed/methachart.git"
+    "url": "https://github.com/PiggySpeed/methachart-open-source.git"
   },
   "bugs": {
-    "url": "https://github.com/PiggySpeed/methachart/issues"
+    "url": "https://github.com/PiggySpeed/methachart-open-source/issues"
   },
   "scripts": {
     "start": "electron .",
