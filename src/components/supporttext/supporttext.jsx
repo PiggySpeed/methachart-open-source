@@ -1,6 +1,5 @@
 'use strict';
 import React, { Component, PropTypes } from 'react';
-import { ViewRow } from '../';
 
 class SupportText extends Component {
   constructor(props){

@@ -4,7 +4,7 @@ import React, { PropTypes } from 'react';
 import applyWindowFunctions from './window-utils';
 const winFunc = applyWindowFunctions();
 
-import { ViewRow, Print } from '../';
+import { ViewRow } from '../';
 
 const style = {
   text: {
@@ -20,7 +20,7 @@ const style = {
 const TitleBar = () => (
   <header className='titlebar'>
 
-    <ViewRow className='draggable' justify='flex-start'>
+    <ViewRow className='draggable' style={{ justifyContent: 'flex-start' }}>
       <img src='resources/methachart-icon.png' width='25px'/>
       <h3 style={style.text}>MethaChart v.1.3.1</h3>
     </ViewRow>

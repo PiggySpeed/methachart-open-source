@@ -3,7 +3,6 @@ import React, { Component, PropTypes } from 'react';
 import { isStringPosNum } from '../../utils/validation';
 
 import { ViewRow } from '../';
-import TextField from 'material-ui/TextField/TextField';
 import TakeHomeDoseInput from './takehomedoseinput.jsx';
 import MethadoneDoseInput from './methadonedoseinput.jsx';
 
@@ -28,7 +27,7 @@ class MethadoneDosePicker extends Component {
   }
   render() {
     return (
-      <ViewRow flex='none' align='flex-end'>
+      <ViewRow style={{ flex: 'none', alignItems: 'flex-end' }}>
 
         <MethadoneDoseInput onBlur={this.onDoseBlur} />
         <h4 style={{margin: '5px'}}>mL</h4>

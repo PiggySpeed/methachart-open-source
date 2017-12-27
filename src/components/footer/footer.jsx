@@ -11,6 +11,8 @@ import { ViewRow } from '../';
 
 const style = {
   container: {
+    flex: 'none',
+    justifyContent: 'space-between',
     height: '50px',
     width: '100%',
     backgroundColor: '#FFFFFF',
@@ -27,7 +29,7 @@ class Footer extends Component {
   }
   render() {
     return (
-      <ViewRow style={style.container} flex='none' justify='space-between'>
+      <ViewRow style={style.container}>
 
         <span>
           <IconButton onClick={() => this.props.changeRoute("/")} tooltip="Log Builder" tooltipPosition="top-right">

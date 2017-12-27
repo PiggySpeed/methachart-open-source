@@ -102,6 +102,8 @@ class DateField extends Component {
     }
   }
   render() {
+    const defaultYear = (moment().get('year') + '').substring(2);
+
     return(
       <ViewRow style={styles.container} onBlur={this.onBlur}>
         <h6 style={styles.label}>{this.props.label}</h6>
@@ -125,7 +127,7 @@ class DateField extends Component {
           onChange={this.validateMonth}/>
         <TextField
           key='year'
-          defaultValue='16'
+          defaultValue={defaultYear}
           errorText={this.state.yearError}
           style={styles.datefieldtextinput}
           inputStyle={styles.inputstyle}
